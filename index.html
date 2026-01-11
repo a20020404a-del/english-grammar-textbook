@@ -521,6 +521,29 @@
             display: none;
         }
 
+        .quiz-explanation {
+            color: #555;
+            font-size: 0.9rem;
+            background: #f5f5f5;
+            padding: 0.6rem 0.8rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            line-height: 1.6;
+        }
+
+        .quiz-card.revealed .quiz-explanation {
+            opacity: 1;
+            max-height: 150px;
+        }
+
+        .quiz-explanation strong {
+            color: #1565c0;
+        }
+
         /* レスポンシブ */
         @media (max-width: 600px) {
             header h1 {
@@ -670,26 +693,31 @@
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I <span class="blank"></span> a teacher.</div>
                         <div class="quiz-answer">am</div>
+                        <div class="quiz-explanation">主語が <strong>I</strong> のときは必ず <strong>am</strong> を使います。「I am 〜」で「私は〜です」という意味になります。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">She <span class="blank"></span> very kind.</div>
                         <div class="quiz-answer">is</div>
+                        <div class="quiz-explanation">主語が <strong>He / She / It</strong>（三人称単数）のときは <strong>is</strong> を使います。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">You <span class="blank"></span> my best friend.</div>
                         <div class="quiz-answer">are</div>
+                        <div class="quiz-explanation">主語が <strong>You</strong> のときは <strong>are</strong> を使います。「あなた」でも「あなたたち」でも are です。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">Tom and I <span class="blank"></span> classmates.</div>
                         <div class="quiz-answer">are</div>
+                        <div class="quiz-explanation">「Tom and I」は「私たち（= We）」と同じ複数形なので <strong>are</strong> を使います。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">It <span class="blank"></span> sunny today.</div>
                         <div class="quiz-answer">is</div>
+                        <div class="quiz-explanation">天気を表すときは主語に <strong>It</strong> を使います。It は三人称単数なので <strong>is</strong> です。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                 </div>
@@ -780,26 +808,31 @@
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">He <span class="blank"></span> soccer every day. (play)</div>
                         <div class="quiz-answer">plays</div>
+                        <div class="quiz-explanation"><strong>He</strong> は三人称単数なので、動詞に <strong>s</strong> をつけます。play → plays</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">My mother <span class="blank"></span> TV at night. (watch)</div>
                         <div class="quiz-answer">watches</div>
+                        <div class="quiz-explanation">watch は <strong>ch</strong> で終わるので、<strong>es</strong> をつけます。watch → watches</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">She <span class="blank"></span> English hard. (study)</div>
                         <div class="quiz-answer">studies</div>
+                        <div class="quiz-explanation">study は「子音 + y」で終わるので、<strong>y を i に変えて es</strong> をつけます。study → studies</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I <span class="blank"></span> coffee every morning. (drink)</div>
                         <div class="quiz-answer">drink</div>
+                        <div class="quiz-explanation">主語が <strong>I</strong> のときは三単現の s は不要。動詞はそのままの形（原形）を使います。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">Tom <span class="blank"></span> to school by bus. (go)</div>
                         <div class="quiz-answer">goes</div>
+                        <div class="quiz-explanation">go は <strong>o</strong> で終わるので、<strong>es</strong> をつけます。go → goes</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                 </div>
@@ -888,26 +921,31 @@
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question"><span class="blank"></span> you like cats? — Yes, I do.</div>
                         <div class="quiz-answer">Do</div>
+                        <div class="quiz-explanation">主語が <strong>you</strong> なので <strong>Do</strong> を使います。一般動詞の疑問文は「Do/Does + 主語 + 動詞原形?」の形です。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question"><span class="blank"></span> she play tennis? — No, she doesn't.</div>
                         <div class="quiz-answer">Does</div>
+                        <div class="quiz-explanation">主語が <strong>she</strong>（三人称単数）なので <strong>Does</strong> を使います。Does を使ったら動詞は原形に戻ります。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I <span class="blank"></span> like natto. (否定文に)</div>
                         <div class="quiz-answer">don't</div>
+                        <div class="quiz-explanation">主語が <strong>I</strong> なので <strong>don't (do not)</strong> を使います。「主語 + don't + 動詞原形」で否定文を作ります。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">He <span class="blank"></span> have a car. (否定文に)</div>
                         <div class="quiz-answer">doesn't</div>
+                        <div class="quiz-explanation">主語が <strong>He</strong>（三人称単数）なので <strong>doesn't (does not)</strong> を使います。doesn't の後ろは動詞の原形です。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question"><span class="blank"></span> this your pen? — Yes, it is.</div>
                         <div class="quiz-answer">Is</div>
+                        <div class="quiz-explanation">これは <strong>be動詞の疑問文</strong>です。be動詞の疑問文は「be動詞を文頭に」置きます。this は三人称単数なので is を使います。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                 </div>
@@ -976,26 +1014,31 @@
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">She is <span class="blank"></span> a letter now. (write)</div>
                         <div class="quiz-answer">writing</div>
+                        <div class="quiz-explanation">write は <strong>e で終わる</strong>ので、e を取って ing をつけます。write → writing</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">They are <span class="blank"></span> in the park. (run)</div>
                         <div class="quiz-answer">running</div>
+                        <div class="quiz-explanation">run は「短母音 + 子音」で終わるので、<strong>子音を重ねて</strong> ing をつけます。run → running</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I <span class="blank"></span> watching TV now.</div>
                         <div class="quiz-answer">am</div>
+                        <div class="quiz-explanation">現在進行形は「<strong>be動詞 + 〜ing</strong>」。主語が I なので be動詞は <strong>am</strong> です。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">He <span class="blank"></span> swimming in the pool.</div>
                         <div class="quiz-answer">is</div>
+                        <div class="quiz-explanation">主語が <strong>He</strong>（三人称単数）なので be動詞は <strong>is</strong> を使います。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">My father is <span class="blank"></span> breakfast. (make)</div>
                         <div class="quiz-answer">making</div>
+                        <div class="quiz-explanation">make は <strong>e で終わる</strong>ので、e を取って ing をつけます。make → making</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                 </div>
@@ -1057,26 +1100,31 @@
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">She <span class="blank"></span> play the guitar very well.</div>
                         <div class="quiz-answer">can</div>
+                        <div class="quiz-explanation">「〜できる」は <strong>can</strong> を使います。主語が何でも can の形は変わりません（cans とはならない）。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question"><span class="blank"></span> you help me? — Sure!</div>
                         <div class="quiz-answer">Can</div>
+                        <div class="quiz-explanation">can の疑問文は <strong>Can を文頭に</strong>置きます。「Can you 〜?」で「〜してくれますか？」という依頼の意味にもなります。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I <span class="blank"></span> speak Chinese. (否定)</div>
                         <div class="quiz-answer">can't / cannot</div>
+                        <div class="quiz-explanation">can の否定は <strong>can't</strong> または <strong>cannot</strong>（1語）です。can not（2語）は間違いです。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">He can <span class="blank"></span> fast. (run)</div>
                         <div class="quiz-answer">run</div>
+                        <div class="quiz-explanation">can の後ろは必ず<strong>動詞の原形</strong>。runs や running ではなく run をそのまま使います。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question"><span class="blank"></span> I use your pen? — Of course.</div>
                         <div class="quiz-answer">Can</div>
+                        <div class="quiz-explanation">「Can I 〜?」で「〜してもいいですか？」という<strong>許可を求める</strong>表現になります。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                 </div>
@@ -1165,26 +1213,31 @@
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I <span class="blank"></span> to the park yesterday. (go)</div>
                         <div class="quiz-answer">went</div>
+                        <div class="quiz-explanation">go は<strong>不規則動詞</strong>で、過去形は <strong>went</strong> です。goed とはなりません。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">She <span class="blank"></span> happy last night. (be)</div>
                         <div class="quiz-answer">was</div>
+                        <div class="quiz-explanation">be動詞の過去形は主語によって変わります。She（三人称単数）なので <strong>was</strong> を使います。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question"><span class="blank"></span> you see the movie? — Yes, I did.</div>
                         <div class="quiz-answer">Did</div>
+                        <div class="quiz-explanation">過去形の疑問文は <strong>Did + 主語 + 動詞原形?</strong> の形です。主語に関係なく Did を使います。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">We <span class="blank"></span> dinner at 7 p.m. (have)</div>
                         <div class="quiz-answer">had</div>
+                        <div class="quiz-explanation">have は<strong>不規則動詞</strong>で、過去形は <strong>had</strong> です。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">He <span class="blank"></span> come to school yesterday. (否定)</div>
                         <div class="quiz-answer">didn't</div>
+                        <div class="quiz-explanation">過去形の否定文は <strong>didn't + 動詞原形</strong>。didn't を使ったら動詞は原形に戻ります。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                 </div>
@@ -1250,26 +1303,31 @@
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I <span class="blank"></span> call you later.</div>
                         <div class="quiz-answer">will</div>
+                        <div class="quiz-explanation"><strong>will + 動詞原形</strong>で未来を表します。その場で決めた意志や予測に使います。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">She <span class="blank"></span> going to visit her grandmother.</div>
                         <div class="quiz-answer">is</div>
+                        <div class="quiz-explanation"><strong>be going to</strong> は「be動詞 + going to + 動詞原形」の形。She には <strong>is</strong> を使います。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question"><span class="blank"></span> you be free tomorrow? — Yes, I will.</div>
                         <div class="quiz-answer">Will</div>
+                        <div class="quiz-explanation">will の疑問文は <strong>Will を文頭に</strong>置きます。「Will + 主語 + 動詞原形?」の形です。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">It <span class="blank"></span> be sunny next week.</div>
                         <div class="quiz-answer">will</div>
+                        <div class="quiz-explanation">天気の予測には <strong>will</strong> がよく使われます。「〜でしょう」という意味です。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">We are going <span class="blank"></span> have a party. (to を入れる)</div>
                         <div class="quiz-answer">to</div>
+                        <div class="quiz-explanation">be going to の <strong>to</strong> は必須です。be going to + 動詞原形で「〜する予定」を表します。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                 </div>
@@ -1332,26 +1390,31 @@
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I want <span class="blank"></span> a singer. (be)</div>
                         <div class="quiz-answer">to be</div>
+                        <div class="quiz-explanation">want の後ろは<strong>不定詞（to + 動詞原形）</strong>。「〜したい」=「want to 〜」【名詞的用法】</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">He has a lot of work <span class="blank"></span>. (do)</div>
                         <div class="quiz-answer">to do</div>
+                        <div class="quiz-explanation">「するべき仕事」= work <strong>to do</strong>。名詞を修飾して「〜するための」【形容詞的用法】</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">She went to the library <span class="blank"></span> books. (read)</div>
                         <div class="quiz-answer">to read</div>
+                        <div class="quiz-explanation">「本を読む<strong>ために</strong>」という目的を表す不定詞です。【副詞的用法】</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">It is important <span class="blank"></span> English. (learn)</div>
                         <div class="quiz-answer">to learn</div>
+                        <div class="quiz-explanation">「It is 形容詞 <strong>to 〜</strong>」で「〜することは（形容詞）だ」という構文です。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I need something <span class="blank"></span>. (drink)</div>
                         <div class="quiz-answer">to drink</div>
+                        <div class="quiz-explanation">「飲む<strong>ための</strong>何か」= something to drink。-thing を修飾します。【形容詞的用法】</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                 </div>
@@ -1417,26 +1480,31 @@
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I enjoy <span class="blank"></span> music. (listen to)</div>
                         <div class="quiz-answer">listening to</div>
+                        <div class="quiz-explanation"><strong>enjoy</strong> の後ろは必ず<strong>動名詞（〜ing）</strong>。不定詞は使えません。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question"><span class="blank"></span> is good for your health. (walk)</div>
                         <div class="quiz-answer">Walking</div>
+                        <div class="quiz-explanation">動名詞は<strong>主語</strong>になれます。「歩くことは健康に良い」。文頭なので大文字で始めます。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">Thank you for <span class="blank"></span> me. (invite)</div>
                         <div class="quiz-answer">inviting</div>
+                        <div class="quiz-explanation"><strong>前置詞（for）の後ろ</strong>は必ず動名詞。「招待してくれて」= for inviting</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">He finished <span class="blank"></span> his homework. (do)</div>
                         <div class="quiz-answer">doing</div>
+                        <div class="quiz-explanation"><strong>finish</strong> の後ろは動名詞のみ。「〜し終える」= finish 〜ing</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">Stop <span class="blank"></span>! It's not funny. (laugh)</div>
                         <div class="quiz-answer">laughing</div>
+                        <div class="quiz-explanation"><strong>stop</strong> の後ろは動名詞で「〜するのをやめる」。stop to 〜 は「〜するために立ち止まる」で別の意味！</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                 </div>
@@ -1522,26 +1590,31 @@
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">This bag is <span class="blank"></span> than that one. (big)</div>
                         <div class="quiz-answer">bigger</div>
+                        <div class="quiz-explanation">big は「短母音+子音」で終わるので、<strong>子音を重ねて er</strong>。big → bigger</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">Mt. Fuji is the <span class="blank"></span> mountain in Japan. (high)</div>
                         <div class="quiz-answer">highest</div>
+                        <div class="quiz-explanation">最上級は <strong>the + 形容詞est</strong>。「日本で最も高い」= the highest in Japan</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">She is <span class="blank"></span> beautiful than her sister. (more/most)</div>
                         <div class="quiz-answer">more</div>
+                        <div class="quiz-explanation">beautiful は長い形容詞なので、<strong>more</strong> をつけて比較級を作ります。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">This is the <span class="blank"></span> movie I've ever seen. (good)</div>
                         <div class="quiz-answer">best</div>
+                        <div class="quiz-explanation">good は<strong>不規則変化</strong>。good → better → <strong>best</strong></div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">He runs as <span class="blank"></span> as Tom. (fast)</div>
                         <div class="quiz-answer">fast</div>
+                        <div class="quiz-explanation">「<strong>as 原級 as</strong>」で「〜と同じくらい」。比較級ではなく<strong>原級</strong>を使います。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                 </div>
@@ -1603,26 +1676,31 @@
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question"><span class="blank"></span> I got home, my mother was cooking.</div>
                         <div class="quiz-answer">When</div>
+                        <div class="quiz-explanation"><strong>When</strong>「〜するとき」。過去の出来事を表す場合は過去形を使います。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question"><span class="blank"></span> you are tired, you should rest.</div>
                         <div class="quiz-answer">If</div>
+                        <div class="quiz-explanation"><strong>If</strong>「もし〜なら」。条件を表す接続詞です。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I stayed home <span class="blank"></span> it was raining.</div>
                         <div class="quiz-answer">because</div>
+                        <div class="quiz-explanation"><strong>because</strong>「なぜなら〜だから」。理由を表す接続詞です。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I think <span class="blank"></span> she is a good teacher.</div>
                         <div class="quiz-answer">that</div>
+                        <div class="quiz-explanation"><strong>that</strong>「〜ということ」。think, know, hope などの後ろに使います。省略可能です。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">If it <span class="blank"></span> tomorrow, I will stay home. (rain)</div>
                         <div class="quiz-answer">rains</div>
+                        <div class="quiz-explanation">if節の中は<strong>未来のことでも現在形</strong>を使います。will rains は間違い！</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                 </div>
@@ -1709,26 +1787,31 @@
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I have <span class="blank"></span> to Okinawa three times. (be)</div>
                         <div class="quiz-answer">been</div>
+                        <div class="quiz-explanation">「〜へ行ったことがある」は <strong>have been to</strong>。be の過去分詞は <strong>been</strong>【経験】</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">She has lived here <span class="blank"></span> 2010.</div>
                         <div class="quiz-answer">since</div>
+                        <div class="quiz-explanation"><strong>since</strong> は「〜以来」で<strong>起点</strong>を表します。2010年という時点から今まで【継続】</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">Have you <span class="blank"></span> eaten sushi? (今までに)</div>
                         <div class="quiz-answer">ever</div>
+                        <div class="quiz-explanation"><strong>ever</strong>「今までに」は経験を尋ねる疑問文でよく使います【経験】</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I have known him <span class="blank"></span> five years.</div>
                         <div class="quiz-answer">for</div>
+                        <div class="quiz-explanation"><strong>for</strong> は「〜の間」で<strong>期間</strong>を表します。5年間という長さ【継続】</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">He has <span class="blank"></span> finished lunch. (ちょうど)</div>
                         <div class="quiz-answer">just</div>
+                        <div class="quiz-explanation"><strong>just</strong>「ちょうど〜したところ」は完了を表すキーワードです【完了】</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                 </div>
@@ -1804,26 +1887,31 @@
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">This song <span class="blank"></span> loved by many people. (be)</div>
                         <div class="quiz-answer">is</div>
+                        <div class="quiz-explanation">受動態は <strong>be動詞 + 過去分詞</strong>。This song は三人称単数なので <strong>is</strong></div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">The letter was <span class="blank"></span> by my father. (write)</div>
                         <div class="quiz-answer">written</div>
+                        <div class="quiz-explanation">write の過去分詞は <strong>written</strong>。不規則変化: write → wrote → written</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">Japanese <span class="blank"></span> spoken in Japan.</div>
                         <div class="quiz-answer">is</div>
+                        <div class="quiz-explanation">「日本語は話される」という現在の事実。Japanese（日本語）は単数扱いなので <strong>is</strong></div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">The window was <span class="blank"></span> by the boy. (break)</div>
                         <div class="quiz-answer">broken</div>
+                        <div class="quiz-explanation">break の過去分詞は <strong>broken</strong>。不規則変化: break → broke → broken</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">These pictures were <span class="blank"></span> by Picasso. (paint)</div>
                         <div class="quiz-answer">painted</div>
+                        <div class="quiz-explanation">paint は<strong>規則動詞</strong>なので過去分詞は <strong>painted</strong>（ed をつける）</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                 </div>
@@ -1892,26 +1980,31 @@
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I have a friend <span class="blank"></span> lives in Canada. (人)</div>
                         <div class="quiz-answer">who / that</div>
+                        <div class="quiz-explanation">先行詞が<strong>人</strong>なので <strong>who</strong> または that。後ろに動詞が続くので<strong>主格</strong>です。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">This is the book <span class="blank"></span> I read yesterday. (もの)</div>
                         <div class="quiz-answer">which / that</div>
+                        <div class="quiz-explanation">先行詞が<strong>もの（book）</strong>なので <strong>which</strong> または that。後ろに主語+動詞が続くので<strong>目的格</strong>（省略可）</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">The man <span class="blank"></span> is standing there is my uncle.</div>
                         <div class="quiz-answer">who / that</div>
+                        <div class="quiz-explanation">先行詞が<strong>人（man）</strong>。後ろに動詞 is standing が続くので<strong>主格</strong>の who/that</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I like the song <span class="blank"></span> she sang.</div>
                         <div class="quiz-answer">which / that</div>
+                        <div class="quiz-explanation">先行詞が<strong>もの（song）</strong>。後ろに she sang と主語+動詞が続くので<strong>目的格</strong>（省略可）</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">The girl <span class="blank"></span> I met at the party was kind.</div>
                         <div class="quiz-answer">who / whom / that</div>
+                        <div class="quiz-explanation">先行詞が<strong>人（girl）</strong>で<strong>目的格</strong>。whom は堅い表現。目的格なので省略も可能です。</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                 </div>
@@ -1975,26 +2068,31 @@
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">Look at the <span class="blank"></span> bird. (fly)</div>
                         <div class="quiz-answer">flying</div>
+                        <div class="quiz-explanation">「飛んでいる鳥」= flying bird。鳥が<strong>自ら飛んでいる</strong>ので現在分詞（〜ing）</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I found a <span class="blank"></span> watch. (break)</div>
                         <div class="quiz-answer">broken</div>
+                        <div class="quiz-explanation">「壊れた時計」= broken watch。時計は<strong>壊された</strong>状態なので過去分詞</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">The girl <span class="blank"></span> the piano is my sister. (play)</div>
                         <div class="quiz-answer">playing</div>
+                        <div class="quiz-explanation">「ピアノを弾いている女の子」。名詞の後ろから修飾する<strong>現在分詞</strong>の後置修飾</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">This is a book <span class="blank"></span> in English. (write)</div>
                         <div class="quiz-answer">written</div>
+                        <div class="quiz-explanation">「英語で書かれた本」。本は<strong>書かれた</strong>側なので過去分詞 written</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I saw a <span class="blank"></span> cat under the tree. (sleep)</div>
                         <div class="quiz-answer">sleeping</div>
+                        <div class="quiz-explanation">「眠っている猫」= sleeping cat。猫が<strong>自ら眠っている</strong>ので現在分詞</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                 </div>
@@ -2053,26 +2151,31 @@
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I don't know where he <span class="blank"></span>. (live の語順)</div>
                         <div class="quiz-answer">lives</div>
+                        <div class="quiz-explanation">間接疑問文は<strong>疑問詞 + 主語 + 動詞</strong>の語順。where he lives（彼がどこに住んでいるか）</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">Do you know what time it <span class="blank"></span>?</div>
                         <div class="quiz-answer">is</div>
+                        <div class="quiz-explanation">「今何時か」= what time it <strong>is</strong>。疑問文の語順 is it ではなく、<strong>主語 + 動詞</strong>の語順に</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">Tell me <span class="blank"></span> you like. (何が)</div>
                         <div class="quiz-answer">what</div>
+                        <div class="quiz-explanation"><strong>what</strong>「何を/何が」。Tell me what you like.「何が好きか教えて」</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">I wonder <span class="blank"></span> she is so happy.</div>
                         <div class="quiz-answer">why</div>
+                        <div class="quiz-explanation"><strong>why</strong>「なぜ」。I wonder why 〜「なぜ〜なのだろう」という表現</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                     <div class="quiz-card" onclick="this.classList.toggle('revealed')">
                         <div class="quiz-question">Please tell me <span class="blank"></span> to get to the station.</div>
                         <div class="quiz-answer">how</div>
+                        <div class="quiz-explanation"><strong>how to 〜</strong>「〜する方法/やり方」。「駅への行き方を教えてください」</div>
                         <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                 </div>
