@@ -440,6 +440,87 @@
             box-shadow: var(--shadow-soft);
         }
 
+        /* 練習問題セクション */
+        .quiz-section {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            margin-left: 2rem;
+            border: 2px solid #90caf9;
+        }
+
+        .quiz-section h4 {
+            color: #1565c0;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quiz-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid #42a5f5;
+        }
+
+        .quiz-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .quiz-card:hover {
+            transform: translateX(3px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .quiz-question {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .quiz-question .blank {
+            display: inline-block;
+            min-width: 80px;
+            border-bottom: 2px dashed #42a5f5;
+            margin: 0 0.3rem;
+            text-align: center;
+        }
+
+        .quiz-answer {
+            color: #1565c0;
+            font-weight: 600;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.1rem;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-card.revealed .quiz-answer {
+            opacity: 1;
+            max-height: 50px;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px dashed #90caf9;
+        }
+
+        .quiz-hint {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 0.3rem;
+        }
+
+        .quiz-card.revealed .quiz-hint {
+            display: none;
+        }
+
         /* レスポンシブ */
         @media (max-width: 600px) {
             header h1 {
@@ -583,6 +664,35 @@
                     「I = student」→「I am a student.」<br>
                     主語と後ろの言葉をつなぐ役割があります。</p>
                 </div>
+
+                <div class="quiz-section">
+                    <h4>✏️ 練習問題</h4>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I <span class="blank"></span> a teacher.</div>
+                        <div class="quiz-answer">am</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">She <span class="blank"></span> very kind.</div>
+                        <div class="quiz-answer">is</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">You <span class="blank"></span> my best friend.</div>
+                        <div class="quiz-answer">are</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">Tom and I <span class="blank"></span> classmates.</div>
+                        <div class="quiz-answer">are</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">It <span class="blank"></span> sunny today.</div>
+                        <div class="quiz-answer">is</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                </div>
             </section>
 
             <!-- 一般動詞 -->
@@ -664,6 +774,35 @@
                         ・子音 + y で終わる → y を i に変えて <strong>es</strong>: study → studies
                     </p>
                 </div>
+
+                <div class="quiz-section">
+                    <h4>✏️ 練習問題</h4>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">He <span class="blank"></span> soccer every day. (play)</div>
+                        <div class="quiz-answer">plays</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">My mother <span class="blank"></span> TV at night. (watch)</div>
+                        <div class="quiz-answer">watches</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">She <span class="blank"></span> English hard. (study)</div>
+                        <div class="quiz-answer">studies</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I <span class="blank"></span> coffee every morning. (drink)</div>
+                        <div class="quiz-answer">drink</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">Tom <span class="blank"></span> to school by bus. (go)</div>
+                        <div class="quiz-answer">goes</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                </div>
             </section>
 
             <!-- 疑問文・否定文 -->
@@ -743,6 +882,35 @@
                         <div class="example-hint">👆 クリックで日本語を表示</div>
                     </div>
                 </div>
+
+                <div class="quiz-section">
+                    <h4>✏️ 練習問題</h4>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question"><span class="blank"></span> you like cats? — Yes, I do.</div>
+                        <div class="quiz-answer">Do</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question"><span class="blank"></span> she play tennis? — No, she doesn't.</div>
+                        <div class="quiz-answer">Does</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I <span class="blank"></span> like natto. (否定文に)</div>
+                        <div class="quiz-answer">don't</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">He <span class="blank"></span> have a car. (否定文に)</div>
+                        <div class="quiz-answer">doesn't</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question"><span class="blank"></span> this your pen? — Yes, it is.</div>
+                        <div class="quiz-answer">Is</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                </div>
             </section>
 
             <!-- 現在進行形 -->
@@ -802,6 +970,35 @@
                         ・短母音+子音 → 子音を重ねて <strong>ing</strong>: run → running
                     </p>
                 </div>
+
+                <div class="quiz-section">
+                    <h4>✏️ 練習問題</h4>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">She is <span class="blank"></span> a letter now. (write)</div>
+                        <div class="quiz-answer">writing</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">They are <span class="blank"></span> in the park. (run)</div>
+                        <div class="quiz-answer">running</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I <span class="blank"></span> watching TV now.</div>
+                        <div class="quiz-answer">am</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">He <span class="blank"></span> swimming in the pool.</div>
+                        <div class="quiz-answer">is</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">My father is <span class="blank"></span> breakfast. (make)</div>
+                        <div class="quiz-answer">making</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                </div>
             </section>
 
             <!-- can -->
@@ -852,6 +1049,35 @@
                         <div class="example-en">She can't come today.</div>
                         <div class="example-ja">彼女は今日来られません。</div>
                         <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                </div>
+
+                <div class="quiz-section">
+                    <h4>✏️ 練習問題</h4>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">She <span class="blank"></span> play the guitar very well.</div>
+                        <div class="quiz-answer">can</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question"><span class="blank"></span> you help me? — Sure!</div>
+                        <div class="quiz-answer">Can</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I <span class="blank"></span> speak Chinese. (否定)</div>
+                        <div class="quiz-answer">can't / cannot</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">He can <span class="blank"></span> fast. (run)</div>
+                        <div class="quiz-answer">run</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question"><span class="blank"></span> I use your pen? — Of course.</div>
+                        <div class="quiz-answer">Can</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                 </div>
             </section>
@@ -933,6 +1159,35 @@
                         ※ Did を使ったら動詞は原形に戻る！
                     </p>
                 </div>
+
+                <div class="quiz-section">
+                    <h4>✏️ 練習問題</h4>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I <span class="blank"></span> to the park yesterday. (go)</div>
+                        <div class="quiz-answer">went</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">She <span class="blank"></span> happy last night. (be)</div>
+                        <div class="quiz-answer">was</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question"><span class="blank"></span> you see the movie? — Yes, I did.</div>
+                        <div class="quiz-answer">Did</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">We <span class="blank"></span> dinner at 7 p.m. (have)</div>
+                        <div class="quiz-answer">had</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">He <span class="blank"></span> come to school yesterday. (否定)</div>
+                        <div class="quiz-answer">didn't</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                </div>
             </section>
 
         </div>
@@ -989,6 +1244,35 @@
                         <div class="example-hint">👆 クリックで日本語を表示</div>
                     </div>
                 </div>
+
+                <div class="quiz-section">
+                    <h4>✏️ 練習問題</h4>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I <span class="blank"></span> call you later.</div>
+                        <div class="quiz-answer">will</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">She <span class="blank"></span> going to visit her grandmother.</div>
+                        <div class="quiz-answer">is</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question"><span class="blank"></span> you be free tomorrow? — Yes, I will.</div>
+                        <div class="quiz-answer">Will</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">It <span class="blank"></span> be sunny next week.</div>
+                        <div class="quiz-answer">will</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">We are going <span class="blank"></span> have a party. (to を入れる)</div>
+                        <div class="quiz-answer">to</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                </div>
             </section>
 
             <!-- 不定詞 -->
@@ -1040,6 +1324,35 @@
                         <div class="example-en">I study hard to pass the exam.</div>
                         <div class="example-ja">試験に受かるために一生懸命勉強します。（副詞的）</div>
                         <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                </div>
+
+                <div class="quiz-section">
+                    <h4>✏️ 練習問題</h4>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I want <span class="blank"></span> a singer. (be)</div>
+                        <div class="quiz-answer">to be</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">He has a lot of work <span class="blank"></span>. (do)</div>
+                        <div class="quiz-answer">to do</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">She went to the library <span class="blank"></span> books. (read)</div>
+                        <div class="quiz-answer">to read</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">It is important <span class="blank"></span> English. (learn)</div>
+                        <div class="quiz-answer">to learn</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I need something <span class="blank"></span>. (drink)</div>
+                        <div class="quiz-answer">to drink</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                 </div>
             </section>
@@ -1097,6 +1410,35 @@
                         ・want, hope, decide → <strong>不定詞</strong>のみ<br>
                         ・like, start, begin → <strong>どちらでもOK</strong>
                     </p>
+                </div>
+
+                <div class="quiz-section">
+                    <h4>✏️ 練習問題</h4>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I enjoy <span class="blank"></span> music. (listen to)</div>
+                        <div class="quiz-answer">listening to</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question"><span class="blank"></span> is good for your health. (walk)</div>
+                        <div class="quiz-answer">Walking</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">Thank you for <span class="blank"></span> me. (invite)</div>
+                        <div class="quiz-answer">inviting</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">He finished <span class="blank"></span> his homework. (do)</div>
+                        <div class="quiz-answer">doing</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">Stop <span class="blank"></span>! It's not funny. (laugh)</div>
+                        <div class="quiz-answer">laughing</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
                 </div>
             </section>
 
@@ -1174,6 +1516,35 @@
                         <div class="example-hint">👆 クリックで日本語を表示</div>
                     </div>
                 </div>
+
+                <div class="quiz-section">
+                    <h4>✏️ 練習問題</h4>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">This bag is <span class="blank"></span> than that one. (big)</div>
+                        <div class="quiz-answer">bigger</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">Mt. Fuji is the <span class="blank"></span> mountain in Japan. (high)</div>
+                        <div class="quiz-answer">highest</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">She is <span class="blank"></span> beautiful than her sister. (more/most)</div>
+                        <div class="quiz-answer">more</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">This is the <span class="blank"></span> movie I've ever seen. (good)</div>
+                        <div class="quiz-answer">best</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">He runs as <span class="blank"></span> as Tom. (fast)</div>
+                        <div class="quiz-answer">fast</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                </div>
             </section>
 
             <!-- 接続詞 -->
@@ -1225,6 +1596,35 @@
                     <p>when, if, before, after などの後ろは<br>
                     未来のことでも<strong>現在形</strong>を使う！<br>
                     ✗ When I will go → ○ When I go</p>
+                </div>
+
+                <div class="quiz-section">
+                    <h4>✏️ 練習問題</h4>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question"><span class="blank"></span> I got home, my mother was cooking.</div>
+                        <div class="quiz-answer">When</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question"><span class="blank"></span> you are tired, you should rest.</div>
+                        <div class="quiz-answer">If</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I stayed home <span class="blank"></span> it was raining.</div>
+                        <div class="quiz-answer">because</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I think <span class="blank"></span> she is a good teacher.</div>
+                        <div class="quiz-answer">that</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">If it <span class="blank"></span> tomorrow, I will stay home. (rain)</div>
+                        <div class="quiz-answer">rains</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
                 </div>
             </section>
 
@@ -1303,6 +1703,35 @@
                         <div class="example-hint">👆 クリックで日本語を表示</div>
                     </div>
                 </div>
+
+                <div class="quiz-section">
+                    <h4>✏️ 練習問題</h4>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I have <span class="blank"></span> to Okinawa three times. (be)</div>
+                        <div class="quiz-answer">been</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">She has lived here <span class="blank"></span> 2010.</div>
+                        <div class="quiz-answer">since</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">Have you <span class="blank"></span> eaten sushi? (今までに)</div>
+                        <div class="quiz-answer">ever</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I have known him <span class="blank"></span> five years.</div>
+                        <div class="quiz-answer">for</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">He has <span class="blank"></span> finished lunch. (ちょうど)</div>
+                        <div class="quiz-answer">just</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                </div>
             </section>
 
             <!-- 受動態 -->
@@ -1369,6 +1798,35 @@
                         目的語が主語になり、動詞は「be + p.p.」に！
                     </p>
                 </div>
+
+                <div class="quiz-section">
+                    <h4>✏️ 練習問題</h4>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">This song <span class="blank"></span> loved by many people. (be)</div>
+                        <div class="quiz-answer">is</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">The letter was <span class="blank"></span> by my father. (write)</div>
+                        <div class="quiz-answer">written</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">Japanese <span class="blank"></span> spoken in Japan.</div>
+                        <div class="quiz-answer">is</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">The window was <span class="blank"></span> by the boy. (break)</div>
+                        <div class="quiz-answer">broken</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">These pictures were <span class="blank"></span> by Picasso. (paint)</div>
+                        <div class="quiz-answer">painted</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                </div>
             </section>
 
             <!-- 関係代名詞 -->
@@ -1428,6 +1886,35 @@
                         ※目的格の関係代名詞は省略できる！
                     </p>
                 </div>
+
+                <div class="quiz-section">
+                    <h4>✏️ 練習問題</h4>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I have a friend <span class="blank"></span> lives in Canada. (人)</div>
+                        <div class="quiz-answer">who / that</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">This is the book <span class="blank"></span> I read yesterday. (もの)</div>
+                        <div class="quiz-answer">which / that</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">The man <span class="blank"></span> is standing there is my uncle.</div>
+                        <div class="quiz-answer">who / that</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I like the song <span class="blank"></span> she sang.</div>
+                        <div class="quiz-answer">which / that</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">The girl <span class="blank"></span> I met at the party was kind.</div>
+                        <div class="quiz-answer">who / whom / that</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                </div>
             </section>
 
             <!-- 分詞 -->
@@ -1482,6 +1969,35 @@
                         <div class="example-hint">👆 クリックで日本語を表示</div>
                     </div>
                 </div>
+
+                <div class="quiz-section">
+                    <h4>✏️ 練習問題</h4>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">Look at the <span class="blank"></span> bird. (fly)</div>
+                        <div class="quiz-answer">flying</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I found a <span class="blank"></span> watch. (break)</div>
+                        <div class="quiz-answer">broken</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">The girl <span class="blank"></span> the piano is my sister. (play)</div>
+                        <div class="quiz-answer">playing</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">This is a book <span class="blank"></span> in English. (write)</div>
+                        <div class="quiz-answer">written</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I saw a <span class="blank"></span> cat under the tree. (sleep)</div>
+                        <div class="quiz-answer">sleeping</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                </div>
             </section>
 
             <!-- 間接疑問文 -->
@@ -1529,6 +2045,35 @@
                         <div class="example-en">Tell me how you did it.</div>
                         <div class="example-ja">どうやってやったか教えて。</div>
                         <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                </div>
+
+                <div class="quiz-section">
+                    <h4>✏️ 練習問題</h4>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I don't know where he <span class="blank"></span>. (live の語順)</div>
+                        <div class="quiz-answer">lives</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">Do you know what time it <span class="blank"></span>?</div>
+                        <div class="quiz-answer">is</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">Tell me <span class="blank"></span> you like. (何が)</div>
+                        <div class="quiz-answer">what</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">I wonder <span class="blank"></span> she is so happy.</div>
+                        <div class="quiz-answer">why</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
+                    </div>
+                    <div class="quiz-card" onclick="this.classList.toggle('revealed')">
+                        <div class="quiz-question">Please tell me <span class="blank"></span> to get to the station.</div>
+                        <div class="quiz-answer">how</div>
+                        <div class="quiz-hint">👆 クリックで答えを表示</div>
                     </div>
                 </div>
             </section>
