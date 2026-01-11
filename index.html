@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中学英文法マスター | イラストで学ぶ英語</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Patrick+Hand&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --grade1-primary: #2d8a6e;
+            --grade1-light: #e8f5f0;
+            --grade1-accent: #45c496;
+            --grade2-primary: #3b7dd8;
+            --grade2-light: #e8f1fc;
+            --grade2-accent: #5da3f7;
+            --grade3-primary: #7c4dbd;
+            --grade3-light: #f3eef9;
+            --grade3-accent: #a77de8;
+            --paper-bg: #fefcf6;
+            --paper-lines: #e8e4d9;
+            --text-dark: #2c2c2c;
+            --text-medium: #555;
+            --text-light: #888;
+            --shadow-soft: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-card: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(135deg, #f5f3ed 0%, #ebe8df 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            line-height: 1.8;
+        }
+
+        /* ノート風背景パターン */
+        .notebook-bg {
+            background-image:
+                linear-gradient(var(--paper-lines) 1px, transparent 1px);
+            background-size: 100% 2rem;
+            background-position: 0 1rem;
+        }
+
+        /* ヘッダー */
+        header {
+            background: linear-gradient(135deg, var(--grade1-primary) 0%, var(--grade2-primary) 50%, var(--grade3-primary) 100%);
+            padding: 2.5rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        header p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+        }
+
+        /* ナビゲーション（学年タブ） */
+        .grade-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1.5rem 1rem;
+            background: var(--paper-bg);
+            border-bottom: 3px solid var(--paper-lines);
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .grade-tab {
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 25px;
+            font-family: 'Zen Maru Gothic', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grade-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .grade-tab:hover::before {
+            left: 100%;
+        }
+
+        .grade-tab.grade1 {
+            background: var(--grade1-light);
+            color: var(--grade1-primary);
+            border: 2px solid var(--grade1-primary);
+        }
+
+        .grade-tab.grade1.active, .grade-tab.grade1:hover {
+            background: var(--grade1-primary);
+            color: white;
+        }
+
+        .grade-tab.grade2 {
+            background: var(--grade2-light);
+            color: var(--grade2-primary);
+            border: 2px solid var(--grade2-primary);
+        }
+
+        .grade-tab.grade2.active, .grade-tab.grade2:hover {
+            background: var(--grade2-primary);
+            color: white;
+        }
+
+        .grade-tab.grade3 {
+            background: var(--grade3-light);
+            color: var(--grade3-primary);
+            border: 2px solid var(--grade3-primary);
+        }
+
+        .grade-tab.grade3.active, .grade-tab.grade3:hover {
+            background: var(--grade3-primary);
+            color: white;
+        }
+
+        /* メインコンテンツ */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .grade-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .grade-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 文法セクション */
+        .grammar-section {
+            background: var(--paper-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            border: 1px solid var(--paper-lines);
+        }
+
+        .grammar-section::before {
+            content: '';
+            position: absolute;
+            left: 2rem;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--paper-lines);
+            border-radius: 2px;
+        }
+
+        .section-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: white;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .grade1 .section-number { background: var(--grade1-primary); }
+        .grade2 .section-number { background: var(--grade2-primary); }
+        .grade3 .section-number { background: var(--grade3-primary); }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            padding-left: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .section-title-en {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.1rem;
+            opacity: 0.7;
+        }
+
+        .section-desc {
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        /* イラストエリア */
+        .illustration-box {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff5d6 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            margin-left: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            border: 2px dashed #e6d9a8;
+            flex-wrap: wrap;
+        }
+
+        .illustration-box svg {
+            flex-shrink: 0;
+        }
+
+        .illustration-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .illustration-text h4 {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        /* 例文カード */
+        .example-cards {
+            display: grid;
+            gap: 1rem;
+            margin-left: 2rem;
+        }
+
+        .example-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            border-left: 4px solid;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-card);
+        }
+
+        .grade1 .example-card { border-left-color: var(--grade1-primary); }
+        .grade2 .example-card { border-left-color: var(--grade2-primary); }
+        .grade3 .example-card { border-left-color: var(--grade3-primary); }
+
+        .example-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .example-en {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .example-ja {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .example-card:hover .example-ja,
+        .example-card.revealed .example-ja {
+            opacity: 1;
+        }
+
+        .example-hint {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        /* ポイントボックス */
+        .point-box {
+            background: linear-gradient(135deg, #ffe8e8 0%, #ffd6d6 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            margin-left: 2rem;
+            border: 2px solid #f5c4c4;
+            position: relative;
+        }
+
+        .point-box::before {
+            content: '💡';
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            font-size: 1.5rem;
+            background: white;
+            padding: 0 0.5rem;
+            border-radius: 10px;
+        }
+
+        .point-box h4 {
+            color: #c44;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* 文法テーブル */
+        .grammar-table {
+            margin: 1.5rem 0;
+            margin-left: 2rem;
+            overflow-x: auto;
+        }
+
+        .grammar-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+        }
+
+        .grammar-table th {
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .grade1 .grammar-table th { background: var(--grade1-light); color: var(--grade1-primary); }
+        .grade2 .grammar-table th { background: var(--grade2-light); color: var(--grade2-primary); }
+        .grade3 .grammar-table th { background: var(--grade3-light); color: var(--grade3-primary); }
+
+        .grammar-table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid var(--paper-lines);
+            text-align: center;
+        }
+
+        .grammar-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .grammar-table .en {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.2rem;
+        }
+
+        /* フッター */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* クイズボタン */
+        .quiz-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-family: 'Zen Maru Gothic', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            margin-left: 2rem;
+        }
+
+        .grade1 .quiz-btn {
+            background: var(--grade1-accent);
+            color: white;
+        }
+
+        .grade2 .quiz-btn {
+            background: var(--grade2-accent);
+            color: white;
+        }
+
+        .grade3 .quiz-btn {
+            background: var(--grade3-accent);
+            color: white;
+        }
+
+        .quiz-btn:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.6rem;
+            }
+
+            .grade-tabs {
+                padding: 1rem 0.5rem;
+            }
+
+            .grade-tab {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .grammar-section {
+                padding: 1.5rem 1rem;
+            }
+
+            .grammar-section::before {
+                left: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+                padding-left: 1.5rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.3rem;
+            }
+
+            .section-desc,
+            .illustration-box,
+            .example-cards,
+            .point-box,
+            .grammar-table,
+            .quiz-btn {
+                margin-left: 1.5rem;
+            }
+
+            .illustration-box {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>📚 中学英文法マスター</h1>
+            <p>イラストで楽しく学ぶ！中学3年間の英語文法</p>
+        </div>
+    </header>
+
+    <nav class="grade-tabs">
+        <button class="grade-tab grade1 active" onclick="showGrade(1)">🌱 中学1年</button>
+        <button class="grade-tab grade2" onclick="showGrade(2)">🌿 中学2年</button>
+        <button class="grade-tab grade3" onclick="showGrade(3)">🌳 中学3年</button>
+    </nav>
+
+    <main>
+        <!-- 中学1年 -->
+        <div id="grade1" class="grade-content grade1 active">
+
+            <!-- be動詞 -->
+            <section class="grammar-section">
+                <span class="section-number">1</span>
+                <h2 class="section-title">be動詞 <span class="section-title-en">am / is / are</span></h2>
+                <p class="section-desc">「〜です」「〜にいます」を表す動詞。主語によって形が変わります。</p>
+
+                <div class="illustration-box">
+                    <svg width="120" height="100" viewBox="0 0 120 100">
+                        <!-- 人物 I -->
+                        <circle cx="30" cy="25" r="12" fill="#ffcc80"/>
+                        <circle cx="26" cy="23" r="2" fill="#333"/>
+                        <circle cx="34" cy="23" r="2" fill="#333"/>
+                        <path d="M26 30 Q30 34 34 30" stroke="#333" stroke-width="2" fill="none"/>
+                        <rect x="22" y="40" width="16" height="25" rx="5" fill="#4CAF50"/>
+                        <text x="30" y="85" text-anchor="middle" font-family="Patrick Hand" font-size="14" fill="#333">I</text>
+
+                        <!-- 矢印 -->
+                        <text x="55" y="45" font-family="Patrick Hand" font-size="16" fill="#2d8a6e">am</text>
+
+                        <!-- 結果 -->
+                        <text x="90" y="45" font-family="Patrick Hand" font-size="18" fill="#333">happy!</text>
+                        <text x="90" y="65" font-size="12" fill="#666">幸せです</text>
+                    </svg>
+                    <div class="illustration-text">
+                        <h4>I am = 私は〜です</h4>
+                        <p>「I（私）」には必ず「am」を使います。<br>短縮形: I'm</p>
+                    </div>
+                </div>
+
+                <div class="grammar-table">
+                    <table>
+                        <tr>
+                            <th>主語</th>
+                            <th>be動詞</th>
+                            <th>短縮形</th>
+                        </tr>
+                        <tr>
+                            <td class="en">I</td>
+                            <td class="en">am</td>
+                            <td class="en">I'm</td>
+                        </tr>
+                        <tr>
+                            <td class="en">You / We / They</td>
+                            <td class="en">are</td>
+                            <td class="en">You're / We're / They're</td>
+                        </tr>
+                        <tr>
+                            <td class="en">He / She / It</td>
+                            <td class="en">is</td>
+                            <td class="en">He's / She's / It's</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="example-cards">
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">I am a student.</div>
+                        <div class="example-ja">私は学生です。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">She is my sister.</div>
+                        <div class="example-ja">彼女は私の姉（妹）です。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">They are from Japan.</div>
+                        <div class="example-ja">彼らは日本出身です。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                </div>
+
+                <div class="point-box">
+                    <h4>ポイント！</h4>
+                    <p>be動詞は「=(イコール)」のイメージ！<br>
+                    「I = student」→「I am a student.」<br>
+                    主語と後ろの言葉をつなぐ役割があります。</p>
+                </div>
+            </section>
+
+            <!-- 一般動詞 -->
+            <section class="grammar-section">
+                <span class="section-number">2</span>
+                <h2 class="section-title">一般動詞 <span class="section-title-en">General Verbs</span></h2>
+                <p class="section-desc">「食べる」「走る」「好き」など、動作や状態を表す動詞です。</p>
+
+                <div class="illustration-box">
+                    <svg width="150" height="100" viewBox="0 0 150 100">
+                        <!-- 走る人 -->
+                        <circle cx="40" cy="30" r="12" fill="#ffcc80"/>
+                        <circle cx="36" cy="28" r="2" fill="#333"/>
+                        <circle cx="44" cy="28" r="2" fill="#333"/>
+                        <path d="M36 34 Q40 38 44 34" stroke="#333" stroke-width="2" fill="none"/>
+                        <!-- 体 -->
+                        <ellipse cx="45" cy="55" rx="12" ry="15" fill="#2196F3" transform="rotate(-15 45 55)"/>
+                        <!-- 足（走っている） -->
+                        <line x1="40" y1="65" x2="25" y2="85" stroke="#ffcc80" stroke-width="6" stroke-linecap="round"/>
+                        <line x1="50" y1="65" x2="65" y2="80" stroke="#ffcc80" stroke-width="6" stroke-linecap="round"/>
+                        <!-- 動きの線 -->
+                        <path d="M15 40 L5 40" stroke="#45c496" stroke-width="2"/>
+                        <path d="M15 50 L8 50" stroke="#45c496" stroke-width="2"/>
+                        <path d="M15 60 L5 60" stroke="#45c496" stroke-width="2"/>
+
+                        <text x="100" y="35" font-family="Patrick Hand" font-size="16" fill="#2d8a6e">run</text>
+                        <text x="100" y="55" font-family="Patrick Hand" font-size="16" fill="#2d8a6e">play</text>
+                        <text x="100" y="75" font-family="Patrick Hand" font-size="16" fill="#2d8a6e">like</text>
+                    </svg>
+                    <div class="illustration-text">
+                        <h4>動作・状態を表す！</h4>
+                        <p>一般動詞は「〜する」という動作を表します。<br>三人称単数（he/she/it）の時は <strong>s</strong> をつける！</p>
+                    </div>
+                </div>
+
+                <div class="grammar-table">
+                    <table>
+                        <tr>
+                            <th>主語</th>
+                            <th>動詞の形</th>
+                            <th>例</th>
+                        </tr>
+                        <tr>
+                            <td class="en">I / You / We / They</td>
+                            <td>そのまま</td>
+                            <td class="en">I play tennis.</td>
+                        </tr>
+                        <tr>
+                            <td class="en">He / She / It</td>
+                            <td>+s (+es)</td>
+                            <td class="en">He plays tennis.</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="example-cards">
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">I like music.</div>
+                        <div class="example-ja">私は音楽が好きです。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">She plays the piano.</div>
+                        <div class="example-ja">彼女はピアノを弾きます。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">We study English every day.</div>
+                        <div class="example-ja">私たちは毎日英語を勉強します。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                </div>
+
+                <div class="point-box">
+                    <h4>三単現の s ルール！</h4>
+                    <p>
+                        ・ふつうは <strong>s</strong> をつける: play → plays<br>
+                        ・s, sh, ch, x, o で終わる → <strong>es</strong>: watch → watches<br>
+                        ・子音 + y で終わる → y を i に変えて <strong>es</strong>: study → studies
+                    </p>
+                </div>
+            </section>
+
+            <!-- 疑問文・否定文 -->
+            <section class="grammar-section">
+                <span class="section-number">3</span>
+                <h2 class="section-title">疑問文・否定文 <span class="section-title-en">Questions & Negatives</span></h2>
+                <p class="section-desc">「〜ですか？」「〜しません」の作り方を覚えよう！</p>
+
+                <div class="illustration-box">
+                    <svg width="180" height="100" viewBox="0 0 180 100">
+                        <!-- 疑問符のキャラ -->
+                        <text x="30" y="50" font-size="40" fill="#2d8a6e">?</text>
+                        <circle cx="30" cy="70" r="8" fill="#45c496"/>
+                        <circle cx="27" cy="68" r="2" fill="#333"/>
+                        <circle cx="33" cy="68" r="2" fill="#333"/>
+
+                        <!-- 矢印 -->
+                        <path d="M55 50 L75 50" stroke="#2d8a6e" stroke-width="2" marker-end="url(#arrow)"/>
+                        <defs>
+                            <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <path d="M0,0 L0,6 L9,3 z" fill="#2d8a6e"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Do/Does -->
+                        <rect x="80" y="30" width="45" height="30" rx="8" fill="#45c496"/>
+                        <text x="102" y="50" text-anchor="middle" font-family="Patrick Hand" font-size="14" fill="white">Do/Does</text>
+
+                        <text x="135" y="50" font-family="Patrick Hand" font-size="14" fill="#333">+ 主語 + 動詞?</text>
+                    </svg>
+                    <div class="illustration-text">
+                        <h4>Do / Does を文頭に！</h4>
+                        <p>一般動詞の疑問文は Do/Does を最初につけます。<br>
+                        Does の時、動詞は原形に戻る！</p>
+                    </div>
+                </div>
+
+                <div class="grammar-table">
+                    <table>
+                        <tr>
+                            <th>種類</th>
+                            <th>be動詞</th>
+                            <th>一般動詞</th>
+                        </tr>
+                        <tr>
+                            <td>疑問文</td>
+                            <td class="en">Is she happy?</td>
+                            <td class="en">Does she like it?</td>
+                        </tr>
+                        <tr>
+                            <td>否定文</td>
+                            <td class="en">She is not happy.</td>
+                            <td class="en">She does not like it.</td>
+                        </tr>
+                        <tr>
+                            <td>短縮形</td>
+                            <td class="en">isn't / aren't</td>
+                            <td class="en">don't / doesn't</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="example-cards">
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">Do you like sushi?</div>
+                        <div class="example-ja">寿司は好きですか？</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">I don't have a pet.</div>
+                        <div class="example-ja">私はペットを飼っていません。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">Is this your book?</div>
+                        <div class="example-ja">これはあなたの本ですか？</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 現在進行形 -->
+            <section class="grammar-section">
+                <span class="section-number">4</span>
+                <h2 class="section-title">現在進行形 <span class="section-title-en">Present Continuous</span></h2>
+                <p class="section-desc">「今〜している」という、まさに今起きている動作を表します。</p>
+
+                <div class="illustration-box">
+                    <svg width="160" height="100" viewBox="0 0 160 100">
+                        <!-- 読書中の人 -->
+                        <circle cx="50" cy="30" r="15" fill="#ffcc80"/>
+                        <circle cx="45" cy="28" r="2.5" fill="#333"/>
+                        <circle cx="55" cy="28" r="2.5" fill="#333"/>
+                        <ellipse cx="50" cy="33" rx="3" ry="1.5" fill="#ff9999"/>
+                        <!-- 本 -->
+                        <rect x="35" y="50" width="30" height="25" rx="2" fill="#8BC34A"/>
+                        <line x1="50" y1="50" x2="50" y2="75" stroke="#689F38" stroke-width="2"/>
+                        <!-- 目線 -->
+                        <path d="M45 35 Q50 45 45 50" stroke="#333" stroke-width="1" fill="none" stroke-dasharray="2"/>
+                        <path d="M55 35 Q50 45 55 50" stroke="#333" stroke-width="1" fill="none" stroke-dasharray="2"/>
+
+                        <text x="100" y="40" font-family="Patrick Hand" font-size="14" fill="#2d8a6e">be動詞</text>
+                        <text x="100" y="55" font-size="20" fill="#2d8a6e">+</text>
+                        <text x="100" y="75" font-family="Patrick Hand" font-size="14" fill="#2d8a6e">〜ing</text>
+                    </svg>
+                    <div class="illustration-text">
+                        <h4>am/is/are + 動詞ing</h4>
+                        <p>「be動詞 + 動詞ing」で「〜している」<br>
+                        今この瞬間の動作を表現できます！</p>
+                    </div>
+                </div>
+
+                <div class="example-cards">
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">I am reading a book now.</div>
+                        <div class="example-ja">私は今、本を読んでいます。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">She is cooking dinner.</div>
+                        <div class="example-ja">彼女は夕食を作っています。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">They are playing soccer.</div>
+                        <div class="example-ja">彼らはサッカーをしています。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                </div>
+
+                <div class="point-box">
+                    <h4>-ing のつけ方！</h4>
+                    <p>
+                        ・ふつうはそのまま <strong>ing</strong>: play → playing<br>
+                        ・e で終わる → e を取って <strong>ing</strong>: make → making<br>
+                        ・短母音+子音 → 子音を重ねて <strong>ing</strong>: run → running
+                    </p>
+                </div>
+            </section>
+
+            <!-- can -->
+            <section class="grammar-section">
+                <span class="section-number">5</span>
+                <h2 class="section-title">can（できる） <span class="section-title-en">Can - Ability</span></h2>
+                <p class="section-desc">「〜できる」「〜してもいい」を表す便利な助動詞です。</p>
+
+                <div class="illustration-box">
+                    <svg width="150" height="100" viewBox="0 0 150 100">
+                        <!-- 泳ぐ人 -->
+                        <ellipse cx="60" cy="70" rx="50" ry="15" fill="#64B5F6" opacity="0.5"/>
+                        <circle cx="45" cy="55" r="12" fill="#ffcc80"/>
+                        <circle cx="42" cy="53" r="2" fill="#333"/>
+                        <circle cx="48" cy="53" r="2" fill="#333"/>
+                        <path d="M42 58 Q45 61 48 58" stroke="#333" stroke-width="1.5" fill="none"/>
+                        <!-- 腕（泳いでいる） -->
+                        <ellipse cx="60" cy="62" rx="20" ry="8" fill="#4FC3F7"/>
+                        <path d="M35 60 Q20 50 25 65" stroke="#ffcc80" stroke-width="5" fill="none" stroke-linecap="round"/>
+                        <path d="M75 60 Q90 50 85 65" stroke="#ffcc80" stroke-width="5" fill="none" stroke-linecap="round"/>
+                        <!-- 水しぶき -->
+                        <circle cx="25" cy="55" r="3" fill="#90CAF9"/>
+                        <circle cx="95" cy="55" r="3" fill="#90CAF9"/>
+                        <circle cx="30" cy="48" r="2" fill="#90CAF9"/>
+
+                        <text x="120" y="40" font-family="Patrick Hand" font-size="16" fill="#2d8a6e">can</text>
+                        <text x="120" y="60" font-family="Patrick Hand" font-size="12" fill="#666">+ 動詞原形</text>
+                    </svg>
+                    <div class="illustration-text">
+                        <h4>can + 動詞の原形</h4>
+                        <p>can の後ろは必ず動詞の原形！<br>
+                        主語が何でも can は変わりません。</p>
+                    </div>
+                </div>
+
+                <div class="example-cards">
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">I can swim.</div>
+                        <div class="example-ja">私は泳げます。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">Can you speak English?</div>
+                        <div class="example-ja">英語を話せますか？</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">She can't come today.</div>
+                        <div class="example-ja">彼女は今日来られません。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 過去形 -->
+            <section class="grammar-section">
+                <span class="section-number">6</span>
+                <h2 class="section-title">過去形 <span class="section-title-en">Past Tense</span></h2>
+                <p class="section-desc">「〜した」「〜だった」という過去の出来事を表します。</p>
+
+                <div class="illustration-box">
+                    <svg width="160" height="100" viewBox="0 0 160 100">
+                        <!-- タイムライン -->
+                        <line x1="20" y1="50" x2="140" y2="50" stroke="#ccc" stroke-width="3"/>
+                        <circle cx="50" cy="50" r="8" fill="#2d8a6e"/>
+                        <circle cx="110" cy="50" r="8" fill="#45c496"/>
+                        <text x="50" y="75" text-anchor="middle" font-size="11" fill="#666">過去</text>
+                        <text x="110" y="75" text-anchor="middle" font-size="11" fill="#666">現在</text>
+
+                        <!-- 過去のアイコン -->
+                        <text x="50" y="30" text-anchor="middle" font-family="Patrick Hand" font-size="12" fill="#2d8a6e">played</text>
+                        <text x="110" y="30" text-anchor="middle" font-family="Patrick Hand" font-size="12" fill="#45c496">play</text>
+                    </svg>
+                    <div class="illustration-text">
+                        <h4>過去のことは -ed ！</h4>
+                        <p>規則動詞は <strong>-ed</strong> をつける<br>
+                        不規則動詞は形が変わる（覚えよう！）</p>
+                    </div>
+                </div>
+
+                <div class="grammar-table">
+                    <table>
+                        <tr>
+                            <th>種類</th>
+                            <th>現在形</th>
+                            <th>過去形</th>
+                        </tr>
+                        <tr>
+                            <td>規則動詞</td>
+                            <td class="en">play / watch</td>
+                            <td class="en">played / watched</td>
+                        </tr>
+                        <tr>
+                            <td>不規則動詞</td>
+                            <td class="en">go / have / eat</td>
+                            <td class="en">went / had / ate</td>
+                        </tr>
+                        <tr>
+                            <td>be動詞</td>
+                            <td class="en">am/is / are</td>
+                            <td class="en">was / were</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="example-cards">
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">I played tennis yesterday.</div>
+                        <div class="example-ja">私は昨日テニスをしました。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">She was busy last week.</div>
+                        <div class="example-ja">彼女は先週忙しかったです。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">Did you see the movie?</div>
+                        <div class="example-ja">その映画を見ましたか？</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                </div>
+
+                <div class="point-box">
+                    <h4>過去形の疑問文・否定文</h4>
+                    <p>
+                        ・疑問文: <strong>Did</strong> + 主語 + 動詞の原形?<br>
+                        ・否定文: 主語 + <strong>did not (didn't)</strong> + 動詞の原形<br>
+                        ※ Did を使ったら動詞は原形に戻る！
+                    </p>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- 中学2年 -->
+        <div id="grade2" class="grade-content grade2">
+
+            <!-- 未来形 -->
+            <section class="grammar-section">
+                <span class="section-number">1</span>
+                <h2 class="section-title">未来形 <span class="section-title-en">Future Tense</span></h2>
+                <p class="section-desc">「〜するつもり」「〜でしょう」という未来のことを表します。</p>
+
+                <div class="illustration-box">
+                    <svg width="180" height="100" viewBox="0 0 180 100">
+                        <!-- タイムライン -->
+                        <line x1="20" y1="60" x2="160" y2="60" stroke="#ccc" stroke-width="3"/>
+                        <circle cx="50" cy="60" r="8" fill="#3b7dd8"/>
+                        <circle cx="130" cy="60" r="8" fill="#5da3f7" stroke="#3b7dd8" stroke-width="2" stroke-dasharray="4"/>
+                        <text x="50" y="85" text-anchor="middle" font-size="11" fill="#666">現在</text>
+                        <text x="130" y="85" text-anchor="middle" font-size="11" fill="#666">未来</text>
+
+                        <!-- 矢印 -->
+                        <path d="M65 55 Q90 40 115 55" stroke="#3b7dd8" stroke-width="2" fill="none" marker-end="url(#arrow2)"/>
+                        <defs>
+                            <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <path d="M0,0 L0,6 L9,3 z" fill="#3b7dd8"/>
+                            </marker>
+                        </defs>
+
+                        <text x="90" y="30" text-anchor="middle" font-family="Patrick Hand" font-size="14" fill="#3b7dd8">will / be going to</text>
+                    </svg>
+                    <div class="illustration-text">
+                        <h4>will と be going to</h4>
+                        <p><strong>will</strong>: その場で決めた予定、予測<br>
+                        <strong>be going to</strong>: 前から決めていた予定</p>
+                    </div>
+                </div>
+
+                <div class="example-cards">
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">I will help you.</div>
+                        <div class="example-ja">手伝いますよ。（その場で決定）</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">I'm going to visit Kyoto next week.</div>
+                        <div class="example-ja">来週京都を訪れる予定です。（計画済み）</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">It will rain tomorrow.</div>
+                        <div class="example-ja">明日は雨が降るでしょう。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 不定詞 -->
+            <section class="grammar-section">
+                <span class="section-number">2</span>
+                <h2 class="section-title">不定詞 <span class="section-title-en">Infinitives (to + verb)</span></h2>
+                <p class="section-desc">「to + 動詞の原形」で名詞・形容詞・副詞の働きをします。</p>
+
+                <div class="illustration-box">
+                    <svg width="200" height="100" viewBox="0 0 200 100">
+                        <!-- to の周りに3つの用法 -->
+                        <circle cx="100" cy="50" r="25" fill="#3b7dd8"/>
+                        <text x="100" y="55" text-anchor="middle" font-family="Patrick Hand" font-size="18" fill="white">to + V</text>
+
+                        <!-- 名詞的用法 -->
+                        <circle cx="40" cy="30" r="20" fill="#e8f1fc" stroke="#3b7dd8" stroke-width="2"/>
+                        <text x="40" y="35" text-anchor="middle" font-size="10" fill="#3b7dd8">名詞的</text>
+                        <text x="40" y="60" text-anchor="middle" font-size="9" fill="#666">〜すること</text>
+
+                        <!-- 形容詞的用法 -->
+                        <circle cx="160" cy="30" r="20" fill="#e8f1fc" stroke="#3b7dd8" stroke-width="2"/>
+                        <text x="160" y="35" text-anchor="middle" font-size="10" fill="#3b7dd8">形容詞的</text>
+                        <text x="160" y="60" text-anchor="middle" font-size="9" fill="#666">〜するための</text>
+
+                        <!-- 副詞的用法 -->
+                        <circle cx="100" cy="90" r="20" fill="#e8f1fc" stroke="#3b7dd8" stroke-width="2"/>
+                        <text x="100" y="88" text-anchor="middle" font-size="10" fill="#3b7dd8">副詞的</text>
+                        <text x="100" y="98" text-anchor="middle" font-size="9" fill="#666">〜するために</text>
+                    </svg>
+                    <div class="illustration-text">
+                        <h4>3つの使い方！</h4>
+                        <p>to + 動詞は文の中で色んな役割をします。<br>
+                        それぞれの意味を覚えよう！</p>
+                    </div>
+                </div>
+
+                <div class="example-cards">
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">I want to be a doctor.</div>
+                        <div class="example-ja">私は医者になりたいです。（名詞的）</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">I have something to eat.</div>
+                        <div class="example-ja">食べるものがあります。（形容詞的）</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">I study hard to pass the exam.</div>
+                        <div class="example-ja">試験に受かるために一生懸命勉強します。（副詞的）</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 動名詞 -->
+            <section class="grammar-section">
+                <span class="section-number">3</span>
+                <h2 class="section-title">動名詞 <span class="section-title-en">Gerunds (-ing)</span></h2>
+                <p class="section-desc">「動詞 + ing」で「〜すること」という名詞になります。</p>
+
+                <div class="illustration-box">
+                    <svg width="150" height="100" viewBox="0 0 150 100">
+                        <!-- 楽しそうに歌う人 -->
+                        <circle cx="60" cy="35" r="18" fill="#ffcc80"/>
+                        <circle cx="54" cy="32" r="3" fill="#333"/>
+                        <circle cx="66" cy="32" r="3" fill="#333"/>
+                        <ellipse cx="60" cy="42" rx="8" ry="5" fill="#ff9999"/>
+                        <!-- 音符 -->
+                        <text x="85" y="25" font-size="16">♪</text>
+                        <text x="95" y="35" font-size="14">♫</text>
+                        <text x="88" y="50" font-size="12">♪</text>
+
+                        <text x="60" y="75" text-anchor="middle" font-family="Patrick Hand" font-size="16" fill="#3b7dd8">singing</text>
+                        <text x="60" y="92" text-anchor="middle" font-size="11" fill="#666">歌うこと</text>
+                    </svg>
+                    <div class="illustration-text">
+                        <h4>〜ing = 〜すること</h4>
+                        <p>動名詞は主語や目的語になれます。<br>
+                        enjoy, finish, stop などの後ろは動名詞！</p>
+                    </div>
+                </div>
+
+                <div class="example-cards">
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">I enjoy playing games.</div>
+                        <div class="example-ja">ゲームをすることを楽しみます。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">Swimming is fun.</div>
+                        <div class="example-ja">泳ぐことは楽しいです。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">Thank you for helping me.</div>
+                        <div class="example-ja">手伝ってくれてありがとう。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                </div>
+
+                <div class="point-box">
+                    <h4>動名詞 vs 不定詞</h4>
+                    <p>
+                        ・enjoy, finish, stop → <strong>動名詞</strong>のみ<br>
+                        ・want, hope, decide → <strong>不定詞</strong>のみ<br>
+                        ・like, start, begin → <strong>どちらでもOK</strong>
+                    </p>
+                </div>
+            </section>
+
+            <!-- 比較級・最上級 -->
+            <section class="grammar-section">
+                <span class="section-number">4</span>
+                <h2 class="section-title">比較級・最上級 <span class="section-title-en">Comparatives & Superlatives</span></h2>
+                <p class="section-desc">「より〜」「最も〜」と比べる表現です。</p>
+
+                <div class="illustration-box">
+                    <svg width="180" height="100" viewBox="0 0 180 100">
+                        <!-- 3つの山 -->
+                        <polygon points="30,80 50,50 70,80" fill="#81C784"/>
+                        <polygon points="70,80 100,30 130,80" fill="#4CAF50"/>
+                        <polygon points="120,80 145,45 170,80" fill="#A5D6A7"/>
+
+                        <text x="50" y="95" text-anchor="middle" font-size="10" fill="#666">tall</text>
+                        <text x="100" y="95" text-anchor="middle" font-size="10" fill="#3b7dd8">tallest</text>
+                        <text x="145" y="95" text-anchor="middle" font-size="10" fill="#666">taller</text>
+
+                        <!-- 王冠 -->
+                        <text x="100" y="22" text-anchor="middle" font-size="16">👑</text>
+                    </svg>
+                    <div class="illustration-text">
+                        <h4>-er / -est をつける！</h4>
+                        <p>短い形容詞: tall → tall<strong>er</strong> → tall<strong>est</strong><br>
+                        長い形容詞: more / most + 形容詞</p>
+                    </div>
+                </div>
+
+                <div class="grammar-table">
+                    <table>
+                        <tr>
+                            <th>原級</th>
+                            <th>比較級</th>
+                            <th>最上級</th>
+                        </tr>
+                        <tr>
+                            <td class="en">tall</td>
+                            <td class="en">taller</td>
+                            <td class="en">tallest</td>
+                        </tr>
+                        <tr>
+                            <td class="en">big</td>
+                            <td class="en">bigger</td>
+                            <td class="en">biggest</td>
+                        </tr>
+                        <tr>
+                            <td class="en">beautiful</td>
+                            <td class="en">more beautiful</td>
+                            <td class="en">most beautiful</td>
+                        </tr>
+                        <tr>
+                            <td class="en">good</td>
+                            <td class="en">better</td>
+                            <td class="en">best</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="example-cards">
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">He is taller than me.</div>
+                        <div class="example-ja">彼は私より背が高いです。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">This is the best book I've ever read.</div>
+                        <div class="example-ja">これは私が読んだ中で最高の本です。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">English is as important as math.</div>
+                        <div class="example-ja">英語は数学と同じくらい重要です。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 接続詞 -->
+            <section class="grammar-section">
+                <span class="section-number">5</span>
+                <h2 class="section-title">接続詞 <span class="section-title-en">Conjunctions</span></h2>
+                <p class="section-desc">文と文をつなげる言葉です。</p>
+
+                <div class="illustration-box">
+                    <svg width="180" height="100" viewBox="0 0 180 100">
+                        <!-- 2つの文 -->
+                        <rect x="10" y="30" width="60" height="40" rx="8" fill="#e8f1fc" stroke="#3b7dd8" stroke-width="2"/>
+                        <text x="40" y="55" text-anchor="middle" font-size="11" fill="#333">文1</text>
+
+                        <rect x="110" y="30" width="60" height="40" rx="8" fill="#e8f1fc" stroke="#3b7dd8" stroke-width="2"/>
+                        <text x="140" y="55" text-anchor="middle" font-size="11" fill="#333">文2</text>
+
+                        <!-- 接続詞 -->
+                        <circle cx="90" cy="50" r="15" fill="#3b7dd8"/>
+                        <text x="90" y="55" text-anchor="middle" font-family="Patrick Hand" font-size="10" fill="white">when</text>
+                    </svg>
+                    <div class="illustration-text">
+                        <h4>文と文をつなぐ！</h4>
+                        <p>when（〜するとき）、if（もし〜なら）<br>
+                        because（なぜなら）、that（〜ということ）</p>
+                    </div>
+                </div>
+
+                <div class="example-cards">
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">When I came home, she was cooking.</div>
+                        <div class="example-ja">私が帰宅したとき、彼女は料理をしていました。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">If it rains, we will stay home.</div>
+                        <div class="example-ja">もし雨が降ったら、家にいます。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">I think that he is kind.</div>
+                        <div class="example-ja">彼は優しいと思います。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                </div>
+
+                <div class="point-box">
+                    <h4>時・条件を表す接続詞の注意！</h4>
+                    <p>when, if, before, after などの後ろは<br>
+                    未来のことでも<strong>現在形</strong>を使う！<br>
+                    ✗ When I will go → ○ When I go</p>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- 中学3年 -->
+        <div id="grade3" class="grade-content grade3">
+
+            <!-- 現在完了形 -->
+            <section class="grammar-section">
+                <span class="section-number">1</span>
+                <h2 class="section-title">現在完了形 <span class="section-title-en">Present Perfect</span></h2>
+                <p class="section-desc">過去から現在までつながる経験・継続・完了を表します。</p>
+
+                <div class="illustration-box">
+                    <svg width="200" height="100" viewBox="0 0 200 100">
+                        <!-- タイムライン -->
+                        <line x1="20" y1="60" x2="180" y2="60" stroke="#ccc" stroke-width="3"/>
+                        <circle cx="50" cy="60" r="6" fill="#7c4dbd"/>
+                        <circle cx="150" cy="60" r="8" fill="#a77de8" stroke="#7c4dbd" stroke-width="2"/>
+                        <text x="50" y="80" text-anchor="middle" font-size="10" fill="#666">過去</text>
+                        <text x="150" y="80" text-anchor="middle" font-size="10" fill="#666">現在</text>
+
+                        <!-- つながりの矢印 -->
+                        <path d="M50 55 L150 55" stroke="#7c4dbd" stroke-width="3" stroke-dasharray="8,4"/>
+                        <polygon points="145,50 155,55 145,60" fill="#7c4dbd"/>
+
+                        <text x="100" y="35" text-anchor="middle" font-family="Patrick Hand" font-size="14" fill="#7c4dbd">have + 過去分詞</text>
+                    </svg>
+                    <div class="illustration-text">
+                        <h4>過去と現在がつながる！</h4>
+                        <p>have/has + 過去分詞（p.p.）<br>
+                        経験・継続・完了の3つの用法があります。</p>
+                    </div>
+                </div>
+
+                <div class="grammar-table">
+                    <table>
+                        <tr>
+                            <th>用法</th>
+                            <th>意味</th>
+                            <th>キーワード</th>
+                        </tr>
+                        <tr>
+                            <td>経験</td>
+                            <td>〜したことがある</td>
+                            <td class="en">ever, never, before</td>
+                        </tr>
+                        <tr>
+                            <td>継続</td>
+                            <td>ずっと〜している</td>
+                            <td class="en">for, since</td>
+                        </tr>
+                        <tr>
+                            <td>完了</td>
+                            <td>〜したところだ</td>
+                            <td class="en">just, already, yet</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="example-cards">
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">I have visited Kyoto twice.</div>
+                        <div class="example-ja">京都を2回訪れたことがあります。（経験）</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">I have lived here for ten years.</div>
+                        <div class="example-ja">ここに10年間住んでいます。（継続）</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">I have just finished my homework.</div>
+                        <div class="example-ja">宿題をちょうど終えたところです。（完了）</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 受動態 -->
+            <section class="grammar-section">
+                <span class="section-number">2</span>
+                <h2 class="section-title">受動態 <span class="section-title-en">Passive Voice</span></h2>
+                <p class="section-desc">「〜される」という受け身の表現です。</p>
+
+                <div class="illustration-box">
+                    <svg width="200" height="100" viewBox="0 0 200 100">
+                        <!-- 能動態 -->
+                        <circle cx="30" cy="40" r="15" fill="#ffcc80"/>
+                        <circle cx="26" cy="38" r="2" fill="#333"/>
+                        <circle cx="34" cy="38" r="2" fill="#333"/>
+                        <text x="30" y="70" text-anchor="middle" font-size="10" fill="#666">Tom</text>
+
+                        <path d="M50 40 L80 40" stroke="#7c4dbd" stroke-width="2" marker-end="url(#arrow3)"/>
+                        <defs>
+                            <marker id="arrow3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <path d="M0,0 L0,6 L9,3 z" fill="#7c4dbd"/>
+                            </marker>
+                        </defs>
+
+                        <rect x="85" y="30" width="30" height="25" rx="5" fill="#a77de8"/>
+                        <text x="100" y="70" text-anchor="middle" font-size="10" fill="#666">cake</text>
+
+                        <!-- 変換矢印 -->
+                        <text x="135" y="45" font-size="20" fill="#7c4dbd">⟹</text>
+
+                        <!-- 受動態 -->
+                        <rect x="155" y="30" width="30" height="25" rx="5" fill="#a77de8"/>
+                        <text x="170" y="70" text-anchor="middle" font-size="9" fill="#666">was made</text>
+                    </svg>
+                    <div class="illustration-text">
+                        <h4>be動詞 + 過去分詞</h4>
+                        <p>主語が動作を受ける側になります。<br>
+                        「by 〜」で動作の主を表すことも。</p>
+                    </div>
+                </div>
+
+                <div class="example-cards">
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">This book was written by her.</div>
+                        <div class="example-ja">この本は彼女によって書かれました。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">English is spoken in many countries.</div>
+                        <div class="example-ja">英語は多くの国で話されています。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">The window was broken.</div>
+                        <div class="example-ja">窓が壊されました。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                </div>
+
+                <div class="point-box">
+                    <h4>能動態 → 受動態の変換</h4>
+                    <p>
+                        能動態: Tom made a cake.<br>
+                        受動態: A cake <strong>was made</strong> by Tom.<br>
+                        目的語が主語になり、動詞は「be + p.p.」に！
+                    </p>
+                </div>
+            </section>
+
+            <!-- 関係代名詞 -->
+            <section class="grammar-section">
+                <span class="section-number">3</span>
+                <h2 class="section-title">関係代名詞 <span class="section-title-en">Relative Pronouns</span></h2>
+                <p class="section-desc">2つの文を1つにつなげて、名詞を詳しく説明します。</p>
+
+                <div class="illustration-box">
+                    <svg width="200" height="100" viewBox="0 0 200 100">
+                        <!-- 2つの文を連結 -->
+                        <rect x="10" y="25" width="70" height="30" rx="8" fill="#f3eef9" stroke="#7c4dbd" stroke-width="2"/>
+                        <text x="45" y="45" text-anchor="middle" font-size="10" fill="#333">I have a friend.</text>
+
+                        <rect x="120" y="25" width="70" height="30" rx="8" fill="#f3eef9" stroke="#7c4dbd" stroke-width="2"/>
+                        <text x="155" y="45" text-anchor="middle" font-size="10" fill="#333">She lives in NY.</text>
+
+                        <!-- 接続 -->
+                        <circle cx="100" cy="40" r="12" fill="#7c4dbd"/>
+                        <text x="100" y="44" text-anchor="middle" font-family="Patrick Hand" font-size="10" fill="white">who</text>
+
+                        <!-- 結果 -->
+                        <rect x="30" y="65" width="140" height="25" rx="8" fill="#a77de8"/>
+                        <text x="100" y="82" text-anchor="middle" font-size="10" fill="white">I have a friend who lives in NY.</text>
+                    </svg>
+                    <div class="illustration-text">
+                        <h4>who / which / that</h4>
+                        <p><strong>who</strong>: 人を説明<br>
+                        <strong>which</strong>: もの・動物を説明<br>
+                        <strong>that</strong>: 人・もの両方OK</p>
+                    </div>
+                </div>
+
+                <div class="example-cards">
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">I have a friend who speaks French.</div>
+                        <div class="example-ja">フランス語を話す友達がいます。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">This is the book which I bought yesterday.</div>
+                        <div class="example-ja">これは昨日買った本です。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">The girl that I met was kind.</div>
+                        <div class="example-ja">私が会った女の子は優しかったです。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                </div>
+
+                <div class="point-box">
+                    <h4>主格と目的格</h4>
+                    <p>
+                        <strong>主格</strong>: 関係代名詞が主語 → who/which/that + 動詞<br>
+                        <strong>目的格</strong>: 関係代名詞が目的語 → who(m)/which/that + 主語 + 動詞<br>
+                        ※目的格の関係代名詞は省略できる！
+                    </p>
+                </div>
+            </section>
+
+            <!-- 分詞 -->
+            <section class="grammar-section">
+                <span class="section-number">4</span>
+                <h2 class="section-title">分詞の形容詞用法 <span class="section-title-en">Participles as Adjectives</span></h2>
+                <p class="section-desc">〜ing（現在分詞）と〜ed（過去分詞）で名詞を修飾します。</p>
+
+                <div class="illustration-box">
+                    <svg width="180" height="100" viewBox="0 0 180 100">
+                        <!-- 走っている犬 -->
+                        <ellipse cx="50" cy="55" rx="25" ry="15" fill="#D7CCC8"/>
+                        <circle cx="35" cy="45" r="12" fill="#D7CCC8"/>
+                        <circle cx="31" cy="43" r="2" fill="#333"/>
+                        <circle cx="39" cy="43" r="2" fill="#333"/>
+                        <ellipse cx="35" cy="50" rx="4" ry="2" fill="#333"/>
+                        <!-- しっぽ -->
+                        <path d="M75 50 Q85 40 80 55" stroke="#D7CCC8" stroke-width="5" fill="none"/>
+                        <!-- 足 -->
+                        <line x1="40" y1="65" x2="30" y2="80" stroke="#D7CCC8" stroke-width="4"/>
+                        <line x1="60" y1="65" x2="70" y2="75" stroke="#D7CCC8" stroke-width="4"/>
+
+                        <text x="50" y="95" text-anchor="middle" font-family="Patrick Hand" font-size="12" fill="#7c4dbd">a running dog</text>
+
+                        <!-- 壊れた窓 -->
+                        <rect x="110" y="30" width="50" height="40" rx="3" fill="#90CAF9" stroke="#5C6BC0" stroke-width="2"/>
+                        <path d="M115 35 L155 65 M155 35 L115 65" stroke="#333" stroke-width="1"/>
+
+                        <text x="135" y="95" text-anchor="middle" font-family="Patrick Hand" font-size="12" fill="#7c4dbd">a broken window</text>
+                    </svg>
+                    <div class="illustration-text">
+                        <h4>〜ing と 〜ed の違い</h4>
+                        <p><strong>〜ing</strong>: 「〜している」（能動）<br>
+                        <strong>〜ed</strong>: 「〜された」（受動）</p>
+                    </div>
+                </div>
+
+                <div class="example-cards">
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">Look at the sleeping baby.</div>
+                        <div class="example-ja">眠っている赤ちゃんを見て。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">I found a broken cup.</div>
+                        <div class="example-ja">壊れたカップを見つけました。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">The boy playing tennis is my brother.</div>
+                        <div class="example-ja">テニスをしている男の子は私の兄です。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 間接疑問文 -->
+            <section class="grammar-section">
+                <span class="section-number">5</span>
+                <h2 class="section-title">間接疑問文 <span class="section-title-en">Indirect Questions</span></h2>
+                <p class="section-desc">疑問文が文の一部になったものです。語順に注意！</p>
+
+                <div class="illustration-box">
+                    <svg width="200" height="100" viewBox="0 0 200 100">
+                        <!-- 直接疑問文 -->
+                        <rect x="10" y="20" width="80" height="25" rx="8" fill="#f3eef9" stroke="#7c4dbd" stroke-width="2"/>
+                        <text x="50" y="37" text-anchor="middle" font-size="10" fill="#333">Where is she?</text>
+                        <text x="50" y="55" text-anchor="middle" font-size="9" fill="#666">疑問詞 + 動詞 + 主語?</text>
+
+                        <!-- 矢印 -->
+                        <text x="105" y="35" font-size="20" fill="#7c4dbd">→</text>
+
+                        <!-- 間接疑問文 -->
+                        <rect x="120" y="20" width="75" height="25" rx="8" fill="#a77de8"/>
+                        <text x="157" y="37" text-anchor="middle" font-size="9" fill="white">where she is</text>
+                        <text x="157" y="55" text-anchor="middle" font-size="9" fill="#666">疑問詞 + 主語 + 動詞</text>
+
+                        <text x="100" y="85" text-anchor="middle" font-size="11" fill="#7c4dbd">I know where she is.</text>
+                    </svg>
+                    <div class="illustration-text">
+                        <h4>語順が変わる！</h4>
+                        <p>文中に入ると「疑問詞 + 主語 + 動詞」の<br>
+                        ふつうの語順になります。</p>
+                    </div>
+                </div>
+
+                <div class="example-cards">
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">I don't know where he lives.</div>
+                        <div class="example-ja">彼がどこに住んでいるか知りません。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">Do you know what time it is?</div>
+                        <div class="example-ja">今何時か知っていますか？</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                    <div class="example-card" onclick="this.classList.toggle('revealed')">
+                        <div class="example-en">Tell me how you did it.</div>
+                        <div class="example-ja">どうやってやったか教えて。</div>
+                        <div class="example-hint">👆 クリックで日本語を表示</div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>📚 中学英文法マスター | イラストで楽しく学ぼう！</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">© 2024 English Grammar Textbook</p>
+    </footer>
+
+    <script>
+        function showGrade(grade) {
+            // すべてのタブとコンテンツを非アクティブに
+            document.querySelectorAll('.grade-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.grade-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // 選択したものをアクティブに
+            document.querySelector(`.grade-tab.grade${grade}`).classList.add('active');
+            document.getElementById(`grade${grade}`).classList.add('active');
+
+            // ページトップにスクロール
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 例文カードのクリック時にヒントを非表示
+        document.querySelectorAll('.example-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const hint = this.querySelector('.example-hint');
+                if (this.classList.contains('revealed')) {
+                    hint.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
