@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アメリカ英語発音マスター | フォニックスから発音記号まで</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Patrick+Hand&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --phonics-primary: #e74c3c;
+            --phonics-light: #fdeaea;
+            --phonics-accent: #ff6b6b;
+            --vowel-primary: #3498db;
+            --vowel-light: #ebf5fb;
+            --vowel-accent: #5dade2;
+            --consonant-primary: #27ae60;
+            --consonant-light: #e8f8f0;
+            --consonant-accent: #58d68d;
+            --diphthong-primary: #9b59b6;
+            --diphthong-light: #f5eef8;
+            --diphthong-accent: #bb8fce;
+            --special-primary: #f39c12;
+            --special-light: #fef9e7;
+            --special-accent: #f7dc6f;
+            --ipa-primary: #1abc9c;
+            --ipa-light: #e8f8f5;
+            --ipa-accent: #48c9b0;
+            --paper-bg: #fefcf6;
+            --paper-lines: #e8e4d9;
+            --text-dark: #2c2c2c;
+            --text-medium: #555;
+            --text-light: #888;
+            --shadow-soft: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-card: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(135deg, #f5f3ed 0%, #ebe8df 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            line-height: 1.8;
+        }
+
+        /* ヘッダー */
+        header {
+            background: linear-gradient(135deg, var(--phonics-primary) 0%, var(--vowel-primary) 33%, var(--consonant-primary) 66%, var(--diphthong-primary) 100%);
+            padding: 2.5rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        header p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+        }
+
+        /* ナビゲーション */
+        .section-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1.5rem 1rem;
+            background: var(--paper-bg);
+            border-bottom: 3px solid var(--paper-lines);
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .section-tab {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 25px;
+            font-family: 'Zen Maru Gothic', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .section-tab:hover::before {
+            left: 100%;
+        }
+
+        .section-tab.phonics {
+            background: var(--phonics-light);
+            color: var(--phonics-primary);
+            border: 2px solid var(--phonics-primary);
+        }
+
+        .section-tab.phonics.active, .section-tab.phonics:hover {
+            background: var(--phonics-primary);
+            color: white;
+        }
+
+        .section-tab.vowel {
+            background: var(--vowel-light);
+            color: var(--vowel-primary);
+            border: 2px solid var(--vowel-primary);
+        }
+
+        .section-tab.vowel.active, .section-tab.vowel:hover {
+            background: var(--vowel-primary);
+            color: white;
+        }
+
+        .section-tab.consonant {
+            background: var(--consonant-light);
+            color: var(--consonant-primary);
+            border: 2px solid var(--consonant-primary);
+        }
+
+        .section-tab.consonant.active, .section-tab.consonant:hover {
+            background: var(--consonant-primary);
+            color: white;
+        }
+
+        .section-tab.diphthong {
+            background: var(--diphthong-light);
+            color: var(--diphthong-primary);
+            border: 2px solid var(--diphthong-primary);
+        }
+
+        .section-tab.diphthong.active, .section-tab.diphthong:hover {
+            background: var(--diphthong-primary);
+            color: white;
+        }
+
+        .section-tab.special {
+            background: var(--special-light);
+            color: var(--special-primary);
+            border: 2px solid var(--special-primary);
+        }
+
+        .section-tab.special.active, .section-tab.special:hover {
+            background: var(--special-primary);
+            color: white;
+        }
+
+        .section-tab.ipa {
+            background: var(--ipa-light);
+            color: var(--ipa-primary);
+            border: 2px solid var(--ipa-primary);
+        }
+
+        .section-tab.ipa.active, .section-tab.ipa:hover {
+            background: var(--ipa-primary);
+            color: white;
+        }
+
+        /* メインコンテンツ */
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .section-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 発音セクション */
+        .pronunciation-section {
+            background: var(--paper-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            border: 1px solid var(--paper-lines);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title .icon {
+            font-size: 1.8rem;
+        }
+
+        .section-intro {
+            background: #f8f9fa;
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid currentColor;
+        }
+
+        /* 発音カード */
+        .sound-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .sound-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.2rem;
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .sound-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .sound-card.playing {
+            animation: pulse 0.5s ease;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .sound-card .letter {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Patrick Hand', cursive;
+            margin-bottom: 0.3rem;
+        }
+
+        .sound-card .ipa {
+            font-size: 1.3rem;
+            color: var(--text-medium);
+            margin-bottom: 0.3rem;
+        }
+
+        .sound-card .example {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .sound-card .example strong {
+            color: var(--text-dark);
+        }
+
+        .sound-card .play-icon {
+            margin-top: 0.5rem;
+            font-size: 1.5rem;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        .sound-card:hover .play-icon {
+            opacity: 1;
+        }
+
+        /* フォニックス色分け */
+        .sound-card.phonics-card {
+            border-color: var(--phonics-light);
+        }
+
+        .sound-card.phonics-card:hover {
+            border-color: var(--phonics-primary);
+        }
+
+        .sound-card.phonics-card .letter {
+            color: var(--phonics-primary);
+        }
+
+        /* 母音色分け */
+        .sound-card.vowel-card {
+            border-color: var(--vowel-light);
+        }
+
+        .sound-card.vowel-card:hover {
+            border-color: var(--vowel-primary);
+        }
+
+        .sound-card.vowel-card .letter,
+        .sound-card.vowel-card .ipa {
+            color: var(--vowel-primary);
+        }
+
+        /* 子音色分け */
+        .sound-card.consonant-card {
+            border-color: var(--consonant-light);
+        }
+
+        .sound-card.consonant-card:hover {
+            border-color: var(--consonant-primary);
+        }
+
+        .sound-card.consonant-card .letter,
+        .sound-card.consonant-card .ipa {
+            color: var(--consonant-primary);
+        }
+
+        /* 二重母音色分け */
+        .sound-card.diphthong-card {
+            border-color: var(--diphthong-light);
+        }
+
+        .sound-card.diphthong-card:hover {
+            border-color: var(--diphthong-primary);
+        }
+
+        .sound-card.diphthong-card .letter,
+        .sound-card.diphthong-card .ipa {
+            color: var(--diphthong-primary);
+        }
+
+        /* 特殊音色分け */
+        .sound-card.special-card {
+            border-color: var(--special-light);
+        }
+
+        .sound-card.special-card:hover {
+            border-color: var(--special-primary);
+        }
+
+        .sound-card.special-card .letter,
+        .sound-card.special-card .ipa {
+            color: var(--special-primary);
+        }
+
+        /* IPA色分け */
+        .sound-card.ipa-card {
+            border-color: var(--ipa-light);
+        }
+
+        .sound-card.ipa-card:hover {
+            border-color: var(--ipa-primary);
+        }
+
+        .sound-card.ipa-card .letter,
+        .sound-card.ipa-card .ipa {
+            color: var(--ipa-primary);
+        }
+
+        /* 詳細説明 */
+        .detail-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border: 1px solid #e9ecef;
+        }
+
+        .detail-box h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .detail-box p {
+            margin-bottom: 0.8rem;
+            line-height: 1.9;
+        }
+
+        .detail-box ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .detail-box li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* 口の形の図解 */
+        .mouth-diagram {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+
+        .mouth-shape {
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-card);
+            min-width: 120px;
+        }
+
+        .mouth-shape .shape {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 0.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            background: #f8f9fa;
+        }
+
+        .mouth-shape .label {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+        }
+
+        /* 練習セクション */
+        .practice-section {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border: 2px dashed #ffd93d;
+        }
+
+        .practice-section h4 {
+            color: #f39c12;
+            margin-bottom: 1rem;
+        }
+
+        .practice-words {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .practice-word {
+            background: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid #ffd93d;
+            font-size: 1rem;
+        }
+
+        .practice-word:hover {
+            background: #ffd93d;
+            transform: scale(1.05);
+        }
+
+        .practice-word .phonetic {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-left: 0.5rem;
+        }
+
+        /* 比較表 */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid var(--paper-lines);
+        }
+
+        .comparison-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .comparison-table tr:hover {
+            background: #fafafa;
+        }
+
+        .comparison-table .sound-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .comparison-table .sound-btn:hover {
+            background: #e9ecef;
+        }
+
+        /* ミニマルペア */
+        .minimal-pairs {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .minimal-pair {
+            background: white;
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow-card);
+        }
+
+        .minimal-pair .word {
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .minimal-pair .word:hover {
+            background: #f0f0f0;
+        }
+
+        .minimal-pair .vs {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* フッター */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* 音声コントロール */
+        .audio-controls {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: white;
+            padding: 1rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+
+        .audio-controls label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            margin-bottom: 0.5rem;
+        }
+
+        .audio-controls input[type="range"] {
+            width: 120px;
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.6rem;
+            }
+
+            .section-tabs {
+                padding: 1rem 0.5rem;
+            }
+
+            .section-tab {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .sound-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+
+            .sound-card {
+                padding: 0.8rem;
+            }
+
+            .sound-card .letter {
+                font-size: 1.8rem;
+            }
+
+            .audio-controls {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.8rem;
+            }
+        }
+
+        /* サブセクションタイトル */
+        .subsection-title {
+            font-size: 1.2rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--paper-lines);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* ヒントボックス */
+        .tip-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #fff 100%);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            border-left: 4px solid #2196f3;
+            display: flex;
+            gap: 0.8rem;
+            align-items: flex-start;
+        }
+
+        .tip-box .tip-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .tip-box p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* 進捗表示 */
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--phonics-primary), var(--vowel-primary), var(--consonant-primary));
+            width: 0%;
+            transition: width 0.3s;
+            z-index: 1001;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-indicator" id="progressBar"></div>
+
+    <header>
+        <a href="index.html" class="back-link">← 文法教材に戻る</a>
+        <div class="header-content">
+            <h1>アメリカ英語発音マスター</h1>
+            <p>フォニックスから発音記号(IPA)まで完全網羅</p>
+        </div>
+    </header>
+
+    <nav class="section-tabs">
+        <button class="section-tab phonics active" data-section="phonics">フォニックス</button>
+        <button class="section-tab vowel" data-section="vowels">母音</button>
+        <button class="section-tab consonant" data-section="consonants">子音</button>
+        <button class="section-tab diphthong" data-section="diphthongs">二重母音</button>
+        <button class="section-tab special" data-section="special">特殊な音</button>
+        <button class="section-tab ipa" data-section="ipa">発音記号一覧</button>
+    </nav>
+
+    <main>
+        <!-- フォニックスセクション -->
+        <div id="phonics" class="section-content active">
+            <div class="pronunciation-section">
+                <h2 class="section-title" style="color: var(--phonics-primary);">
+                    <span class="icon">📚</span> フォニックス入門
+                </h2>
+
+                <div class="section-intro" style="border-color: var(--phonics-primary);">
+                    <p><strong>フォニックス</strong>とは、英語の「文字」と「音」の関係を学ぶ学習法です。アルファベット26文字には、それぞれ基本となる音があります。この音を覚えることで、初めて見る単語でも読めるようになります。</p>
+                </div>
+
+                <h3 class="subsection-title">アルファベットの基本音（Letter Sounds）</h3>
+                <p>各文字をクリックすると音声が再生されます。</p>
+
+                <div class="sound-grid" id="alphabetGrid">
+                    <!-- JavaScriptで生成 -->
+                </div>
+
+                <div class="detail-box">
+                    <h4>💡 フォニックスのルール</h4>
+                    <ul>
+                        <li><strong>母音（Vowels）:</strong> A, E, I, O, U の5文字。短い音（Short Vowel）と長い音（Long Vowel）がある</li>
+                        <li><strong>子音（Consonants）:</strong> 母音以外の21文字</li>
+                        <li><strong>サイレントE:</strong> 単語の最後の E は発音しないことが多い（例: make, time）</li>
+                        <li><strong>マジックE:</strong> 最後の E があると、前の母音が「名前読み」になる</li>
+                    </ul>
+                </div>
+
+                <div class="practice-section">
+                    <h4>🎯 練習しよう：CVC単語（子音-母音-子音）</h4>
+                    <p>基本的な3文字単語で練習しましょう。クリックで発音を聞けます。</p>
+                    <div class="practice-words" id="cvcWords">
+                        <!-- JavaScriptで生成 -->
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">ブレンド音（Consonant Blends）</h3>
+                <p>2つ以上の子音が連続する音です。</p>
+
+                <div class="sound-grid" id="blendsGrid">
+                    <!-- JavaScriptで生成 -->
+                </div>
+
+                <h3 class="subsection-title">ダイグラフ（Digraphs）</h3>
+                <p>2文字で1つの新しい音を作る組み合わせです。</p>
+
+                <div class="sound-grid" id="digraphsGrid">
+                    <!-- JavaScriptで生成 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 母音セクション -->
+        <div id="vowels" class="section-content">
+            <div class="pronunciation-section">
+                <h2 class="section-title" style="color: var(--vowel-primary);">
+                    <span class="icon">🔴</span> 母音（Vowels）
+                </h2>
+
+                <div class="section-intro" style="border-color: var(--vowel-primary);">
+                    <p>アメリカ英語には<strong>約15種類の母音</strong>があります。日本語の母音は「あいうえお」の5つだけなので、英語の母音を区別するのは難しいですが、口の開き方と舌の位置を意識することが大切です。</p>
+                </div>
+
+                <h3 class="subsection-title">短母音（Short Vowels）</h3>
+                <p>短く切って発音する母音です。</p>
+
+                <div class="sound-grid" id="shortVowelsGrid">
+                    <!-- JavaScriptで生成 -->
+                </div>
+
+                <div class="tip-box">
+                    <span class="tip-icon">💡</span>
+                    <p><strong>/æ/（cat の音）</strong>は日本人が最も苦手とする母音の一つです。「エ」と「ア」の中間で、口を横に引いて発音します。</p>
+                </div>
+
+                <h3 class="subsection-title">長母音（Long Vowels）</h3>
+                <p>アルファベットの「名前読み」に近い音です。</p>
+
+                <div class="sound-grid" id="longVowelsGrid">
+                    <!-- JavaScriptで生成 -->
+                </div>
+
+                <h3 class="subsection-title">その他の母音</h3>
+
+                <div class="sound-grid" id="otherVowelsGrid">
+                    <!-- JavaScriptで生成 -->
+                </div>
+
+                <div class="detail-box">
+                    <h4>👄 口の形の違い</h4>
+                    <div class="mouth-diagram">
+                        <div class="mouth-shape">
+                            <div class="shape" style="border-radius: 50%;">😮</div>
+                            <div class="label">/ɑː/ (father)<br>口を大きく開ける</div>
+                        </div>
+                        <div class="mouth-shape">
+                            <div class="shape" style="border-radius: 40%;">😐</div>
+                            <div class="label">/æ/ (cat)<br>口を横に引く</div>
+                        </div>
+                        <div class="mouth-shape">
+                            <div class="shape" style="border-radius: 60%;">😯</div>
+                            <div class="label">/ɔː/ (call)<br>唇を丸める</div>
+                        </div>
+                        <div class="mouth-shape">
+                            <div class="shape" style="border-radius: 70% 70% 50% 50%;">😊</div>
+                            <div class="label">/iː/ (see)<br>口を横に引いて</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="practice-section">
+                    <h4>🎯 ミニマルペア練習</h4>
+                    <p>似た音の単語を聞き比べてみましょう。</p>
+                    <div class="minimal-pairs" id="vowelMinimalPairs">
+                        <!-- JavaScriptで生成 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 子音セクション -->
+        <div id="consonants" class="section-content">
+            <div class="pronunciation-section">
+                <h2 class="section-title" style="color: var(--consonant-primary);">
+                    <span class="icon">🟢</span> 子音（Consonants）
+                </h2>
+
+                <div class="section-intro" style="border-color: var(--consonant-primary);">
+                    <p>子音は<strong>声帯の振動の有無</strong>で「有声音」と「無声音」に分かれます。また、<strong>調音位置</strong>（どこで音を作るか）と<strong>調音方法</strong>（どうやって音を作るか）で分類されます。</p>
+                </div>
+
+                <h3 class="subsection-title">破裂音（Plosives/Stops）</h3>
+                <p>息を一度止めてから、勢いよく破裂させる音です。</p>
+
+                <div class="sound-grid" id="plosivesGrid">
+                    <!-- JavaScriptで生成 -->
+                </div>
+
+                <div class="tip-box">
+                    <span class="tip-icon">💡</span>
+                    <p><strong>/p/, /t/, /k/</strong> は単語の最初では息を強く出して（有気音）、<strong>/b/, /d/, /g/</strong> は声帯を振動させて発音します。</p>
+                </div>
+
+                <h3 class="subsection-title">摩擦音（Fricatives）</h3>
+                <p>空気を狭い隙間から押し出して作る音です。</p>
+
+                <div class="sound-grid" id="fricativesGrid">
+                    <!-- JavaScriptで生成 -->
+                </div>
+
+                <h3 class="subsection-title">破擦音（Affricates）</h3>
+                <p>破裂音と摩擦音が組み合わさった音です。</p>
+
+                <div class="sound-grid" id="affricatesGrid">
+                    <!-- JavaScriptで生成 -->
+                </div>
+
+                <h3 class="subsection-title">鼻音（Nasals）</h3>
+                <p>空気を鼻から出して作る音です。</p>
+
+                <div class="sound-grid" id="nasalsGrid">
+                    <!-- JavaScriptで生成 -->
+                </div>
+
+                <h3 class="subsection-title">接近音・側音（Approximants & Laterals）</h3>
+                <p>調音器官を近づけるが接触させずに出す音です。</p>
+
+                <div class="sound-grid" id="approximantsGrid">
+                    <!-- JavaScriptで生成 -->
+                </div>
+
+                <div class="detail-box">
+                    <h4>🔊 有声音 vs 無声音</h4>
+                    <p>喉に手を当てて発音してみましょう。振動を感じるのが有声音です。</p>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>無声音</th>
+                                <th>有声音</th>
+                                <th>例（無声）</th>
+                                <th>例（有声）</th>
+                            </tr>
+                        </thead>
+                        <tbody id="voicingTable">
+                            <!-- JavaScriptで生成 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 二重母音セクション -->
+        <div id="diphthongs" class="section-content">
+            <div class="pronunciation-section">
+                <h2 class="section-title" style="color: var(--diphthong-primary);">
+                    <span class="icon">🟣</span> 二重母音（Diphthongs）
+                </h2>
+
+                <div class="section-intro" style="border-color: var(--diphthong-primary);">
+                    <p><strong>二重母音</strong>とは、1つの音節の中で2つの母音が滑らかに移り変わる音です。発音中に口の形や舌の位置が変化します。</p>
+                </div>
+
+                <h3 class="subsection-title">主要な二重母音</h3>
+
+                <div class="sound-grid" id="diphthongsGrid">
+                    <!-- JavaScriptで生成 -->
+                </div>
+
+                <div class="detail-box">
+                    <h4>📝 二重母音の発音のコツ</h4>
+                    <ul>
+                        <li><strong>/aɪ/</strong>（my, time）: 「ア」から「イ」へ滑らかに移動</li>
+                        <li><strong>/aʊ/</strong>（now, house）: 「ア」から「ウ」へ。唇を丸める</li>
+                        <li><strong>/eɪ/</strong>（day, make）: 「エ」から「イ」へ。口を横に引く</li>
+                        <li><strong>/oʊ/</strong>（go, home）: 「オ」から「ウ」へ。唇を突き出す</li>
+                        <li><strong>/ɔɪ/</strong>（boy, coin）: 「オ」から「イ」へ</li>
+                    </ul>
+                </div>
+
+                <div class="practice-section">
+                    <h4>🎯 二重母音の練習単語</h4>
+                    <div class="practice-words" id="diphthongPractice">
+                        <!-- JavaScriptで生成 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 特殊な音セクション -->
+        <div id="special" class="section-content">
+            <div class="pronunciation-section">
+                <h2 class="section-title" style="color: var(--special-primary);">
+                    <span class="icon">⭐</span> 特殊な音・日本人が苦手な音
+                </h2>
+
+                <div class="section-intro" style="border-color: var(--special-primary);">
+                    <p>日本語にない音は、意識的に練習することが大切です。特に<strong>R と L</strong>、<strong>TH</strong>、<strong>F と V</strong>の区別が重要です。</p>
+                </div>
+
+                <h3 class="subsection-title">R と L の違い</h3>
+
+                <div class="detail-box">
+                    <h4>👄 /r/ の発音方法</h4>
+                    <ul>
+                        <li>舌を口の中のどこにも触れさせない</li>
+                        <li>舌先を少し巻き上げるか、後ろに引く</li>
+                        <li>唇を少し丸める</li>
+                        <li>日本語の「ラ行」とは全く違う音</li>
+                    </ul>
+
+                    <h4>👄 /l/ の発音方法</h4>
+                    <ul>
+                        <li>舌先を上の歯茎（前歯の裏）にしっかりつける</li>
+                        <li>舌の両側から空気を出す</li>
+                        <li>声を出しながら発音</li>
+                    </ul>
+                </div>
+
+                <div class="sound-grid" id="rlGrid">
+                    <!-- JavaScriptで生成 -->
+                </div>
+
+                <div class="practice-section">
+                    <h4>🎯 R/L ミニマルペア</h4>
+                    <div class="minimal-pairs" id="rlMinimalPairs">
+                        <!-- JavaScriptで生成 -->
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">TH の音</h3>
+
+                <div class="detail-box">
+                    <h4>👄 TH の発音方法</h4>
+                    <ul>
+                        <li>舌先を上下の歯の間に軽く挟む</li>
+                        <li>舌と歯の隙間から息を出す</li>
+                        <li><strong>/θ/</strong>（think）：無声音。息だけ</li>
+                        <li><strong>/ð/</strong>（this）：有声音。声を出す</li>
+                    </ul>
+                </div>
+
+                <div class="sound-grid" id="thGrid">
+                    <!-- JavaScriptで生成 -->
+                </div>
+
+                <h3 class="subsection-title">F と V</h3>
+
+                <div class="detail-box">
+                    <h4>👄 F/V の発音方法</h4>
+                    <ul>
+                        <li>上の前歯を下唇に軽く当てる</li>
+                        <li>歯と唇の隙間から息を出す</li>
+                        <li><strong>/f/</strong>（fun）：無声音</li>
+                        <li><strong>/v/</strong>（van）：有声音</li>
+                    </ul>
+                </div>
+
+                <div class="sound-grid" id="fvGrid">
+                    <!-- JavaScriptで生成 -->
+                </div>
+
+                <h3 class="subsection-title">その他の重要な音</h3>
+
+                <div class="sound-grid" id="otherSpecialGrid">
+                    <!-- JavaScriptで生成 -->
+                </div>
+
+                <div class="detail-box">
+                    <h4>🎵 アメリカ英語特有の音</h4>
+                    <ul>
+                        <li><strong>Flap T（フラップT）</strong>: water, better などの t が「ラ」に近い音になる</li>
+                        <li><strong>Glottal Stop</strong>: button, mountain などの t が喉で止まる音になる</li>
+                        <li><strong>Dark L</strong>: 単語の最後の l は舌の後ろが上がり、暗い音になる</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- IPA発音記号一覧セクション -->
+        <div id="ipa" class="section-content">
+            <div class="pronunciation-section">
+                <h2 class="section-title" style="color: var(--ipa-primary);">
+                    <span class="icon">📖</span> 発音記号（IPA）完全一覧
+                </h2>
+
+                <div class="section-intro" style="border-color: var(--ipa-primary);">
+                    <p><strong>IPA（国際音声記号）</strong>は世界共通の発音記号です。辞書で単語を調べるとき、この記号を読めれば正確な発音がわかります。</p>
+                </div>
+
+                <h3 class="subsection-title">母音記号（Vowel Symbols）</h3>
+
+                <table class="comparison-table" id="ipaVowelTable">
+                    <thead>
+                        <tr>
+                            <th>記号</th>
+                            <th>音声</th>
+                            <th>例</th>
+                            <th>日本語の近い音</th>
+                            <th>説明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- JavaScriptで生成 -->
+                    </tbody>
+                </table>
+
+                <h3 class="subsection-title">子音記号（Consonant Symbols）</h3>
+
+                <table class="comparison-table" id="ipaConsonantTable">
+                    <thead>
+                        <tr>
+                            <th>記号</th>
+                            <th>音声</th>
+                            <th>例</th>
+                            <th>種類</th>
+                            <th>説明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- JavaScriptで生成 -->
+                    </tbody>
+                </table>
+
+                <h3 class="subsection-title">二重母音記号</h3>
+
+                <table class="comparison-table" id="ipaDiphthongTable">
+                    <thead>
+                        <tr>
+                            <th>記号</th>
+                            <th>音声</th>
+                            <th>例</th>
+                            <th>発音のコツ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- JavaScriptで生成 -->
+                    </tbody>
+                </table>
+
+                <div class="detail-box">
+                    <h4>📚 発音記号を読むコツ</h4>
+                    <ul>
+                        <li><strong>/ː/</strong>（長音記号）: 音を長く伸ばす</li>
+                        <li><strong>/ˈ/</strong>（第一アクセント）: この記号の次の音節を強く発音</li>
+                        <li><strong>/ˌ/</strong>（第二アクセント）: 第一より弱いが、やや強く発音</li>
+                        <li><strong>/ə/</strong>（シュワー）: 曖昧母音。弱い「ア」のような音</li>
+                        <li><strong>/ɚ/</strong>: シュワー + R。アメリカ英語特有</li>
+                    </ul>
+                </div>
+
+                <div class="practice-section">
+                    <h4>🎯 発音記号クイズ</h4>
+                    <p>発音記号を見て、どの単語か当ててみましょう。</p>
+                    <div id="ipaQuiz">
+                        <!-- JavaScriptで生成 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 音声コントロール -->
+    <div class="audio-controls">
+        <label>🔊 速度: <span id="speedValue">1.0</span>x</label>
+        <input type="range" id="speedControl" min="0.5" max="1.5" step="0.1" value="1">
+    </div>
+
+    <footer>
+        <p>アメリカ英語発音マスター | Web Speech API を使用</p>
+        <p>※ 音声はブラウザの音声合成機能を使用しています</p>
+    </footer>
+
+    <script>
+        // ======================================
+        // 発音データ
+        // ======================================
+
+        // アルファベット基本音
+        const alphabetSounds = [
+            { letter: 'A', ipa: '/æ/', example: '<strong>a</strong>pple', word: 'apple' },
+            { letter: 'B', ipa: '/b/', example: '<strong>b</strong>all', word: 'ball' },
+            { letter: 'C', ipa: '/k/', example: '<strong>c</strong>at', word: 'cat' },
+            { letter: 'D', ipa: '/d/', example: '<strong>d</strong>og', word: 'dog' },
+            { letter: 'E', ipa: '/ɛ/', example: '<strong>e</strong>gg', word: 'egg' },
+            { letter: 'F', ipa: '/f/', example: '<strong>f</strong>ish', word: 'fish' },
+            { letter: 'G', ipa: '/g/', example: '<strong>g</strong>irl', word: 'girl' },
+            { letter: 'H', ipa: '/h/', example: '<strong>h</strong>at', word: 'hat' },
+            { letter: 'I', ipa: '/ɪ/', example: '<strong>i</strong>nk', word: 'ink' },
+            { letter: 'J', ipa: '/dʒ/', example: '<strong>j</strong>am', word: 'jam' },
+            { letter: 'K', ipa: '/k/', example: '<strong>k</strong>ite', word: 'kite' },
+            { letter: 'L', ipa: '/l/', example: '<strong>l</strong>ion', word: 'lion' },
+            { letter: 'M', ipa: '/m/', example: '<strong>m</strong>oon', word: 'moon' },
+            { letter: 'N', ipa: '/n/', example: '<strong>n</strong>est', word: 'nest' },
+            { letter: 'O', ipa: '/ɑ/', example: '<strong>o</strong>ctopus', word: 'octopus' },
+            { letter: 'P', ipa: '/p/', example: '<strong>p</strong>ig', word: 'pig' },
+            { letter: 'Q', ipa: '/kw/', example: '<strong>qu</strong>een', word: 'queen' },
+            { letter: 'R', ipa: '/r/', example: '<strong>r</strong>abbit', word: 'rabbit' },
+            { letter: 'S', ipa: '/s/', example: '<strong>s</strong>un', word: 'sun' },
+            { letter: 'T', ipa: '/t/', example: '<strong>t</strong>iger', word: 'tiger' },
+            { letter: 'U', ipa: '/ʌ/', example: '<strong>u</strong>mbrella', word: 'umbrella' },
+            { letter: 'V', ipa: '/v/', example: '<strong>v</strong>an', word: 'van' },
+            { letter: 'W', ipa: '/w/', example: '<strong>w</strong>ater', word: 'water' },
+            { letter: 'X', ipa: '/ks/', example: 'bo<strong>x</strong>', word: 'box' },
+            { letter: 'Y', ipa: '/j/', example: '<strong>y</strong>ellow', word: 'yellow' },
+            { letter: 'Z', ipa: '/z/', example: '<strong>z</strong>ebra', word: 'zebra' }
+        ];
+
+        // CVC単語
+        const cvcWords = [
+            { word: 'cat', phonetic: '/kæt/' },
+            { word: 'dog', phonetic: '/dɑːg/' },
+            { word: 'pen', phonetic: '/pɛn/' },
+            { word: 'cup', phonetic: '/kʌp/' },
+            { word: 'big', phonetic: '/bɪg/' },
+            { word: 'hot', phonetic: '/hɑːt/' },
+            { word: 'run', phonetic: '/rʌn/' },
+            { word: 'map', phonetic: '/mæp/' },
+            { word: 'sit', phonetic: '/sɪt/' },
+            { word: 'bed', phonetic: '/bɛd/' },
+            { word: 'top', phonetic: '/tɑːp/' },
+            { word: 'fun', phonetic: '/fʌn/' }
+        ];
+
+        // ブレンド音
+        const blendSounds = [
+            { letter: 'bl', ipa: '/bl/', example: '<strong>bl</strong>ue', word: 'blue' },
+            { letter: 'br', ipa: '/br/', example: '<strong>br</strong>own', word: 'brown' },
+            { letter: 'cl', ipa: '/kl/', example: '<strong>cl</strong>ock', word: 'clock' },
+            { letter: 'cr', ipa: '/kr/', example: '<strong>cr</strong>ab', word: 'crab' },
+            { letter: 'dr', ipa: '/dr/', example: '<strong>dr</strong>um', word: 'drum' },
+            { letter: 'fl', ipa: '/fl/', example: '<strong>fl</strong>ower', word: 'flower' },
+            { letter: 'fr', ipa: '/fr/', example: '<strong>fr</strong>og', word: 'frog' },
+            { letter: 'gl', ipa: '/gl/', example: '<strong>gl</strong>ass', word: 'glass' },
+            { letter: 'gr', ipa: '/gr/', example: '<strong>gr</strong>een', word: 'green' },
+            { letter: 'pl', ipa: '/pl/', example: '<strong>pl</strong>ane', word: 'plane' },
+            { letter: 'pr', ipa: '/pr/', example: '<strong>pr</strong>ize', word: 'prize' },
+            { letter: 'sk', ipa: '/sk/', example: '<strong>sk</strong>y', word: 'sky' },
+            { letter: 'sl', ipa: '/sl/', example: '<strong>sl</strong>eep', word: 'sleep' },
+            { letter: 'sm', ipa: '/sm/', example: '<strong>sm</strong>ile', word: 'smile' },
+            { letter: 'sn', ipa: '/sn/', example: '<strong>sn</strong>ow', word: 'snow' },
+            { letter: 'sp', ipa: '/sp/', example: '<strong>sp</strong>oon', word: 'spoon' },
+            { letter: 'st', ipa: '/st/', example: '<strong>st</strong>ar', word: 'star' },
+            { letter: 'sw', ipa: '/sw/', example: '<strong>sw</strong>im', word: 'swim' },
+            { letter: 'tr', ipa: '/tr/', example: '<strong>tr</strong>ee', word: 'tree' },
+            { letter: 'tw', ipa: '/tw/', example: '<strong>tw</strong>o', word: 'two' }
+        ];
+
+        // ダイグラフ
+        const digraphSounds = [
+            { letter: 'ch', ipa: '/tʃ/', example: '<strong>ch</strong>air', word: 'chair' },
+            { letter: 'sh', ipa: '/ʃ/', example: '<strong>sh</strong>ip', word: 'ship' },
+            { letter: 'th', ipa: '/θ/', example: '<strong>th</strong>ink', word: 'think' },
+            { letter: 'th', ipa: '/ð/', example: '<strong>th</strong>is', word: 'this' },
+            { letter: 'wh', ipa: '/w/', example: '<strong>wh</strong>ale', word: 'whale' },
+            { letter: 'ph', ipa: '/f/', example: '<strong>ph</strong>one', word: 'phone' },
+            { letter: 'ng', ipa: '/ŋ/', example: 'si<strong>ng</strong>', word: 'sing' },
+            { letter: 'ck', ipa: '/k/', example: 'du<strong>ck</strong>', word: 'duck' }
+        ];
+
+        // 短母音
+        const shortVowels = [
+            { letter: 'a', ipa: '/æ/', example: 'c<strong>a</strong>t, b<strong>a</strong>g', word: 'cat', desc: '「エ」と「ア」の中間。口を横に引く' },
+            { letter: 'e', ipa: '/ɛ/', example: 'b<strong>e</strong>d, r<strong>e</strong>d', word: 'bed', desc: '日本語の「エ」に近い' },
+            { letter: 'i', ipa: '/ɪ/', example: 's<strong>i</strong>t, b<strong>i</strong>g', word: 'sit', desc: '「イ」より口を少し開ける' },
+            { letter: 'o', ipa: '/ɑ/', example: 'h<strong>o</strong>t, d<strong>o</strong>g', word: 'hot', desc: '口を大きく開けて「ア」' },
+            { letter: 'u', ipa: '/ʌ/', example: 'c<strong>u</strong>p, s<strong>u</strong>n', word: 'cup', desc: '短い「ア」。リラックスして' }
+        ];
+
+        // 長母音
+        const longVowels = [
+            { letter: 'a', ipa: '/eɪ/', example: 'm<strong>a</strong>ke, d<strong>ay</strong>', word: 'make', desc: '「エイ」と発音' },
+            { letter: 'e', ipa: '/iː/', example: 's<strong>ee</strong>, m<strong>e</strong>', word: 'see', desc: '長い「イー」' },
+            { letter: 'i', ipa: '/aɪ/', example: 't<strong>i</strong>me, m<strong>y</strong>', word: 'time', desc: '「アイ」と発音' },
+            { letter: 'o', ipa: '/oʊ/', example: 'g<strong>o</strong>, h<strong>o</strong>me', word: 'go', desc: '「オウ」と発音' },
+            { letter: 'u', ipa: '/uː/', example: 'bl<strong>ue</strong>, m<strong>oo</strong>n', word: 'blue', desc: '長い「ウー」' }
+        ];
+
+        // その他の母音
+        const otherVowels = [
+            { letter: 'ə', ipa: '/ə/', example: '<strong>a</strong>bout, sof<strong>a</strong>', word: 'about', desc: 'シュワー。曖昧な「ア」' },
+            { letter: 'ɜr', ipa: '/ɜːr/', example: 'b<strong>ir</strong>d, w<strong>or</strong>k', word: 'bird', desc: 'Rを含む母音' },
+            { letter: 'ɔ', ipa: '/ɔː/', example: 'c<strong>all</strong>, l<strong>aw</strong>', word: 'call', desc: '唇を丸めた「オー」' },
+            { letter: 'ʊ', ipa: '/ʊ/', example: 'b<strong>oo</strong>k, p<strong>u</strong>t', word: 'book', desc: '短い「ウ」' },
+            { letter: 'ɑr', ipa: '/ɑːr/', example: 'c<strong>ar</strong>, st<strong>ar</strong>', word: 'car', desc: '口を開けた「アー」+R' }
+        ];
+
+        // 母音のミニマルペア
+        const vowelMinimalPairs = [
+            { word1: 'cat', word2: 'cut', phonetic1: '/kæt/', phonetic2: '/kʌt/' },
+            { word1: 'bed', word2: 'bad', phonetic1: '/bɛd/', phonetic2: '/bæd/' },
+            { word1: 'sit', word2: 'seat', phonetic1: '/sɪt/', phonetic2: '/siːt/' },
+            { word1: 'full', word2: 'fool', phonetic1: '/fʊl/', phonetic2: '/fuːl/' },
+            { word1: 'cop', word2: 'cup', phonetic1: '/kɑːp/', phonetic2: '/kʌp/' },
+            { word1: 'hat', word2: 'hot', phonetic1: '/hæt/', phonetic2: '/hɑːt/' }
+        ];
+
+        // 破裂音
+        const plosives = [
+            { letter: 'p', ipa: '/p/', example: '<strong>p</strong>en', word: 'pen', type: '無声・両唇' },
+            { letter: 'b', ipa: '/b/', example: '<strong>b</strong>all', word: 'ball', type: '有声・両唇' },
+            { letter: 't', ipa: '/t/', example: '<strong>t</strong>op', word: 'top', type: '無声・歯茎' },
+            { letter: 'd', ipa: '/d/', example: '<strong>d</strong>og', word: 'dog', type: '有声・歯茎' },
+            { letter: 'k', ipa: '/k/', example: '<strong>k</strong>ey', word: 'key', type: '無声・軟口蓋' },
+            { letter: 'g', ipa: '/g/', example: '<strong>g</strong>o', word: 'go', type: '有声・軟口蓋' }
+        ];
+
+        // 摩擦音
+        const fricatives = [
+            { letter: 'f', ipa: '/f/', example: '<strong>f</strong>ish', word: 'fish', type: '無声・唇歯' },
+            { letter: 'v', ipa: '/v/', example: '<strong>v</strong>an', word: 'van', type: '有声・唇歯' },
+            { letter: 'θ', ipa: '/θ/', example: '<strong>th</strong>ink', word: 'think', type: '無声・歯間' },
+            { letter: 'ð', ipa: '/ð/', example: '<strong>th</strong>is', word: 'this', type: '有声・歯間' },
+            { letter: 's', ipa: '/s/', example: '<strong>s</strong>un', word: 'sun', type: '無声・歯茎' },
+            { letter: 'z', ipa: '/z/', example: '<strong>z</strong>oo', word: 'zoo', type: '有声・歯茎' },
+            { letter: 'ʃ', ipa: '/ʃ/', example: '<strong>sh</strong>ip', word: 'ship', type: '無声・後部歯茎' },
+            { letter: 'ʒ', ipa: '/ʒ/', example: 'mea<strong>s</strong>ure', word: 'measure', type: '有声・後部歯茎' },
+            { letter: 'h', ipa: '/h/', example: '<strong>h</strong>ouse', word: 'house', type: '無声・声門' }
+        ];
+
+        // 破擦音
+        const affricates = [
+            { letter: 'tʃ', ipa: '/tʃ/', example: '<strong>ch</strong>air', word: 'chair', type: '無声' },
+            { letter: 'dʒ', ipa: '/dʒ/', example: '<strong>j</strong>am', word: 'jam', type: '有声' }
+        ];
+
+        // 鼻音
+        const nasals = [
+            { letter: 'm', ipa: '/m/', example: '<strong>m</strong>oon', word: 'moon', type: '両唇' },
+            { letter: 'n', ipa: '/n/', example: '<strong>n</strong>ose', word: 'nose', type: '歯茎' },
+            { letter: 'ŋ', ipa: '/ŋ/', example: 'si<strong>ng</strong>', word: 'sing', type: '軟口蓋' }
+        ];
+
+        // 接近音・側音
+        const approximants = [
+            { letter: 'l', ipa: '/l/', example: '<strong>l</strong>ight', word: 'light', type: '側音' },
+            { letter: 'r', ipa: '/r/', example: '<strong>r</strong>ed', word: 'red', type: '接近音' },
+            { letter: 'w', ipa: '/w/', example: '<strong>w</strong>et', word: 'wet', type: '両唇軟口蓋' },
+            { letter: 'j', ipa: '/j/', example: '<strong>y</strong>es', word: 'yes', type: '硬口蓋' }
+        ];
+
+        // 有声・無声の対
+        const voicingPairs = [
+            { voiceless: '/p/', voiced: '/b/', exVoiceless: 'pen', exVoiced: 'ben' },
+            { voiceless: '/t/', voiced: '/d/', exVoiceless: 'ten', exVoiced: 'den' },
+            { voiceless: '/k/', voiced: '/g/', exVoiceless: 'coat', exVoiced: 'goat' },
+            { voiceless: '/f/', voiced: '/v/', exVoiceless: 'fan', exVoiced: 'van' },
+            { voiceless: '/θ/', voiced: '/ð/', exVoiceless: 'think', exVoiced: 'this' },
+            { voiceless: '/s/', voiced: '/z/', exVoiceless: 'sue', exVoiced: 'zoo' },
+            { voiceless: '/ʃ/', voiced: '/ʒ/', exVoiceless: 'ship', exVoiced: 'measure' },
+            { voiceless: '/tʃ/', voiced: '/dʒ/', exVoiceless: 'chin', exVoiced: 'gin' }
+        ];
+
+        // 二重母音
+        const diphthongs = [
+            { letter: 'aɪ', ipa: '/aɪ/', example: 'm<strong>y</strong>, t<strong>i</strong>me', word: 'my', desc: '「ア」→「イ」' },
+            { letter: 'aʊ', ipa: '/aʊ/', example: 'n<strong>ow</strong>, h<strong>ou</strong>se', word: 'now', desc: '「ア」→「ウ」' },
+            { letter: 'eɪ', ipa: '/eɪ/', example: 'd<strong>ay</strong>, m<strong>a</strong>ke', word: 'day', desc: '「エ」→「イ」' },
+            { letter: 'oʊ', ipa: '/oʊ/', example: 'g<strong>o</strong>, h<strong>o</strong>me', word: 'go', desc: '「オ」→「ウ」' },
+            { letter: 'ɔɪ', ipa: '/ɔɪ/', example: 'b<strong>oy</strong>, c<strong>oi</strong>n', word: 'boy', desc: '「オ」→「イ」' },
+            { letter: 'ɪr', ipa: '/ɪr/', example: 'h<strong>ere</strong>, n<strong>ear</strong>', word: 'here', desc: '「イ」+R' },
+            { letter: 'ɛr', ipa: '/ɛr/', example: 'th<strong>ere</strong>, c<strong>are</strong>', word: 'there', desc: '「エ」+R' },
+            { letter: 'ʊr', ipa: '/ʊr/', example: 'p<strong>ure</strong>, t<strong>our</strong>', word: 'pure', desc: '「ウ」+R' }
+        ];
+
+        // 二重母音練習
+        const diphthongPracticeWords = [
+            { word: 'time', phonetic: '/taɪm/' },
+            { word: 'house', phonetic: '/haʊs/' },
+            { word: 'make', phonetic: '/meɪk/' },
+            { word: 'home', phonetic: '/hoʊm/' },
+            { word: 'boy', phonetic: '/bɔɪ/' },
+            { word: 'nice', phonetic: '/naɪs/' },
+            { word: 'out', phonetic: '/aʊt/' },
+            { word: 'play', phonetic: '/pleɪ/' },
+            { word: 'note', phonetic: '/noʊt/' },
+            { word: 'join', phonetic: '/dʒɔɪn/' },
+            { word: 'night', phonetic: '/naɪt/' },
+            { word: 'ground', phonetic: '/graʊnd/' }
+        ];
+
+        // R/L関連
+        const rlSounds = [
+            { letter: 'R', ipa: '/r/', example: '<strong>r</strong>ed, ca<strong>r</strong>', word: 'red', desc: '舌を巻く・後ろに引く' },
+            { letter: 'L', ipa: '/l/', example: '<strong>l</strong>ight, ba<strong>ll</strong>', word: 'light', desc: '舌先を歯茎につける' }
+        ];
+
+        const rlMinimalPairs = [
+            { word1: 'right', word2: 'light', phonetic1: '/raɪt/', phonetic2: '/laɪt/' },
+            { word1: 'red', word2: 'led', phonetic1: '/rɛd/', phonetic2: '/lɛd/' },
+            { word1: 'rock', word2: 'lock', phonetic1: '/rɑːk/', phonetic2: '/lɑːk/' },
+            { word1: 'road', word2: 'load', phonetic1: '/roʊd/', phonetic2: '/loʊd/' },
+            { word1: 'wrong', word2: 'long', phonetic1: '/rɔːŋ/', phonetic2: '/lɔːŋ/' },
+            { word1: 'pray', word2: 'play', phonetic1: '/preɪ/', phonetic2: '/pleɪ/' },
+            { word1: 'grow', word2: 'glow', phonetic1: '/groʊ/', phonetic2: '/gloʊ/' },
+            { word1: 'fry', word2: 'fly', phonetic1: '/fraɪ/', phonetic2: '/flaɪ/' }
+        ];
+
+        // TH関連
+        const thSounds = [
+            { letter: 'θ', ipa: '/θ/', example: '<strong>th</strong>ink, ma<strong>th</strong>', word: 'think', desc: '無声音・歯間摩擦音' },
+            { letter: 'ð', ipa: '/ð/', example: '<strong>th</strong>is, wi<strong>th</strong>', word: 'this', desc: '有声音・歯間摩擦音' }
+        ];
+
+        // F/V関連
+        const fvSounds = [
+            { letter: 'F', ipa: '/f/', example: '<strong>f</strong>un, li<strong>f</strong>e', word: 'fun', desc: '無声音・唇歯摩擦音' },
+            { letter: 'V', ipa: '/v/', example: '<strong>v</strong>ery, lo<strong>v</strong>e', word: 'very', desc: '有声音・唇歯摩擦音' }
+        ];
+
+        // その他の特殊音
+        const otherSpecialSounds = [
+            { letter: 'ʃ', ipa: '/ʃ/', example: '<strong>sh</strong>e, fi<strong>sh</strong>', word: 'she', desc: '「シュ」に近い' },
+            { letter: 'ʒ', ipa: '/ʒ/', example: 'vi<strong>s</strong>ion', word: 'vision', desc: '「ジュ」に近い（有声）' },
+            { letter: 'ŋ', ipa: '/ŋ/', example: 'si<strong>ng</strong>', word: 'sing', desc: '鼻から抜ける「ング」' },
+            { letter: 'w', ipa: '/w/', example: '<strong>w</strong>ater', word: 'water', desc: '唇を丸めて「ウ」' },
+            { letter: 'j', ipa: '/j/', example: '<strong>y</strong>es', word: 'yes', desc: '日本語の「ヤ行」に近い' }
+        ];
+
+        // IPA母音一覧
+        const ipaVowels = [
+            { symbol: '/iː/', word: 'see', japanese: '長い「イー」', desc: '口を横に引いて長く' },
+            { symbol: '/ɪ/', word: 'sit', japanese: '短い「イ」', desc: '口をやや開けて短く' },
+            { symbol: '/eɪ/', word: 'day', japanese: '「エイ」', desc: '二重母音' },
+            { symbol: '/ɛ/', word: 'bed', japanese: '「エ」', desc: '日本語の「エ」に近い' },
+            { symbol: '/æ/', word: 'cat', japanese: '「エとアの中間」', desc: '口を横に引いて開ける' },
+            { symbol: '/ɑː/', word: 'father', japanese: '長い「アー」', desc: '口を大きく開けて' },
+            { symbol: '/ʌ/', word: 'cup', japanese: '短い「ア」', desc: 'リラックスして短く' },
+            { symbol: '/ə/', word: 'about', japanese: '曖昧な「ア」', desc: 'シュワー。弱く発音' },
+            { symbol: '/ɜːr/', word: 'bird', japanese: '「アー」+R', desc: '舌を巻いて' },
+            { symbol: '/ɔː/', word: 'call', japanese: '丸い「オー」', desc: '唇を丸めて' },
+            { symbol: '/oʊ/', word: 'go', japanese: '「オウ」', desc: '二重母音' },
+            { symbol: '/ʊ/', word: 'book', japanese: '短い「ウ」', desc: '口をやや丸めて' },
+            { symbol: '/uː/', word: 'blue', japanese: '長い「ウー」', desc: '唇を突き出して' }
+        ];
+
+        // IPA子音一覧
+        const ipaConsonants = [
+            { symbol: '/p/', word: 'pen', type: '破裂・無声', desc: '両唇で息を止めて破裂' },
+            { symbol: '/b/', word: 'ball', type: '破裂・有声', desc: '両唇で息を止めて破裂' },
+            { symbol: '/t/', word: 'top', type: '破裂・無声', desc: '舌先を歯茎につけて' },
+            { symbol: '/d/', word: 'dog', type: '破裂・有声', desc: '舌先を歯茎につけて' },
+            { symbol: '/k/', word: 'key', type: '破裂・無声', desc: '舌の奥を軟口蓋に' },
+            { symbol: '/g/', word: 'go', type: '破裂・有声', desc: '舌の奥を軟口蓋に' },
+            { symbol: '/f/', word: 'fish', type: '摩擦・無声', desc: '上歯を下唇に当てて' },
+            { symbol: '/v/', word: 'van', type: '摩擦・有声', desc: '上歯を下唇に当てて' },
+            { symbol: '/θ/', word: 'think', type: '摩擦・無声', desc: '舌を歯の間に' },
+            { symbol: '/ð/', word: 'this', type: '摩擦・有声', desc: '舌を歯の間に' },
+            { symbol: '/s/', word: 'sun', type: '摩擦・無声', desc: '舌先を歯茎に近づけて' },
+            { symbol: '/z/', word: 'zoo', type: '摩擦・有声', desc: '舌先を歯茎に近づけて' },
+            { symbol: '/ʃ/', word: 'ship', type: '摩擦・無声', desc: '舌を後ろに引いて「シュ」' },
+            { symbol: '/ʒ/', word: 'measure', type: '摩擦・有声', desc: '舌を後ろに引いて「ジュ」' },
+            { symbol: '/h/', word: 'house', type: '摩擦・無声', desc: '息を吐くだけ' },
+            { symbol: '/tʃ/', word: 'chair', type: '破擦・無声', desc: '「チ」' },
+            { symbol: '/dʒ/', word: 'jam', type: '破擦・有声', desc: '「ヂ」' },
+            { symbol: '/m/', word: 'moon', type: '鼻音', desc: '両唇を閉じて鼻から' },
+            { symbol: '/n/', word: 'nose', type: '鼻音', desc: '舌先を歯茎につけて鼻から' },
+            { symbol: '/ŋ/', word: 'sing', type: '鼻音', desc: '舌の奥を上げて鼻から' },
+            { symbol: '/l/', word: 'light', type: '側音', desc: '舌先を歯茎につけて両側から' },
+            { symbol: '/r/', word: 'red', type: '接近音', desc: '舌を巻いて' },
+            { symbol: '/w/', word: 'wet', type: '接近音', desc: '唇を丸めて' },
+            { symbol: '/j/', word: 'yes', type: '接近音', desc: '「ヤ行」' }
+        ];
+
+        // IPA二重母音一覧
+        const ipaDiphthongs = [
+            { symbol: '/aɪ/', word: 'my', tip: '「ア」から始めて「イ」へ滑らかに' },
+            { symbol: '/aʊ/', word: 'now', tip: '「ア」から始めて「ウ」へ、唇を丸める' },
+            { symbol: '/eɪ/', word: 'day', tip: '「エ」から始めて「イ」へ' },
+            { symbol: '/oʊ/', word: 'go', tip: '「オ」から始めて「ウ」へ、唇を突き出す' },
+            { symbol: '/ɔɪ/', word: 'boy', tip: '丸い「オ」から「イ」へ' }
+        ];
+
+        // IPAクイズデータ
+        const ipaQuizData = [
+            { ipa: '/kæt/', answer: 'cat', options: ['cat', 'cut', 'cot', 'caught'] },
+            { ipa: '/taɪm/', answer: 'time', options: ['team', 'time', 'tom', 'tame'] },
+            { ipa: '/θɪŋk/', answer: 'think', options: ['sink', 'thing', 'think', 'thick'] },
+            { ipa: '/laɪt/', answer: 'light', options: ['light', 'right', 'late', 'let'] },
+            { ipa: '/hoʊm/', answer: 'home', options: ['ham', 'hum', 'home', 'him'] }
+        ];
+
+        // ======================================
+        // 音声合成（Web Speech API）
+        // ======================================
+        let speechRate = 1.0;
+        let voices = [];
+
+        // 音声を読み込む
+        function loadVoices() {
+            voices = speechSynthesis.getVoices();
+        }
+
+        speechSynthesis.onvoiceschanged = loadVoices;
+        loadVoices();
+
+        // アメリカ英語の音声を取得
+        function getAmericanVoice() {
+            // 優先順位: en-US の女性音声 > en-US の男性音声 > 任意の英語音声
+            const usVoices = voices.filter(v => v.lang.startsWith('en-US'));
+            if (usVoices.length > 0) {
+                // Samantha や Alex など品質の良い音声を優先
+                const preferred = usVoices.find(v =>
+                    v.name.includes('Samantha') ||
+                    v.name.includes('Alex') ||
+                    v.name.includes('Ava') ||
+                    v.name.includes('Tom')
+                );
+                return preferred || usVoices[0];
+            }
+            // フォールバック: 任意の英語音声
+            const enVoice = voices.find(v => v.lang.startsWith('en'));
+            return enVoice || null;
+        }
+
+        // 単語を発音する
+        function speak(text, rate = speechRate) {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            const voice = getAmericanVoice();
+            if (voice) {
+                utterance.voice = voice;
+            }
+            utterance.lang = 'en-US';
+            utterance.rate = rate;
+            utterance.pitch = 1;
+
+            speechSynthesis.speak(utterance);
+        }
+
+        // 速度コントロール
+        document.getElementById('speedControl').addEventListener('input', function() {
+            speechRate = parseFloat(this.value);
+            document.getElementById('speedValue').textContent = speechRate.toFixed(1);
+        });
+
+        // ======================================
+        // UI生成関数
+        // ======================================
+
+        // サウンドカードを生成
+        function createSoundCard(data, cardClass) {
+            const card = document.createElement('div');
+            card.className = `sound-card ${cardClass}`;
+            card.innerHTML = `
+                <div class="letter">${data.letter}</div>
+                <div class="ipa">${data.ipa}</div>
+                <div class="example">${data.example}</div>
+                <div class="play-icon">🔊</div>
+            `;
+            card.addEventListener('click', () => {
+                card.classList.add('playing');
+                speak(data.word);
+                setTimeout(() => card.classList.remove('playing'), 500);
+            });
+            return card;
+        }
+
+        // サウンドグリッドを生成
+        function populateSoundGrid(containerId, data, cardClass) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = '';
+            data.forEach(item => {
+                container.appendChild(createSoundCard(item, cardClass));
+            });
+        }
+
+        // 練習単語を生成
+        function populatePracticeWords(containerId, words) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = '';
+            words.forEach(item => {
+                const wordEl = document.createElement('span');
+                wordEl.className = 'practice-word';
+                wordEl.innerHTML = `${item.word} <span class="phonetic">${item.phonetic}</span>`;
+                wordEl.addEventListener('click', () => speak(item.word));
+                container.appendChild(wordEl);
+            });
+        }
+
+        // ミニマルペアを生成
+        function populateMinimalPairs(containerId, pairs) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = '';
+            pairs.forEach(pair => {
+                const pairEl = document.createElement('div');
+                pairEl.className = 'minimal-pair';
+                pairEl.innerHTML = `
+                    <span class="word" onclick="speak('${pair.word1}')">${pair.word1}<br><small>${pair.phonetic1}</small></span>
+                    <span class="vs">vs</span>
+                    <span class="word" onclick="speak('${pair.word2}')">${pair.word2}<br><small>${pair.phonetic2}</small></span>
+                `;
+                container.appendChild(pairEl);
+            });
+        }
+
+        // 有声・無声テーブルを生成
+        function populateVoicingTable() {
+            const tbody = document.getElementById('voicingTable');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            voicingPairs.forEach(pair => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${pair.voiceless}</td>
+                    <td>${pair.voiced}</td>
+                    <td><button class="sound-btn" onclick="speak('${pair.exVoiceless}')">🔊 ${pair.exVoiceless}</button></td>
+                    <td><button class="sound-btn" onclick="speak('${pair.exVoiced}')">🔊 ${pair.exVoiced}</button></td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // IPA母音テーブルを生成
+        function populateIpaVowelTable() {
+            const tbody = document.querySelector('#ipaVowelTable tbody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            ipaVowels.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td style="font-size: 1.3rem;">${item.symbol}</td>
+                    <td><button class="sound-btn" onclick="speak('${item.word}')">🔊</button></td>
+                    <td>${item.word}</td>
+                    <td>${item.japanese}</td>
+                    <td>${item.desc}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // IPA子音テーブルを生成
+        function populateIpaConsonantTable() {
+            const tbody = document.querySelector('#ipaConsonantTable tbody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            ipaConsonants.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td style="font-size: 1.3rem;">${item.symbol}</td>
+                    <td><button class="sound-btn" onclick="speak('${item.word}')">🔊</button></td>
+                    <td>${item.word}</td>
+                    <td>${item.type}</td>
+                    <td>${item.desc}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // IPA二重母音テーブルを生成
+        function populateIpaDiphthongTable() {
+            const tbody = document.querySelector('#ipaDiphthongTable tbody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            ipaDiphthongs.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td style="font-size: 1.3rem;">${item.symbol}</td>
+                    <td><button class="sound-btn" onclick="speak('${item.word}')">🔊</button></td>
+                    <td>${item.word}</td>
+                    <td>${item.tip}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // IPAクイズを生成
+        function populateIpaQuiz() {
+            const container = document.getElementById('ipaQuiz');
+            if (!container) return;
+            container.innerHTML = '';
+
+            ipaQuizData.forEach((quiz, index) => {
+                const quizEl = document.createElement('div');
+                quizEl.className = 'practice-section';
+                quizEl.style.marginTop = '1rem';
+                quizEl.innerHTML = `
+                    <p><strong>Q${index + 1}.</strong> <span style="font-size: 1.3rem;">${quiz.ipa}</span>
+                    <button class="sound-btn" onclick="speak('${quiz.answer}')">🔊 聞く</button></p>
+                    <div class="practice-words">
+                        ${quiz.options.map(opt => `
+                            <span class="practice-word quiz-option"
+                                  data-answer="${quiz.answer}"
+                                  data-option="${opt}"
+                                  onclick="checkQuizAnswer(this, '${quiz.answer}', '${opt}')">${opt}</span>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(quizEl);
+            });
+        }
+
+        // クイズの答えをチェック
+        function checkQuizAnswer(el, answer, selected) {
+            const parent = el.parentElement;
+            const options = parent.querySelectorAll('.quiz-option');
+
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+                if (opt.dataset.option === answer) {
+                    opt.style.background = '#4CAF50';
+                    opt.style.color = 'white';
+                } else if (opt === el && selected !== answer) {
+                    opt.style.background = '#f44336';
+                    opt.style.color = 'white';
+                }
+            });
+        }
+
+        // ======================================
+        // タブ切り替え
+        // ======================================
+        document.querySelectorAll('.section-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // タブのアクティブ状態を切り替え
+                document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // コンテンツの表示を切り替え
+                const sectionId = tab.dataset.section;
+                document.querySelectorAll('.section-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(sectionId).classList.add('active');
+
+                // スクロールをトップに
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // ======================================
+        // 進捗バー
+        // ======================================
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        });
+
+        // ======================================
+        // 初期化
+        // ======================================
+        function init() {
+            // フォニックスセクション
+            populateSoundGrid('alphabetGrid', alphabetSounds, 'phonics-card');
+            populatePracticeWords('cvcWords', cvcWords);
+            populateSoundGrid('blendsGrid', blendSounds, 'phonics-card');
+            populateSoundGrid('digraphsGrid', digraphSounds, 'phonics-card');
+
+            // 母音セクション
+            populateSoundGrid('shortVowelsGrid', shortVowels, 'vowel-card');
+            populateSoundGrid('longVowelsGrid', longVowels, 'vowel-card');
+            populateSoundGrid('otherVowelsGrid', otherVowels, 'vowel-card');
+            populateMinimalPairs('vowelMinimalPairs', vowelMinimalPairs);
+
+            // 子音セクション
+            populateSoundGrid('plosivesGrid', plosives, 'consonant-card');
+            populateSoundGrid('fricativesGrid', fricatives, 'consonant-card');
+            populateSoundGrid('affricatesGrid', affricates, 'consonant-card');
+            populateSoundGrid('nasalsGrid', nasals, 'consonant-card');
+            populateSoundGrid('approximantsGrid', approximants, 'consonant-card');
+            populateVoicingTable();
+
+            // 二重母音セクション
+            populateSoundGrid('diphthongsGrid', diphthongs, 'diphthong-card');
+            populatePracticeWords('diphthongPractice', diphthongPracticeWords);
+
+            // 特殊な音セクション
+            populateSoundGrid('rlGrid', rlSounds, 'special-card');
+            populateMinimalPairs('rlMinimalPairs', rlMinimalPairs);
+            populateSoundGrid('thGrid', thSounds, 'special-card');
+            populateSoundGrid('fvGrid', fvSounds, 'special-card');
+            populateSoundGrid('otherSpecialGrid', otherSpecialSounds, 'special-card');
+
+            // IPA一覧セクション
+            populateIpaVowelTable();
+            populateIpaConsonantTable();
+            populateIpaDiphthongTable();
+            populateIpaQuiz();
+        }
+
+        // DOMが読み込まれたら初期化
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
