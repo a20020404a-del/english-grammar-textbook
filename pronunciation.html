@@ -267,7 +267,7 @@
         /* 発音カード */
         .sound-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 1rem;
             margin-top: 1.5rem;
         }
@@ -328,6 +328,42 @@
 
         .sound-card:hover .play-icon {
             opacity: 1;
+        }
+
+        /* 例単語ボタン */
+        .word-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            justify-content: center;
+            margin-top: 0.8rem;
+        }
+
+        .word-btn {
+            background: #f0f0f0;
+            border: none;
+            padding: 0.4rem 0.7rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .word-btn:hover {
+            background: #e0e0e0;
+            transform: scale(1.05);
+        }
+
+        .word-btn.playing {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .word-btn .speaker {
+            font-size: 0.9rem;
         }
 
         /* フォニックス色分け */
@@ -1226,29 +1262,29 @@
 
         // 短母音
         const shortVowels = [
-            { letter: 'a', ipa: '/æ/', example: 'c<strong>a</strong>t, b<strong>a</strong>g', word: 'cat', desc: '「エ」と「ア」の中間。口を横に引く' },
-            { letter: 'e', ipa: '/ɛ/', example: 'b<strong>e</strong>d, r<strong>e</strong>d', word: 'bed', desc: '日本語の「エ」に近い' },
-            { letter: 'i', ipa: '/ɪ/', example: 's<strong>i</strong>t, b<strong>i</strong>g', word: 'sit', desc: '「イ」より口を少し開ける' },
-            { letter: 'o', ipa: '/ɑ/', example: 'h<strong>o</strong>t, d<strong>o</strong>g', word: 'hot', desc: '口を大きく開けて「ア」' },
-            { letter: 'u', ipa: '/ʌ/', example: 'c<strong>u</strong>p, s<strong>u</strong>n', word: 'cup', desc: '短い「ア」。リラックスして' }
+            { letter: 'a', ipa: '/æ/', words: ['cat', 'bag', 'apple'], desc: '「エ」と「ア」の中間。口を横に引く' },
+            { letter: 'e', ipa: '/ɛ/', words: ['bed', 'red', 'egg'], desc: '日本語の「エ」に近い' },
+            { letter: 'i', ipa: '/ɪ/', words: ['sit', 'big', 'fish'], desc: '「イ」より口を少し開ける' },
+            { letter: 'o', ipa: '/ɑ/', words: ['hot', 'dog', 'box'], desc: '口を大きく開けて「ア」' },
+            { letter: 'u', ipa: '/ʌ/', words: ['cup', 'sun', 'bus'], desc: '短い「ア」。リラックスして' }
         ];
 
         // 長母音
         const longVowels = [
-            { letter: 'a', ipa: '/eɪ/', example: 'm<strong>a</strong>ke, d<strong>ay</strong>', word: 'make', desc: '「エイ」と発音' },
-            { letter: 'e', ipa: '/iː/', example: 's<strong>ee</strong>, m<strong>e</strong>', word: 'see', desc: '長い「イー」' },
-            { letter: 'i', ipa: '/aɪ/', example: 't<strong>i</strong>me, m<strong>y</strong>', word: 'time', desc: '「アイ」と発音' },
-            { letter: 'o', ipa: '/oʊ/', example: 'g<strong>o</strong>, h<strong>o</strong>me', word: 'go', desc: '「オウ」と発音' },
-            { letter: 'u', ipa: '/uː/', example: 'bl<strong>ue</strong>, m<strong>oo</strong>n', word: 'blue', desc: '長い「ウー」' }
+            { letter: 'a', ipa: '/eɪ/', words: ['make', 'day', 'rain'], desc: '「エイ」と発音' },
+            { letter: 'e', ipa: '/iː/', words: ['see', 'tree', 'beach'], desc: '長い「イー」' },
+            { letter: 'i', ipa: '/aɪ/', words: ['time', 'my', 'bike'], desc: '「アイ」と発音' },
+            { letter: 'o', ipa: '/oʊ/', words: ['go', 'home', 'boat'], desc: '「オウ」と発音' },
+            { letter: 'u', ipa: '/uː/', words: ['blue', 'moon', 'food'], desc: '長い「ウー」' }
         ];
 
         // その他の母音
         const otherVowels = [
-            { letter: 'ə', ipa: '/ə/', example: '<strong>a</strong>bout, sof<strong>a</strong>', word: 'about', desc: 'シュワー。曖昧な「ア」' },
-            { letter: 'ɜr', ipa: '/ɜːr/', example: 'b<strong>ir</strong>d, w<strong>or</strong>k', word: 'bird', desc: 'Rを含む母音' },
-            { letter: 'ɔ', ipa: '/ɔː/', example: 'c<strong>all</strong>, l<strong>aw</strong>', word: 'call', desc: '唇を丸めた「オー」' },
-            { letter: 'ʊ', ipa: '/ʊ/', example: 'b<strong>oo</strong>k, p<strong>u</strong>t', word: 'book', desc: '短い「ウ」' },
-            { letter: 'ɑr', ipa: '/ɑːr/', example: 'c<strong>ar</strong>, st<strong>ar</strong>', word: 'car', desc: '口を開けた「アー」+R' }
+            { letter: 'ə', ipa: '/ə/', words: ['about', 'sofa', 'banana'], desc: 'シュワー。曖昧な「ア」' },
+            { letter: 'ɜr', ipa: '/ɜːr/', words: ['bird', 'work', 'nurse'], desc: 'Rを含む母音' },
+            { letter: 'ɔ', ipa: '/ɔː/', words: ['call', 'law', 'ball'], desc: '唇を丸めた「オー」' },
+            { letter: 'ʊ', ipa: '/ʊ/', words: ['book', 'put', 'good'], desc: '短い「ウ」' },
+            { letter: 'ɑr', ipa: '/ɑːr/', words: ['car', 'star', 'park'], desc: '口を開けた「アー」+R' }
         ];
 
         // 母音のミニマルペア
@@ -1263,46 +1299,46 @@
 
         // 破裂音
         const plosives = [
-            { letter: 'p', ipa: '/p/', example: '<strong>p</strong>en', word: 'pen', type: '無声・両唇' },
-            { letter: 'b', ipa: '/b/', example: '<strong>b</strong>all', word: 'ball', type: '有声・両唇' },
-            { letter: 't', ipa: '/t/', example: '<strong>t</strong>op', word: 'top', type: '無声・歯茎' },
-            { letter: 'd', ipa: '/d/', example: '<strong>d</strong>og', word: 'dog', type: '有声・歯茎' },
-            { letter: 'k', ipa: '/k/', example: '<strong>k</strong>ey', word: 'key', type: '無声・軟口蓋' },
-            { letter: 'g', ipa: '/g/', example: '<strong>g</strong>o', word: 'go', type: '有声・軟口蓋' }
+            { letter: 'p', ipa: '/p/', words: ['pen', 'paper', 'happy'], type: '無声・両唇' },
+            { letter: 'b', ipa: '/b/', words: ['ball', 'baby', 'job'], type: '有声・両唇' },
+            { letter: 't', ipa: '/t/', words: ['top', 'water', 'cat'], type: '無声・歯茎' },
+            { letter: 'd', ipa: '/d/', words: ['dog', 'daddy', 'bad'], type: '有声・歯茎' },
+            { letter: 'k', ipa: '/k/', words: ['key', 'cake', 'back'], type: '無声・軟口蓋' },
+            { letter: 'g', ipa: '/g/', words: ['go', 'girl', 'big'], type: '有声・軟口蓋' }
         ];
 
         // 摩擦音
         const fricatives = [
-            { letter: 'f', ipa: '/f/', example: '<strong>f</strong>ish', word: 'fish', type: '無声・唇歯' },
-            { letter: 'v', ipa: '/v/', example: '<strong>v</strong>an', word: 'van', type: '有声・唇歯' },
-            { letter: 'θ', ipa: '/θ/', example: '<strong>th</strong>ink', word: 'think', type: '無声・歯間' },
-            { letter: 'ð', ipa: '/ð/', example: '<strong>th</strong>is', word: 'this', type: '有声・歯間' },
-            { letter: 's', ipa: '/s/', example: '<strong>s</strong>un', word: 'sun', type: '無声・歯茎' },
-            { letter: 'z', ipa: '/z/', example: '<strong>z</strong>oo', word: 'zoo', type: '有声・歯茎' },
-            { letter: 'ʃ', ipa: '/ʃ/', example: '<strong>sh</strong>ip', word: 'ship', type: '無声・後部歯茎' },
-            { letter: 'ʒ', ipa: '/ʒ/', example: 'mea<strong>s</strong>ure', word: 'measure', type: '有声・後部歯茎' },
-            { letter: 'h', ipa: '/h/', example: '<strong>h</strong>ouse', word: 'house', type: '無声・声門' }
+            { letter: 'f', ipa: '/f/', words: ['fish', 'coffee', 'leaf'], type: '無声・唇歯' },
+            { letter: 'v', ipa: '/v/', words: ['van', 'voice', 'love'], type: '有声・唇歯' },
+            { letter: 'θ', ipa: '/θ/', words: ['think', 'three', 'math'], type: '無声・歯間' },
+            { letter: 'ð', ipa: '/ð/', words: ['this', 'mother', 'with'], type: '有声・歯間' },
+            { letter: 's', ipa: '/s/', words: ['sun', 'city', 'bus'], type: '無声・歯茎' },
+            { letter: 'z', ipa: '/z/', words: ['zoo', 'busy', 'jazz'], type: '有声・歯茎' },
+            { letter: 'ʃ', ipa: '/ʃ/', words: ['ship', 'nation', 'fish'], type: '無声・後部歯茎' },
+            { letter: 'ʒ', ipa: '/ʒ/', words: ['measure', 'vision', 'beige'], type: '有声・後部歯茎' },
+            { letter: 'h', ipa: '/h/', words: ['house', 'happy', 'behind'], type: '無声・声門' }
         ];
 
         // 破擦音
         const affricates = [
-            { letter: 'tʃ', ipa: '/tʃ/', example: '<strong>ch</strong>air', word: 'chair', type: '無声' },
-            { letter: 'dʒ', ipa: '/dʒ/', example: '<strong>j</strong>am', word: 'jam', type: '有声' }
+            { letter: 'tʃ', ipa: '/tʃ/', words: ['chair', 'teacher', 'watch'], type: '無声' },
+            { letter: 'dʒ', ipa: '/dʒ/', words: ['jam', 'bridge', 'age'], type: '有声' }
         ];
 
         // 鼻音
         const nasals = [
-            { letter: 'm', ipa: '/m/', example: '<strong>m</strong>oon', word: 'moon', type: '両唇' },
-            { letter: 'n', ipa: '/n/', example: '<strong>n</strong>ose', word: 'nose', type: '歯茎' },
-            { letter: 'ŋ', ipa: '/ŋ/', example: 'si<strong>ng</strong>', word: 'sing', type: '軟口蓋' }
+            { letter: 'm', ipa: '/m/', words: ['moon', 'mother', 'swim'], type: '両唇' },
+            { letter: 'n', ipa: '/n/', words: ['nose', 'dinner', 'sun'], type: '歯茎' },
+            { letter: 'ŋ', ipa: '/ŋ/', words: ['sing', 'think', 'ring'], type: '軟口蓋' }
         ];
 
         // 接近音・側音
         const approximants = [
-            { letter: 'l', ipa: '/l/', example: '<strong>l</strong>ight', word: 'light', type: '側音' },
-            { letter: 'r', ipa: '/r/', example: '<strong>r</strong>ed', word: 'red', type: '接近音' },
-            { letter: 'w', ipa: '/w/', example: '<strong>w</strong>et', word: 'wet', type: '両唇軟口蓋' },
-            { letter: 'j', ipa: '/j/', example: '<strong>y</strong>es', word: 'yes', type: '硬口蓋' }
+            { letter: 'l', ipa: '/l/', words: ['light', 'yellow', 'bell'], type: '側音' },
+            { letter: 'r', ipa: '/r/', words: ['red', 'very', 'car'], type: '接近音' },
+            { letter: 'w', ipa: '/w/', words: ['wet', 'away', 'sweet'], type: '両唇軟口蓋' },
+            { letter: 'j', ipa: '/j/', words: ['yes', 'yellow', 'music'], type: '硬口蓋' }
         ];
 
         // 有声・無声の対
@@ -1319,14 +1355,14 @@
 
         // 二重母音
         const diphthongs = [
-            { letter: 'aɪ', ipa: '/aɪ/', example: 'm<strong>y</strong>, t<strong>i</strong>me', word: 'my', desc: '「ア」→「イ」' },
-            { letter: 'aʊ', ipa: '/aʊ/', example: 'n<strong>ow</strong>, h<strong>ou</strong>se', word: 'now', desc: '「ア」→「ウ」' },
-            { letter: 'eɪ', ipa: '/eɪ/', example: 'd<strong>ay</strong>, m<strong>a</strong>ke', word: 'day', desc: '「エ」→「イ」' },
-            { letter: 'oʊ', ipa: '/oʊ/', example: 'g<strong>o</strong>, h<strong>o</strong>me', word: 'go', desc: '「オ」→「ウ」' },
-            { letter: 'ɔɪ', ipa: '/ɔɪ/', example: 'b<strong>oy</strong>, c<strong>oi</strong>n', word: 'boy', desc: '「オ」→「イ」' },
-            { letter: 'ɪr', ipa: '/ɪr/', example: 'h<strong>ere</strong>, n<strong>ear</strong>', word: 'here', desc: '「イ」+R' },
-            { letter: 'ɛr', ipa: '/ɛr/', example: 'th<strong>ere</strong>, c<strong>are</strong>', word: 'there', desc: '「エ」+R' },
-            { letter: 'ʊr', ipa: '/ʊr/', example: 'p<strong>ure</strong>, t<strong>our</strong>', word: 'pure', desc: '「ウ」+R' }
+            { letter: 'aɪ', ipa: '/aɪ/', words: ['my', 'time', 'night'], desc: '「ア」→「イ」' },
+            { letter: 'aʊ', ipa: '/aʊ/', words: ['now', 'house', 'out'], desc: '「ア」→「ウ」' },
+            { letter: 'eɪ', ipa: '/eɪ/', words: ['day', 'make', 'rain'], desc: '「エ」→「イ」' },
+            { letter: 'oʊ', ipa: '/oʊ/', words: ['go', 'home', 'boat'], desc: '「オ」→「ウ」' },
+            { letter: 'ɔɪ', ipa: '/ɔɪ/', words: ['boy', 'coin', 'voice'], desc: '「オ」→「イ」' },
+            { letter: 'ɪr', ipa: '/ɪr/', words: ['here', 'near', 'fear'], desc: '「イ」+R' },
+            { letter: 'ɛr', ipa: '/ɛr/', words: ['there', 'care', 'bear'], desc: '「エ」+R' },
+            { letter: 'ʊr', ipa: '/ʊr/', words: ['pure', 'tour', 'cure'], desc: '「ウ」+R' }
         ];
 
         // 二重母音練習
@@ -1347,8 +1383,8 @@
 
         // R/L関連
         const rlSounds = [
-            { letter: 'R', ipa: '/r/', example: '<strong>r</strong>ed, ca<strong>r</strong>', word: 'red', desc: '舌を巻く・後ろに引く' },
-            { letter: 'L', ipa: '/l/', example: '<strong>l</strong>ight, ba<strong>ll</strong>', word: 'light', desc: '舌先を歯茎につける' }
+            { letter: 'R', ipa: '/r/', words: ['red', 'run', 'car'], desc: '舌を巻く・後ろに引く' },
+            { letter: 'L', ipa: '/l/', words: ['light', 'love', 'ball'], desc: '舌先を歯茎につける' }
         ];
 
         const rlMinimalPairs = [
@@ -1364,23 +1400,23 @@
 
         // TH関連
         const thSounds = [
-            { letter: 'θ', ipa: '/θ/', example: '<strong>th</strong>ink, ma<strong>th</strong>', word: 'think', desc: '無声音・歯間摩擦音' },
-            { letter: 'ð', ipa: '/ð/', example: '<strong>th</strong>is, wi<strong>th</strong>', word: 'this', desc: '有声音・歯間摩擦音' }
+            { letter: 'θ', ipa: '/θ/', words: ['think', 'three', 'math'], desc: '無声音・歯間摩擦音' },
+            { letter: 'ð', ipa: '/ð/', words: ['this', 'mother', 'breathe'], desc: '有声音・歯間摩擦音' }
         ];
 
         // F/V関連
         const fvSounds = [
-            { letter: 'F', ipa: '/f/', example: '<strong>f</strong>un, li<strong>f</strong>e', word: 'fun', desc: '無声音・唇歯摩擦音' },
-            { letter: 'V', ipa: '/v/', example: '<strong>v</strong>ery, lo<strong>v</strong>e', word: 'very', desc: '有声音・唇歯摩擦音' }
+            { letter: 'F', ipa: '/f/', words: ['fun', 'life', 'office'], desc: '無声音・唇歯摩擦音' },
+            { letter: 'V', ipa: '/v/', words: ['very', 'love', 'have'], desc: '有声音・唇歯摩擦音' }
         ];
 
         // その他の特殊音
         const otherSpecialSounds = [
-            { letter: 'ʃ', ipa: '/ʃ/', example: '<strong>sh</strong>e, fi<strong>sh</strong>', word: 'she', desc: '「シュ」に近い' },
-            { letter: 'ʒ', ipa: '/ʒ/', example: 'vi<strong>s</strong>ion', word: 'vision', desc: '「ジュ」に近い（有声）' },
-            { letter: 'ŋ', ipa: '/ŋ/', example: 'si<strong>ng</strong>', word: 'sing', desc: '鼻から抜ける「ング」' },
-            { letter: 'w', ipa: '/w/', example: '<strong>w</strong>ater', word: 'water', desc: '唇を丸めて「ウ」' },
-            { letter: 'j', ipa: '/j/', example: '<strong>y</strong>es', word: 'yes', desc: '日本語の「ヤ行」に近い' }
+            { letter: 'ʃ', ipa: '/ʃ/', words: ['she', 'fish', 'nation'], desc: '「シュ」に近い' },
+            { letter: 'ʒ', ipa: '/ʒ/', words: ['vision', 'measure', 'beige'], desc: '「ジュ」に近い（有声）' },
+            { letter: 'ŋ', ipa: '/ŋ/', words: ['sing', 'ring', 'think'], desc: '鼻から抜ける「ング」' },
+            { letter: 'w', ipa: '/w/', words: ['water', 'away', 'sweet'], desc: '唇を丸めて「ウ」' },
+            { letter: 'j', ipa: '/j/', words: ['yes', 'yellow', 'you'], desc: '日本語の「ヤ行」に近い' }
         ];
 
         // IPA母音一覧
@@ -1511,17 +1547,46 @@
         function createSoundCard(data, cardClass) {
             const card = document.createElement('div');
             card.className = `sound-card ${cardClass}`;
-            card.innerHTML = `
-                <div class="letter">${data.letter}</div>
-                <div class="ipa">${data.ipa}</div>
-                <div class="example">${data.example}</div>
-                <div class="play-icon">🔊</div>
-            `;
-            card.addEventListener('click', () => {
-                card.classList.add('playing');
-                speak(data.word);
-                setTimeout(() => card.classList.remove('playing'), 500);
-            });
+
+            // words配列がある場合（母音・子音用）
+            if (data.words && Array.isArray(data.words)) {
+                card.innerHTML = `
+                    <div class="letter">${data.letter}</div>
+                    <div class="ipa">${data.ipa}</div>
+                    ${data.type ? `<div class="example">${data.type}</div>` : ''}
+                    ${data.desc ? `<div class="example">${data.desc}</div>` : ''}
+                    <div class="word-buttons">
+                        ${data.words.map(word => `
+                            <button class="word-btn" data-word="${word}">
+                                <span class="speaker">🔊</span>${word}
+                            </button>
+                        `).join('')}
+                    </div>
+                `;
+                // 各単語ボタンにクリックイベントを追加
+                card.querySelectorAll('.word-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const word = btn.dataset.word;
+                        btn.classList.add('playing');
+                        speak(word);
+                        setTimeout(() => btn.classList.remove('playing'), 500);
+                    });
+                });
+            } else {
+                // 従来の形式（フォニックス用）
+                card.innerHTML = `
+                    <div class="letter">${data.letter}</div>
+                    <div class="ipa">${data.ipa}</div>
+                    <div class="example">${data.example}</div>
+                    <div class="play-icon">🔊</div>
+                `;
+                card.addEventListener('click', () => {
+                    card.classList.add('playing');
+                    speak(data.word);
+                    setTimeout(() => card.classList.remove('playing'), 500);
+                });
+            }
             return card;
         }
 
