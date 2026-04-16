@@ -1,0 +1,2013 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>疑問詞マスター | 疑問文の作り方</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Patrick+Hand&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #3b7dd8;
+      --primary-light: #e8f1fc;
+      --accent: #e85d5d;
+      --accent2: #2d8a6e;
+      --accent3: #f5a623;
+      --paper-bg: #fefcf6;
+      --paper-lines: #e8e4d9;
+      --text-dark: #2c2c2c;
+      --text-medium: #555;
+      --text-light: #888;
+      --shadow: 0 4px 20px rgba(0,0,0,0.08);
+      --card-shadow: 0 2px 12px rgba(0,0,0,0.06);
+
+      /* 疑問詞ごとの色 */
+      --what: #e85d5d;
+      --why: #9b59b6;
+      --when: #2d8a6e;
+      --where: #3b7dd8;
+      --which: #e67e22;
+      --whether: #1abc9c;
+      --how: #e91e8c;
+      --howmany: #795548;
+      --howmuch: #607d8b;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      background: linear-gradient(135deg, #f5f3ed 0%, #ebe8df 100%);
+      color: var(--text-dark);
+      min-height: 100vh;
+      line-height: 1.8;
+    }
+
+    /* ヘッダー */
+    header {
+      background: linear-gradient(135deg, #1a237e 0%, #3b7dd8 50%, #00acc1 100%);
+      padding: 3rem 1rem 2rem;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    header h1 {
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      position: relative;
+    }
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      opacity: 0.85;
+      position: relative;
+    }
+
+    /* ナビ */
+    .toc {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.75rem;
+    }
+    .toc-btn {
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.15s, opacity 0.15s;
+      text-decoration: none;
+      display: block;
+      box-shadow: var(--card-shadow);
+    }
+    .toc-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+    /* 時制バッジ早見表 */
+    .tense-table-wrap {
+      max-width: 900px;
+      margin: 0 auto 2rem;
+      padding: 0 1rem;
+    }
+    .tense-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      overflow-x: auto;
+    }
+    .tense-card h2 {
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    th {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 0.6rem 1rem;
+      text-align: left;
+      font-weight: 700;
+    }
+    td {
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #fafafa; }
+    .tag {
+      display: inline-block;
+      padding: 0.15rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: white;
+    }
+    .tag-present { background: #2d8a6e; }
+    .tag-past { background: #e85d5d; }
+    .tag-perfect { background: #9b59b6; }
+    .tag-passive { background: #3b7dd8; }
+    code {
+      font-family: 'Patrick Hand', cursive;
+      background: #f5f3ed;
+      padding: 0.1rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.95em;
+      color: #1a237e;
+    }
+
+    /* メインコンテンツ */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1rem 4rem;
+    }
+
+    /* セクション */
+    .section {
+      margin-bottom: 3rem;
+      background: white;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .section-header {
+      padding: 1.5rem 2rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .section-header .badge {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 2rem;
+      background: rgba(255,255,255,0.25);
+      padding: 0.3rem 1rem;
+      border-radius: 12px;
+      line-height: 1.2;
+    }
+    .section-header .title-wrap h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+    .section-header .title-wrap p {
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+    .section-body { padding: 1.5rem 2rem; }
+
+    /* 構造ボックス */
+    .formula-box {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 12px 12px 0;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1rem;
+      line-height: 1.9;
+      color: #1a237e;
+    }
+    .formula-box.custom { border-left-color: inherit; }
+
+    /* 例文 */
+    .examples {
+      margin: 1rem 0;
+    }
+    .examples h4 {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+    .example-item {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      padding: 0.4rem 0;
+      border-bottom: 1px dashed #f0f0f0;
+      font-size: 0.95rem;
+    }
+    .example-item:last-child { border-bottom: none; }
+    .example-en {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1.05rem;
+      color: #1a237e;
+      flex: 1;
+    }
+    .example-ja {
+      color: var(--text-medium);
+      font-size: 0.85rem;
+      min-width: 120px;
+    }
+
+    /* 問題セクション */
+    .quiz-section {
+      margin-top: 1.5rem;
+      border-top: 2px dashed #f0f0f0;
+      padding-top: 1.5rem;
+    }
+    .quiz-section h3 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .quiz-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .quiz-item {
+      background: #fafafa;
+      border: 1px solid #eeeeee;
+      border-radius: 12px;
+      padding: 0.9rem 1.1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .quiz-item:hover { border-color: #cccccc; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .quiz-num {
+      display: inline-block;
+      width: 26px;
+      height: 26px;
+      line-height: 26px;
+      text-align: center;
+      border-radius: 50%;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+    .quiz-ja {
+      font-size: 0.95rem;
+      display: inline;
+    }
+    .tense-badge {
+      display: inline-block;
+      padding: 0.1rem 0.5rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+      color: white;
+    }
+    .answer-box {
+      display: none;
+      margin-top: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: white;
+      border-radius: 8px;
+      border-left: 3px solid #ccc;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1.05rem;
+      color: #1a237e;
+      transition: all 0.2s;
+    }
+    .answer-box.show { display: block; }
+    .answer-label {
+      font-size: 0.7rem;
+      color: var(--text-light);
+      font-family: 'Zen Maru Gothic', sans-serif;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    /* 注意ボックス */
+    .note-box {
+      background: #fff8e1;
+      border-left: 4px solid #f5a623;
+      border-radius: 0 12px 12px 0;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    .note-box strong { color: #e67e22; }
+
+    /* whether vs if 比較 */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .compare-card {
+      border-radius: 12px;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+    .compare-card h4 { font-size: 1rem; margin-bottom: 0.5rem; }
+
+    /* まとめ表 */
+    .summary-section {
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      padding: 0 1rem;
+    }
+    .summary-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 2rem;
+    }
+    .summary-card h2 {
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    /* モバイル */
+    @media (max-width: 600px) {
+      .section-body { padding: 1.2rem; }
+      .compare-grid { grid-template-columns: 1fr; }
+      .section-header { padding: 1.2rem; }
+      .toc-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* フッター */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-light);
+      font-size: 0.85rem;
+    }
+
+    /* 解説・発音ボックス */
+    .answer-inner {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1.1rem;
+      color: #1a237e;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px dashed #dce8f8;
+    }
+    .exp-box {
+      margin-top: 0.5rem;
+      padding: 0.65rem 1rem;
+      background: #f0f7ff;
+      border-radius: 8px;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 0.85rem;
+      color: #2c3e50;
+      line-height: 1.75;
+    }
+    .exp-box .sub-label {
+      font-weight: 700;
+      color: #3b7dd8;
+      font-size: 0.78rem;
+      display: block;
+      margin-bottom: 0.25rem;
+      letter-spacing: 0.04em;
+    }
+    .pron-box {
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .speak-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1.1rem;
+      background: linear-gradient(135deg, #f5a623, #f0852a);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+      box-shadow: 0 2px 8px rgba(245,166,35,0.35);
+      letter-spacing: 0.03em;
+    }
+    .speak-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(245,166,35,0.45);
+    }
+    .speak-btn:active {
+      transform: scale(0.97);
+      opacity: 0.85;
+    }
+    .speak-btn.speaking {
+      background: linear-gradient(135deg, #43a047, #2e7d32);
+      box-shadow: 0 2px 8px rgba(67,160,71,0.4);
+    }
+    .speak-icon {
+      font-size: 1rem;
+    }
+    .speak-slow-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.85rem;
+      background: #eceff1;
+      color: #546e7a;
+      border: 1.5px solid #b0bec5;
+      border-radius: 30px;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.15s;
+      letter-spacing: 0.03em;
+    }
+    .speak-slow-btn:hover {
+      background: #cfd8dc;
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>疑問詞マスター</h1>
+  <p>What / Why / When / Where / Which / Whether・If / How / How many / How much<br>過去形・現在完了・受動態（過去分詞）まで完全対応</p>
+</header>
+
+<!-- 目次 -->
+<div class="toc" id="top">
+  <div class="toc-grid">
+    <a href="#what"    class="toc-btn" style="background:#e85d5d;">WHAT</a>
+    <a href="#why"     class="toc-btn" style="background:#9b59b6;">WHY</a>
+    <a href="#when"    class="toc-btn" style="background:#2d8a6e;">WHEN</a>
+    <a href="#where"   class="toc-btn" style="background:#3b7dd8;">WHERE</a>
+    <a href="#which"   class="toc-btn" style="background:#e67e22;">WHICH</a>
+    <a href="#whether" class="toc-btn" style="background:#1abc9c;">WHETHER/IF</a>
+    <a href="#how"     class="toc-btn" style="background:#e91e8c;">HOW</a>
+    <a href="#howmany" class="toc-btn" style="background:#795548;">HOW MANY</a>
+    <a href="#howmuch" class="toc-btn" style="background:#607d8b;">HOW MUCH</a>
+    <a href="#perfect"   class="toc-btn" style="background: linear-gradient(135deg,#00897b,#004d40); grid-column: span 2;">現在完了・現在完了進行形・過去完了形</a>
+    <a href="#tense-diff" class="toc-btn" style="background: linear-gradient(135deg,#e85d5d,#7c4dbd); grid-column: span 2;">🕐 過去形 vs 過去完了形</a>
+  </div>
+</div>
+
+<!-- 時制早見表 -->
+<div class="tense-table-wrap">
+  <div class="tense-card">
+    <h2>📋 時制と受動態のパターン早見表</h2>
+    <table>
+      <tr>
+        <th>時制</th>
+        <th>形</th>
+        <th>疑問文の例</th>
+      </tr>
+      <tr>
+        <td><span class="tag tag-present">現在形</span></td>
+        <td><code>do/does + 動詞原形</code></td>
+        <td>What do you eat?</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-past">過去形</span></td>
+        <td><code>did + 動詞原形</code></td>
+        <td>Where did she go?</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-perfect">現在完了</span></td>
+        <td><code>have/has + 過去分詞</code></td>
+        <td>How long have you lived here?</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-perfect">過去完了</span></td>
+        <td><code>had + 過去分詞</code></td>
+        <td>When had she already left?</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-passive">受動態（現在）</span></td>
+        <td><code>is/are + 過去分詞</code></td>
+        <td>Where is it made?</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-passive">受動態（過去）</span></td>
+        <td><code>was/were + 過去分詞</code></td>
+        <td>Why was it canceled?</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-passive">受動態（現在完了）</span></td>
+        <td><code>have/has been + 過去分詞</code></td>
+        <td>Which has been chosen?</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- 過去形 vs 過去完了形 解説 -->
+<div class="tense-table-wrap" id="tense-diff">
+  <div class="tense-card" style="border-top: 4px solid #7c4dbd;">
+    <h2 style="color:#7c4dbd;">🕐 過去形 vs 過去完了形 ― 違いを徹底解説</h2>
+
+    <!-- 一言まとめ -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1.5rem;">
+      <div style="background:#fdecea; border-radius:12px; padding:1rem; border-left:4px solid #e85d5d;">
+        <div style="font-weight:700; color:#e85d5d; font-size:1rem; margin-bottom:0.4rem;">過去形 <span style="font-family:'Patrick Hand',cursive; font-size:1.1rem;">（did / was / were）</span></div>
+        <div style="font-size:0.9rem; line-height:1.75;">過去のある<strong>1点</strong>で起きたこと。<br>「〜した」「〜だった」</div>
+      </div>
+      <div style="background:#f3eef9; border-radius:12px; padding:1rem; border-left:4px solid #7c4dbd;">
+        <div style="font-weight:700; color:#7c4dbd; font-size:1rem; margin-bottom:0.4rem;">過去完了形 <span style="font-family:'Patrick Hand',cursive; font-size:1.1rem;">（had + 過去分詞）</span></div>
+        <div style="font-size:0.9rem; line-height:1.75;">過去のある時点より<strong>さらに前</strong>に完了したこと。<br>「（その時すでに）〜していた」</div>
+      </div>
+    </div>
+
+    <!-- タイムライン図 -->
+    <div style="background:#fafafa; border-radius:12px; padding:1.25rem 1.5rem; margin-bottom:1.5rem; border:1px solid #eeeeee;">
+      <div style="font-weight:700; font-size:0.85rem; color:#888; margin-bottom:0.9rem; letter-spacing:0.05em;">▶ 時間軸イメージ</div>
+      <div style="overflow-x:auto;">
+        <div style="min-width:420px; position:relative; padding:0.5rem 0 2.2rem;">
+          <!-- 矢印ライン -->
+          <div style="height:3px; background:linear-gradient(to right,#ccc,#333); border-radius:2px; position:relative; margin:1.5rem 0 0.5rem;">
+            <div style="position:absolute; right:-6px; top:-5px; width:0; height:0; border-top:6px solid transparent; border-bottom:6px solid transparent; border-left:12px solid #333;"></div>
+          </div>
+          <!-- 「過去のある時点」マーカー -->
+          <div style="position:absolute; left:58%; top:0.25rem; text-align:center; transform:translateX(-50%);">
+            <div style="width:14px; height:14px; background:#e85d5d; border-radius:50%; margin:0 auto;"></div>
+            <div style="font-size:0.78rem; color:#e85d5d; font-weight:700; margin-top:0.3rem; white-space:nowrap;">過去のある時点<br><span style="font-family:'Patrick Hand',cursive;">（arrived）</span></div>
+          </div>
+          <!-- 「過去完了」マーカー -->
+          <div style="position:absolute; left:22%; top:0.25rem; text-align:center; transform:translateX(-50%);">
+            <div style="width:14px; height:14px; background:#7c4dbd; border-radius:50%; margin:0 auto;"></div>
+            <div style="font-size:0.78rem; color:#7c4dbd; font-weight:700; margin-top:0.3rem; white-space:nowrap;">さらに前の出来事<br><span style="font-family:'Patrick Hand',cursive;">（had left）</span></div>
+          </div>
+          <!-- 「現在」マーカー -->
+          <div style="position:absolute; right:0; top:0.25rem; text-align:center; transform:translateX(-50%);">
+            <div style="width:14px; height:14px; background:#333; border-radius:50%; margin:0 auto;"></div>
+            <div style="font-size:0.78rem; color:#333; font-weight:700; margin-top:0.3rem;">現在</div>
+          </div>
+          <!-- 矢印ラベル -->
+          <div style="position:absolute; left:10%; top:3.8rem; font-size:0.75rem; color:#7c4dbd; white-space:nowrap;">① 彼女はすでに出発していた</div>
+          <div style="position:absolute; left:44%; top:3.8rem; font-size:0.75rem; color:#e85d5d; white-space:nowrap;">② あなたが到着した</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 例文比較 -->
+    <div style="font-weight:700; font-size:0.85rem; color:#555; margin-bottom:0.75rem; letter-spacing:0.05em;">▶ 例文で比較</div>
+    <table style="margin-bottom:1.5rem;">
+      <tr>
+        <th style="width:30%;">日本語</th>
+        <th style="background:#fdecea; color:#c0392b;">過去形</th>
+        <th style="background:#f3eef9; color:#6c3483;">過去完了形</th>
+      </tr>
+      <tr>
+        <td>彼女は出発した</td>
+        <td style="font-family:'Patrick Hand',cursive; color:#c0392b; font-size:1rem;">She <strong>left</strong>.</td>
+        <td style="font-family:'Patrick Hand',cursive; color:#6c3483; font-size:1rem;">She <strong>had left</strong>.</td>
+      </tr>
+      <tr>
+        <td>私が着いたとき</td>
+        <td colspan="2" style="font-size:0.88rem; color:#555;">When I arrived, she <strong style="color:#c0392b;">left</strong>. ← 到着と同時 or 到着後に出発<br>When I arrived, she <strong style="color:#6c3483;">had left</strong>. ← 到着より前にすでに出発していた</td>
+      </tr>
+      <tr>
+        <td>彼は宿題を終えた</td>
+        <td style="font-family:'Patrick Hand',cursive; color:#c0392b; font-size:1rem;">He <strong>finished</strong> his homework.</td>
+        <td style="font-family:'Patrick Hand',cursive; color:#6c3483; font-size:1rem;">He <strong>had finished</strong> his homework.</td>
+      </tr>
+      <tr>
+        <td>映画が始まったとき</td>
+        <td colspan="2" style="font-size:0.88rem; color:#555;">When the movie started, he <strong style="color:#c0392b;">finished</strong> his homework. ← 同じ頃 or その後<br>When the movie started, he <strong style="color:#6c3483;">had finished</strong> his homework. ← 映画開始前にもう終わっていた</td>
+      </tr>
+    </table>
+
+    <!-- 使い分けポイント -->
+    <div style="font-weight:700; font-size:0.85rem; color:#555; margin-bottom:0.75rem; letter-spacing:0.05em;">▶ 使い分けのポイント</div>
+    <div style="display:flex; flex-direction:column; gap:0.7rem; margin-bottom:1rem;">
+      <div style="background:#fff8e1; border-left:4px solid #f5a623; border-radius:0 10px 10px 0; padding:0.8rem 1rem; font-size:0.9rem; line-height:1.75;">
+        💡 <strong>過去形だけでOKな場面</strong><br>
+        過去の出来事を時系列に並べるだけなら、すべて過去形でも伝わる。<br>
+        <span style="font-family:'Patrick Hand',cursive; color:#555;">He came home and ate dinner.</span>（帰宅して夕食を食べた）
+      </div>
+      <div style="background:#f3eef9; border-left:4px solid #7c4dbd; border-radius:0 10px 10px 0; padding:0.8rem 1rem; font-size:0.9rem; line-height:1.75;">
+        💡 <strong>過去完了形が必要な場面</strong><br>
+        「その時点より前に完了していた」ことを強調したいとき。<br>
+        <span style="font-family:'Patrick Hand',cursive; color:#555;">When I arrived, he <strong>had already eaten</strong>.</span>（私が着いたとき、彼はもう食べ終えていた）<br>
+        → <strong>already・by the time・before・when</strong> などとセットで使うことが多い
+      </div>
+      <div style="background:#e8f1fc; border-left:4px solid #3b7dd8; border-radius:0 10px 10px 0; padding:0.8rem 1rem; font-size:0.9rem; line-height:1.75;">
+        💡 <strong>疑問文での形</strong><br>
+        過去形：<span style="font-family:'Patrick Hand',cursive; color:#c0392b;">Did he leave?</span> / <span style="font-family:'Patrick Hand',cursive; color:#c0392b;">Where did she go?</span><br>
+        過去完了形：<span style="font-family:'Patrick Hand',cursive; color:#6c3483;">Had he left?</span> / <span style="font-family:'Patrick Hand',cursive; color:#6c3483;">Where had she gone?</span>
+      </div>
+    </div>
+
+    <!-- よく使うセット表現 -->
+    <div style="font-weight:700; font-size:0.85rem; color:#555; margin-bottom:0.6rem; letter-spacing:0.05em;">▶ 過去完了形とよく使うセット表現</div>
+    <table>
+      <tr><th>表現</th><th>意味</th><th>例文</th></tr>
+      <tr>
+        <td><code>already</code></td><td>すでに</td>
+        <td style="font-family:'Patrick Hand',cursive; font-size:0.95rem; color:#6c3483;">He had <strong>already</strong> left.</td>
+      </tr>
+      <tr>
+        <td><code>just</code></td><td>ちょうど〜したところ</td>
+        <td style="font-family:'Patrick Hand',cursive; font-size:0.95rem; color:#6c3483;">She had <strong>just</strong> arrived.</td>
+      </tr>
+      <tr>
+        <td><code>never</code></td><td>一度も〜したことがなかった</td>
+        <td style="font-family:'Patrick Hand',cursive; font-size:0.95rem; color:#6c3483;">I had <strong>never</strong> seen it.</td>
+      </tr>
+      <tr>
+        <td><code>by the time</code></td><td>〜するまでに</td>
+        <td style="font-family:'Patrick Hand',cursive; font-size:0.95rem; color:#6c3483;"><strong>By the time</strong> she came, he had left.</td>
+      </tr>
+      <tr>
+        <td><code>when / before / after</code></td><td>〜したとき／前／後</td>
+        <td style="font-family:'Patrick Hand',cursive; font-size:0.95rem; color:#6c3483;"><strong>When</strong> I got there, it had started.</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<main>
+
+  <!-- ==================== WHAT ==================== -->
+  <div class="section" id="what">
+    <div class="section-header" style="background: linear-gradient(135deg, #e85d5d, #c0392b);">
+      <div class="badge">What</div>
+      <div class="title-wrap">
+        <h2>WHAT ― 何・どんな</h2>
+        <p>物事・内容・種類を尋ねる</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="formula-box" style="background:#fdecea; border-color:#e85d5d;">
+        What + do/does/did/have/has/had + 主語 + 動詞原形 ...?<br>
+        What + be動詞 + 主語 ...?<br>
+        What + 名詞 + do/does/did + 主語 + 動詞 ...?
+      </div>
+      <div class="note-box">
+        💡 <strong>ポイント：</strong> What が主語になるときは <code>What + 動詞 ...?</code> だけでOK！<br>
+        例: <em>What happened?</em> （何が起きた？）
+      </div>
+      <div class="examples">
+        <h4>▶ 時制別 例文</h4>
+        <div class="example-item">
+          <span class="tag tag-present">現在</span>
+          <span class="example-en">What do you drink every morning?</span>
+          <span class="example-ja">毎朝何を飲む？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-past">過去</span>
+          <span class="example-en">What did she say?</span>
+          <span class="example-ja">彼女は何と言った？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-perfect">現在完了</span>
+          <span class="example-en">What have you done?</span>
+          <span class="example-ja">何をしてきたの？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-passive">受動態</span>
+          <span class="example-en">What was stolen from the store?</span>
+          <span class="example-ja">店から何が盗まれた？</span>
+        </div>
+      </div>
+
+      <div class="quiz-section">
+        <h3 style="color:#e85d5d;">✏️ 練習問題（各クリックで解答表示）</h3>
+        <div class="quiz-list" id="quiz-what"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== WHY ==================== -->
+  <div class="section" id="why">
+    <div class="section-header" style="background: linear-gradient(135deg, #9b59b6, #6c3483);">
+      <div class="badge">Why</div>
+      <div class="title-wrap">
+        <h2>WHY ― なぜ・どうして</h2>
+        <p>理由・原因を尋ねる</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="formula-box" style="background:#f5eef8; border-color:#9b59b6;">
+        Why + do/does/did/have/has/had + 主語 + 動詞原形 ...?<br>
+        Why + be動詞 + 主語 + 形容詞/名詞 ...?<br>
+        Why + was/were + 主語 + 過去分詞 ...?（受動態）
+      </div>
+      <div class="examples">
+        <h4>▶ 時制別 例文</h4>
+        <div class="example-item">
+          <span class="tag tag-present">現在</span>
+          <span class="example-en">Why do you study English?</span>
+          <span class="example-ja">なぜ英語を勉強する？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-past">過去</span>
+          <span class="example-en">Why did he leave early?</span>
+          <span class="example-ja">なぜ彼は早く帰った？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-perfect">現在完了</span>
+          <span class="example-en">Why haven't you finished yet?</span>
+          <span class="example-ja">なぜまだ終わっていない？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-passive">受動態</span>
+          <span class="example-en">Why was the event canceled?</span>
+          <span class="example-ja">なぜイベントは中止された？</span>
+        </div>
+      </div>
+
+      <div class="quiz-section">
+        <h3 style="color:#9b59b6;">✏️ 練習問題</h3>
+        <div class="quiz-list" id="quiz-why"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== WHEN ==================== -->
+  <div class="section" id="when">
+    <div class="section-header" style="background: linear-gradient(135deg, #2d8a6e, #1a5c48);">
+      <div class="badge">When</div>
+      <div class="title-wrap">
+        <h2>WHEN ― いつ</h2>
+        <p>時・時刻・時期を尋ねる</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="formula-box" style="background:#e8f5f0; border-color:#2d8a6e;">
+        When + do/does/did/have/has/had + 主語 + 動詞原形 ...?<br>
+        When + was/were + 主語 + 過去分詞 ...?（受動態）<br>
+        When + had + 主語 + 過去分詞 ...?（過去完了）
+      </div>
+      <div class="examples">
+        <h4>▶ 時制別 例文</h4>
+        <div class="example-item">
+          <span class="tag tag-past">過去</span>
+          <span class="example-en">When did you arrive?</span>
+          <span class="example-ja">いつ着いた？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-perfect">現在完了</span>
+          <span class="example-en">When have you seen this movie?</span>
+          <span class="example-ja">いつこの映画を見たの？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-passive">受動態（過去）</span>
+          <span class="example-en">When was this photo taken?</span>
+          <span class="example-ja">この写真はいつ撮られた？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-perfect">過去完了</span>
+          <span class="example-en">When had she already left?</span>
+          <span class="example-ja">彼女はいつすでに出発していた？</span>
+        </div>
+      </div>
+
+      <div class="quiz-section">
+        <h3 style="color:#2d8a6e;">✏️ 練習問題</h3>
+        <div class="quiz-list" id="quiz-when"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== WHERE ==================== -->
+  <div class="section" id="where">
+    <div class="section-header" style="background: linear-gradient(135deg, #3b7dd8, #1a3a8f);">
+      <div class="badge">Where</div>
+      <div class="title-wrap">
+        <h2>WHERE ― どこ</h2>
+        <p>場所・位置を尋ねる</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="formula-box" style="background:#e8f1fc; border-color:#3b7dd8;">
+        Where + do/does/did/have/has/had + 主語 + 動詞原形 ...?<br>
+        Where + is/are/was/were + 主語 ...?<br>
+        Where + was/were + 主語 + 過去分詞 ...?（受動態）
+      </div>
+      <div class="examples">
+        <h4>▶ 時制別 例文</h4>
+        <div class="example-item">
+          <span class="tag tag-present">現在</span>
+          <span class="example-en">Where do you live?</span>
+          <span class="example-ja">どこに住んでる？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-past">過去</span>
+          <span class="example-en">Where did she go last night?</span>
+          <span class="example-ja">昨夜どこへ行った？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-perfect">現在完了</span>
+          <span class="example-en">Where have you been?</span>
+          <span class="example-ja">どこに行っていたの？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-passive">受動態（過去）</span>
+          <span class="example-en">Where was this car manufactured?</span>
+          <span class="example-ja">この車はどこで作られた？</span>
+        </div>
+      </div>
+
+      <div class="quiz-section">
+        <h3 style="color:#3b7dd8;">✏️ 練習問題</h3>
+        <div class="quiz-list" id="quiz-where"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== WHICH ==================== -->
+  <div class="section" id="which">
+    <div class="section-header" style="background: linear-gradient(135deg, #e67e22, #a04000);">
+      <div class="badge">Which</div>
+      <div class="title-wrap">
+        <h2>WHICH ― どれ・どちら</h2>
+        <p>選択肢の中から選ぶときに使う</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="formula-box" style="background:#fef5ec; border-color:#e67e22;">
+        Which + do/does/did + 主語 + 動詞原形 ...?<br>
+        Which + 名詞 + do/does/did + 主語 + 動詞 ...?<br>
+        Which + was/were + 主語 + 過去分詞 ...?（受動態）<br>
+        Which + has/have been + 過去分詞 ...?（現在完了受動態）
+      </div>
+      <div class="note-box">
+        💡 <strong>What vs Which：</strong> 選択肢が限られているときは <strong>Which</strong>、広く問うときは <strong>What</strong> を使う。<br>
+        例: <em>Which do you prefer, A or B?</em>（AかBかどっち？）
+      </div>
+      <div class="examples">
+        <h4>▶ 時制別 例文</h4>
+        <div class="example-item">
+          <span class="tag tag-present">現在</span>
+          <span class="example-en">Which do you prefer, tea or coffee?</span>
+          <span class="example-ja">紅茶とコーヒーどっちが好き？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-past">過去</span>
+          <span class="example-en">Which team won the game?</span>
+          <span class="example-ja">どのチームが勝った？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-passive">受動態（過去）</span>
+          <span class="example-en">Which book was written first?</span>
+          <span class="example-ja">どの本が最初に書かれた？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-passive">受動態（現在完了）</span>
+          <span class="example-en">Which candidate has been selected?</span>
+          <span class="example-ja">どの候補者が選ばれた？</span>
+        </div>
+      </div>
+
+      <div class="quiz-section">
+        <h3 style="color:#e67e22;">✏️ 練習問題</h3>
+        <div class="quiz-list" id="quiz-which"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== WHETHER/IF ==================== -->
+  <div class="section" id="whether">
+    <div class="section-header" style="background: linear-gradient(135deg, #1abc9c, #0e7a63);">
+      <div class="badge">Whether / If</div>
+      <div class="title-wrap">
+        <h2>WHETHER / IF ― 〜かどうか</h2>
+        <p>間接疑問文として名詞節を作る</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="formula-box" style="background:#e8faf4; border-color:#1abc9c;">
+        Do you know <strong>whether/if</strong> + 主語 + 動詞 ...?<br>
+        I wonder <strong>whether/if</strong> + 主語 + 動詞 ...<br>
+        Can you tell me <strong>whether/if</strong> + 主語 + 動詞 ...?
+      </div>
+      <div class="compare-grid">
+        <div class="compare-card" style="background:#e8faf4; border: 1.5px solid #1abc9c;">
+          <h4 style="color:#1abc9c;">✅ whether</h4>
+          <ul style="padding-left:1.2rem; font-size:0.9rem;">
+            <li>フォーマルな場面でよく使う</li>
+            <li><code>whether or not</code> が使える</li>
+            <li>文頭・文中どちらでもOK</li>
+          </ul>
+        </div>
+        <div class="compare-card" style="background:#fef9e7; border: 1.5px solid #f5a623;">
+          <h4 style="color:#e67e22;">✅ if</h4>
+          <ul style="padding-left:1.2rem; font-size:0.9rem;">
+            <li>カジュアルな場面でよく使う</li>
+            <li>文頭には使いにくい</li>
+            <li><code>if or not</code> は直後には置けない</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note-box">
+        ⚠️ <strong>注意：</strong> whether / if は直接疑問文の文頭には使えない！<br>
+        ❌ <em>Whether does he know?</em><br>
+        ✅ <em>Do you know whether he knows?</em>
+      </div>
+      <div class="examples">
+        <h4>▶ 時制別 例文</h4>
+        <div class="example-item">
+          <span class="tag tag-past">過去</span>
+          <span class="example-en">Do you know whether he came?</span>
+          <span class="example-ja">彼が来たかどうか知ってる？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-perfect">現在完了</span>
+          <span class="example-en">Can you tell me whether she has left?</span>
+          <span class="example-ja">彼女がもう出発したか教えて</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-passive">受動態（過去）</span>
+          <span class="example-en">I wonder if he was invited.</span>
+          <span class="example-ja">彼が招待されたか気になる</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-passive">受動態（現在完了）</span>
+          <span class="example-en">Do you know whether the plan has been approved?</span>
+          <span class="example-ja">計画が承認されたか知ってる？</span>
+        </div>
+      </div>
+
+      <div class="quiz-section">
+        <h3 style="color:#1abc9c;">✏️ 練習問題</h3>
+        <div class="quiz-list" id="quiz-whether"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== HOW ==================== -->
+  <div class="section" id="how">
+    <div class="section-header" style="background: linear-gradient(135deg, #e91e8c, #880e4f);">
+      <div class="badge">How</div>
+      <div class="title-wrap">
+        <h2>HOW ― どのように</h2>
+        <p>方法・手段・状態を尋ねる</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="formula-box" style="background:#fce4ec; border-color:#e91e8c;">
+        How + do/does/did/have/has/had + 主語 + 動詞原形 ...?<br>
+        How + be動詞 + 主語 ...?<br>
+        How + was/were + 主語 + 過去分詞 ...?（受動態）
+      </div>
+      <div class="examples">
+        <h4>▶ 時制別 例文</h4>
+        <div class="example-item">
+          <span class="tag tag-present">現在</span>
+          <span class="example-en">How do you feel today?</span>
+          <span class="example-ja">今日の調子は？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-past">過去</span>
+          <span class="example-en">How did you solve the problem?</span>
+          <span class="example-ja">どうやってその問題を解いた？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-perfect">現在完了</span>
+          <span class="example-en">How long have you studied English?</span>
+          <span class="example-ja">どのくらい英語を勉強してきた？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-passive">受動態（過去）</span>
+          <span class="example-en">How was the building destroyed?</span>
+          <span class="example-ja">その建物はどうやって壊された？</span>
+        </div>
+      </div>
+
+      <div class="quiz-section">
+        <h3 style="color:#e91e8c;">✏️ 練習問題</h3>
+        <div class="quiz-list" id="quiz-how"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== HOW MANY ==================== -->
+  <div class="section" id="howmany">
+    <div class="section-header" style="background: linear-gradient(135deg, #795548, #4e342e);">
+      <div class="badge">How many</div>
+      <div class="title-wrap">
+        <h2>HOW MANY ― いくつ・何人・何枚</h2>
+        <p>数えられる名詞（可算名詞）の数を尋ねる</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="formula-box" style="background:#efebe9; border-color:#795548;">
+        How many + <strong>可算名詞（複数形）</strong> + do/does/did + 主語 + 動詞 ...?<br>
+        How many + 名詞 + have/has + 主語 + 過去分詞 ...?（現在完了）<br>
+        How many + 名詞 + were/have been + 過去分詞 ...?（受動態）
+      </div>
+      <div class="note-box">
+        💡 <strong>可算名詞とは？</strong> 1つ・2つと数えられる名詞のこと。<br>
+        例：books（本）/ people（人）/ tickets（チケット）/ students（生徒）<br>
+        ※ <strong>How many</strong> の後は必ず<strong>複数形</strong>！
+      </div>
+      <div class="examples">
+        <h4>▶ 時制別 例文</h4>
+        <div class="example-item">
+          <span class="tag tag-present">現在</span>
+          <span class="example-en">How many books do you read a month?</span>
+          <span class="example-ja">1ヶ月に何冊本を読む？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-past">過去</span>
+          <span class="example-en">How many people came to the party?</span>
+          <span class="example-ja">パーティーに何人来た？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-perfect">現在完了</span>
+          <span class="example-en">How many countries have you visited?</span>
+          <span class="example-ja">これまでに何カ国行ったことがある？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-passive">受動態（現在完了）</span>
+          <span class="example-en">How many tickets have been sold so far?</span>
+          <span class="example-ja">今までに何枚チケットが売れた？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-passive">受動態（過去）</span>
+          <span class="example-en">How many people were injured in the accident?</span>
+          <span class="example-ja">事故で何人がけがをした？</span>
+        </div>
+      </div>
+
+      <div class="quiz-section">
+        <h3 style="color:#795548;">✏️ 練習問題</h3>
+        <div class="quiz-list" id="quiz-howmany"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== HOW MUCH ==================== -->
+  <div class="section" id="howmuch">
+    <div class="section-header" style="background: linear-gradient(135deg, #607d8b, #37474f);">
+      <div class="badge">How much</div>
+      <div class="title-wrap">
+        <h2>HOW MUCH ― いくら・どのくらい</h2>
+        <p>数えられない名詞（不可算名詞）の量・金額を尋ねる</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="formula-box" style="background:#eceff1; border-color:#607d8b;">
+        How much + <strong>不可算名詞</strong> + do/does/did + 主語 + 動詞 ...?<br>
+        How much + does/did + 主語 + cost ...?（値段）<br>
+        How much + has/have been + 過去分詞 ...?（受動態・現在完了）
+      </div>
+      <div class="note-box">
+        💡 <strong>不可算名詞とは？</strong> 個数で数えられない名詞のこと。<br>
+        例：water（水）/ money（お金）/ time（時間）/ sugar（砂糖）/ information（情報）<br>
+        ※ <strong>How much</strong> の後の名詞は<strong>単数形</strong>（またはそのまま）！
+      </div>
+      <div class="compare-grid">
+        <div class="compare-card" style="background:#efebe9; border: 1.5px solid #795548;">
+          <h4 style="color:#795548;">How many（数える）</h4>
+          <p style="font-size:0.9rem;">How many <strong>books</strong> did you buy?<br>本を何冊買った？</p>
+        </div>
+        <div class="compare-card" style="background:#eceff1; border: 1.5px solid #607d8b;">
+          <h4 style="color:#607d8b;">How much（量・金額）</h4>
+          <p style="font-size:0.9rem;">How much <strong>money</strong> did you spend?<br>いくらお金を使った？</p>
+        </div>
+      </div>
+      <div class="examples">
+        <h4>▶ 時制別 例文</h4>
+        <div class="example-item">
+          <span class="tag tag-present">現在</span>
+          <span class="example-en">How much does this coat cost?</span>
+          <span class="example-ja">このコートはいくら？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-past">過去</span>
+          <span class="example-en">How much did you pay for it?</span>
+          <span class="example-ja">それにいくら払った？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-perfect">現在完了</span>
+          <span class="example-en">How much time have you spent on this project?</span>
+          <span class="example-ja">このプロジェクトにどのくらい時間をかけてきた？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-passive">受動態（現在完了）</span>
+          <span class="example-en">How much money has been raised so far?</span>
+          <span class="example-ja">これまでにいくら集まった？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-passive">受動態（過去）</span>
+          <span class="example-en">How much of the budget was used?</span>
+          <span class="example-ja">予算のどのくらいが使われた？</span>
+        </div>
+      </div>
+
+      <div class="quiz-section">
+        <h3 style="color:#607d8b;">✏️ 練習問題</h3>
+        <div class="quiz-list" id="quiz-howmuch"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==================== 現在完了・現在完了進行形・過去完了形 ==================== -->
+  <div class="section" id="perfect">
+    <div class="section-header" style="background: linear-gradient(135deg, #00897b, #004d40);">
+      <div class="badge" style="font-size:1.3rem;">完了形</div>
+      <div class="title-wrap">
+        <h2>現在完了・現在完了進行形・過去完了形</h2>
+        <p>継続 / 経験 / 完了 / 進行継続 / 過去より前の出来事</p>
+      </div>
+    </div>
+    <div class="section-body">
+
+      <!-- 4種類の説明カード -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:0.75rem; margin-bottom:1.25rem;">
+        <div style="background:#e0f2f1; border-left:4px solid #00897b; border-radius:0 10px 10px 0; padding:0.85rem 1rem; font-size:0.88rem; line-height:1.7;">
+          <div style="font-weight:700; color:#00695c; margin-bottom:0.3rem;">① 現在完了（継続）</div>
+          <code>have/has + 過去分詞</code><br>
+          過去から今もずっと〜している<br>
+          <span style="color:#555;">for〜 / since〜 / How long</span>
+        </div>
+        <div style="background:#fce4ec; border-left:4px solid #e91e8c; border-radius:0 10px 10px 0; padding:0.85rem 1rem; font-size:0.88rem; line-height:1.7;">
+          <div style="font-weight:700; color:#880e4f; margin-bottom:0.3rem;">② 現在完了（経験）</div>
+          <code>have/has + 過去分詞</code><br>
+          今までに〜したことがある<br>
+          <span style="color:#555;">ever / never / How many times</span>
+        </div>
+        <div style="background:#fff8e1; border-left:4px solid #f5a623; border-radius:0 10px 10px 0; padding:0.85rem 1rem; font-size:0.88rem; line-height:1.7;">
+          <div style="font-weight:700; color:#e65100; margin-bottom:0.3rem;">③ 現在完了（完了）</div>
+          <code>have/has + 過去分詞</code><br>
+          ちょうど〜し終えた<br>
+          <span style="color:#555;">just / already / yet</span>
+        </div>
+        <div style="background:#e8f5e9; border-left:4px solid #43a047; border-radius:0 10px 10px 0; padding:0.85rem 1rem; font-size:0.88rem; line-height:1.7;">
+          <div style="font-weight:700; color:#1b5e20; margin-bottom:0.3rem;">④ 現在完了進行形</div>
+          <code>have/has been + 動詞ing</code><br>
+          ずっと〜し続けている<br>
+          <span style="color:#555;">for〜 / since〜 / How long</span>
+        </div>
+        <div style="background:#f3eef9; border-left:4px solid #7c4dbd; border-radius:0 10px 10px 0; padding:0.85rem 1rem; font-size:0.88rem; line-height:1.7;">
+          <div style="font-weight:700; color:#4a148c; margin-bottom:0.3rem;">⑤ 過去完了形</div>
+          <code>had + 過去分詞</code><br>
+          過去のある時点より前に〜していた<br>
+          <span style="color:#555;">already / by the time / when</span>
+        </div>
+      </div>
+
+      <!-- 構造まとめ -->
+      <div class="formula-box" style="background:#e0f2f1; border-color:#00897b;">
+        <strong>現在完了（継続・経験・完了）:</strong>　Have/Has + 主語 + 過去分詞 ...?<br>
+        <strong>現在完了進行形:</strong>　Have/Has + 主語 + been + 動詞ing ...?<br>
+        <strong>過去完了形:</strong>　Had + 主語 + 過去分詞 ...?
+      </div>
+
+      <!-- 継続 vs 進行形の注意 -->
+      <div class="note-box">
+        💡 <strong>現在完了（継続）vs 現在完了進行形の違い</strong><br>
+        <b>継続（状態動詞）:</b> <span style="font-family:'Patrick Hand',cursive;">How long have you <u>known</u> him?</span>　← know は状態動詞なので進行形NG<br>
+        <b>進行継続（動作動詞）:</b> <span style="font-family:'Patrick Hand',cursive;">How long have you been <u>studying</u>?</span>　← study は動作動詞なので進行形OK
+      </div>
+
+      <!-- 例文 -->
+      <div class="examples">
+        <h4>▶ 種類別 例文</h4>
+        <div class="example-item">
+          <span class="tag tag-perfect">継続</span>
+          <span class="example-en">How long have you lived here?</span>
+          <span class="example-ja">どのくらいここに住んでいる？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-perfect">経験</span>
+          <span class="example-en">Have you ever been to Paris?</span>
+          <span class="example-ja">パリに行ったことある？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-perfect">完了</span>
+          <span class="example-en">Has she finished her homework yet?</span>
+          <span class="example-ja">彼女はもう宿題を終えた？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-perfect">進行形</span>
+          <span class="example-en">How long have you been waiting?</span>
+          <span class="example-ja">どのくらい待っているの？</span>
+        </div>
+        <div class="example-item">
+          <span class="tag tag-perfect">過去完了</span>
+          <span class="example-en">Had he already left when you arrived?</span>
+          <span class="example-ja">あなたが着いたとき彼はもう出発していた？</span>
+        </div>
+      </div>
+
+      <div class="quiz-section">
+        <h3 style="color:#00897b;">✏️ 練習問題（各クリックで解答・解説・音声）</h3>
+        <div class="quiz-list" id="quiz-perfect"></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- まとめ -->
+<div class="summary-section">
+  <div class="summary-card">
+    <h2>📌 疑問詞まとめ早見表</h2>
+    <table>
+      <tr>
+        <th>疑問詞</th>
+        <th>意味</th>
+        <th>名詞の種類</th>
+        <th>ポイント</th>
+      </tr>
+      <tr>
+        <td><strong style="color:#e85d5d;">What</strong></td>
+        <td>何・どんな</td>
+        <td>—</td>
+        <td>広く物事を尋ねる</td>
+      </tr>
+      <tr>
+        <td><strong style="color:#9b59b6;">Why</strong></td>
+        <td>なぜ</td>
+        <td>—</td>
+        <td>理由・原因</td>
+      </tr>
+      <tr>
+        <td><strong style="color:#2d8a6e;">When</strong></td>
+        <td>いつ</td>
+        <td>—</td>
+        <td>時・時期</td>
+      </tr>
+      <tr>
+        <td><strong style="color:#3b7dd8;">Where</strong></td>
+        <td>どこ</td>
+        <td>—</td>
+        <td>場所・位置</td>
+      </tr>
+      <tr>
+        <td><strong style="color:#e67e22;">Which</strong></td>
+        <td>どれ・どちら</td>
+        <td>—</td>
+        <td>選択肢が限定的なとき</td>
+      </tr>
+      <tr>
+        <td><strong style="color:#1abc9c;">Whether/If</strong></td>
+        <td>〜かどうか</td>
+        <td>—</td>
+        <td>間接疑問文で使う</td>
+      </tr>
+      <tr>
+        <td><strong style="color:#e91e8c;">How</strong></td>
+        <td>どのように</td>
+        <td>—</td>
+        <td>方法・手段・状態</td>
+      </tr>
+      <tr>
+        <td><strong style="color:#795548;">How many</strong></td>
+        <td>いくつ・何〜</td>
+        <td>可算名詞（複数形）</td>
+        <td>数えられるもの</td>
+      </tr>
+      <tr>
+        <td><strong style="color:#607d8b;">How much</strong></td>
+        <td>いくら・どのくらい</td>
+        <td>不可算名詞（単数）</td>
+        <td>量・金額・程度</td>
+      </tr>
+    </table>
+    <p style="text-align:center; margin-top:1.5rem;">
+      <a href="#top" style="color:#3b7dd8; text-decoration:none; font-size:0.9rem;">▲ 先頭に戻る</a>
+    </p>
+  </div>
+</div>
+
+<footer>
+  英語疑問詞マスター教材 — 過去形・現在完了・受動態（過去分詞）対応
+</footer>
+
+<script>
+  const colors = {
+    what: '#e85d5d', why: '#9b59b6', when: '#2d8a6e', where: '#3b7dd8',
+    which: '#e67e22', whether: '#1abc9c', how: '#e91e8c', howmany: '#795548', howmuch: '#607d8b',
+    perfect: '#00897b'
+  };
+
+  const quizData = {
+    what: [
+      {
+        ja: 'あなたは毎朝何を飲みますか？',
+        ans: 'What do you drink every morning?',
+        exp: '「What + do + 主語 + 動詞原形」の現在形疑問文の基本形。<br>drink = 飲む　／　every morning = 毎朝',
+      },
+      {
+        ja: '彼女は昨日何を買いましたか？',
+        ans: 'What did she buy yesterday?',
+        exp: '過去形疑問文。<b>did</b> があるので動詞は必ず原形 buy（× bought にしない！）。<br>yesterday = 昨日',
+      },
+      {
+        ja: 'あなたの趣味は何ですか？',
+        ans: 'What is your hobby?',
+        exp: 'be動詞の疑問文。「What + is + 主語」の形。<br>hobby = 趣味　／　「What do you do for fun?」でも同じ意味',
+      },
+      {
+        ja: '彼の電話番号は何ですか？',
+        ans: 'What is his phone number?',
+        exp: 'be動詞の疑問文。「What + is + 主語」の基本形。<br>phone number = 電話番号　／　his = 彼の（所有格）',
+      },
+      {
+        ja: '彼は部屋で何を探していましたか？',
+        ans: 'What was he looking for in the room?',
+        exp: '過去進行形。「was + 動詞ing（looking）」。<br>look for = 〜を探す（for は文末に残る！）　／　in the room = 部屋の中で',
+      },
+      {
+        ja: 'あなたが一番好きな食べ物は何ですか？',
+        ans: 'What is your favorite food?',
+        exp: 'be動詞の疑問文。「What + is + 主語」の形。<br>favorite = お気に入りの・一番好きな　／　food = 食べ物',
+      },
+      {
+        ja: '今日の天気はどんな感じですか？',
+        ans: 'What is the weather like today?',
+        exp: '「What is ... like?」= 〜はどんな感じですか？天気を聞く定番表現。<br>weather = 天気　／　today = 今日',
+      },
+      {
+        ja: '彼らは会議で何を決定しましたか？',
+        ans: 'What did they decide at the meeting?',
+        exp: '過去形疑問文。<b>did</b> があるので decide は原形（× decided にしない）。<br>at the meeting = 会議で',
+      },
+      {
+        ja: '放課後あなたは何をしますか？',
+        ans: 'What do you do after school?',
+        exp: '現在形疑問文。do you do の最初の do は助動詞、2つ目の do は「する」の意味の動詞。<br>after school = 放課後',
+      },
+      {
+        ja: 'お昼に何を食べましたか？',
+        ans: 'What did you eat for lunch?',
+        exp: '過去形疑問文。eat → ate（不規則変化）だが、<b>did</b> があるので eat のまま（原形）。<br>for lunch = 昼食に',
+      },
+    ],
+    why: [
+      {
+        ja: 'あなたはなぜ英語を勉強しているのですか？',
+        ans: 'Why do you study English?',
+        exp: '現在形疑問文の基本形。「Why + do + 主語 + 動詞原形」。<br>study = 勉強する　／　English = 英語',
+      },
+      {
+        ja: '彼はなぜ早退したのですか？',
+        ans: 'Why did he leave early?',
+        exp: '過去形疑問文。<b>did</b> があるので leave は原形のまま（× left にしない）。<br>leave early = 早退する　／　early = 早く',
+      },
+      {
+        ja: 'あなたはなぜ疲れているのですか？',
+        ans: 'Why are you tired?',
+        exp: 'be動詞の疑問文（現在形）。tired = 疲れている（形容詞）。<br>「Why + are + 主語 + 形容詞」の形。状態を表すシンプルな疑問文',
+      },
+      {
+        ja: '彼女はなぜ笑っているのですか？',
+        ans: 'Why is she laughing?',
+        exp: '現在進行形の疑問文。「Why + is + 主語 + 動詞ing」。<br>laugh → laughing（規則変化）　／　laugh = 笑う',
+      },
+      {
+        ja: 'あなたはなぜその申し出を断ったのですか？',
+        ans: 'Why did you refuse the offer?',
+        exp: '過去形疑問文。<b>did</b> があるので refuse は原形（× refused にしない）。<br>refuse = 断る　／　the offer = 申し出・提案',
+      },
+      {
+        ja: 'あなたはなぜ遅刻したのですか？',
+        ans: 'Why were you late?',
+        exp: 'be動詞の過去疑問文。late = 遅れた・遅刻した（形容詞）。<br>you が主語なので be動詞は <b>were</b>（× was にしない）',
+      },
+      {
+        ja: '彼はなぜ学校を休んだのですか？',
+        ans: 'Why did he miss school?',
+        exp: '過去形疑問文。miss school = 学校を休む・欠席する。<br><b>did</b> があるので miss のまま（原形）　／　miss = 〜を休む・逃す',
+      },
+      {
+        ja: '彼女はなぜ泣いているのですか？',
+        ans: 'Why is she crying?',
+        exp: '現在進行形の疑問文。cry → crying（y をそのままにして ing をつける）。<br>「Why + is + 主語 + 動詞ing」の形',
+      },
+      {
+        ja: 'あなたはなぜそんなに眠そうなのですか？',
+        ans: 'Why do you look so sleepy?',
+        exp: '現在形疑問文。look + 形容詞 = 〜に見える。<br>sleepy = 眠そうな　／　so = そんなに・とても',
+      },
+      {
+        ja: 'あなたはなぜそんなに怒っているのですか？',
+        ans: 'Why are you so angry?',
+        exp: 'be動詞の疑問文（現在形）。状態を表すので進行形ではなく are を使う。<br>angry = 怒っている　／　so = そんなに・とても',
+      },
+    ],
+    when: [
+      {
+        ja: 'あなたはいつ日本に来ましたか？',
+        ans: 'When did you come to Japan?',
+        exp: '過去形疑問文。come → came（不規則変化）だが、<b>did</b> があるので原形 come のまま。<br>to Japan = 日本に',
+      },
+      {
+        ja: 'あなたは毎朝いつ起きますか？',
+        ans: 'When do you wake up every morning?',
+        exp: '現在形疑問文。「When + do + 主語 + 動詞原形」の基本形。<br>wake up = 起きる　／　every morning = 毎朝',
+      },
+      {
+        ja: '授業はいつ始まりますか？',
+        ans: 'When does the class start?',
+        exp: '現在形疑問文。主語が the class（三人称単数）なので <b>does</b> を使う。<br>class = 授業　／　start = 始まる',
+      },
+      {
+        ja: 'あなたはいつ宿題を終わらせましたか？',
+        ans: 'When did you finish your homework?',
+        exp: '過去形疑問文。<b>did</b> があるので finish は原形のまま（× finished にしない）。<br>homework = 宿題（不可算名詞）',
+      },
+      {
+        ja: 'あなたの誕生日はいつですか？',
+        ans: 'When is your birthday?',
+        exp: 'be動詞の疑問文。「When + is + 主語」の形。<br>birthday = 誕生日　／　日常会話で最もよく使う When の疑問文のひとつ',
+      },
+      {
+        ja: 'あなたはいつ彼に最後に会いましたか？',
+        ans: 'When did you last see him?',
+        exp: '過去形疑問文。last = 最後に（副詞として動詞の前に置く）。<br>see → saw（不規則変化）だが、<b>did</b> があるので see のまま（原形）',
+      },
+      {
+        ja: 'お店はいつ開きますか？',
+        ans: 'When does the shop open?',
+        exp: '現在形疑問文。主語が the shop（三人称単数）なので <b>does</b> を使う。<br>shop = 店　／　open = 開く',
+      },
+      {
+        ja: '昨夜いつ寝ましたか？',
+        ans: 'When did you go to bed last night?',
+        exp: '過去形疑問文。go to bed = 寝る（就寝する）。<br><b>did</b> があるので go のまま（原形）　／　last night = 昨夜',
+      },
+      {
+        ja: '夏休みはいつ始まりますか？',
+        ans: 'When does summer vacation start?',
+        exp: '現在形疑問文（未来の予定にも使える）。summer vacation = 夏休み。<br>三人称単数主語なので <b>does</b>　／　start = 始まる',
+      },
+      {
+        ja: '次の電車はいつ来ますか？',
+        ans: 'When does the next train come?',
+        exp: '現在形疑問文（近い未来の予定）。next train = 次の電車。<br>三人称単数主語なので <b>does</b>　／　come = 来る',
+      },
+    ],
+    where: [
+      {
+        ja: 'あなたはどこに住んでいますか？',
+        ans: 'Where do you live?',
+        exp: '現在形疑問文の基本形。「Where + do + 主語 + 動詞原形」。<br>live = 住む（状態動詞なので進行形にしないのが原則）',
+      },
+      {
+        ja: '彼女は昨夜どこに行きましたか？',
+        ans: 'Where did she go last night?',
+        exp: '過去形疑問文。go → went（不規則変化）だが、<b>did</b> があるので go のまま（原形）。<br>last night = 昨夜',
+      },
+      {
+        ja: 'あなたはどこで勉強しますか？',
+        ans: 'Where do you study?',
+        exp: '現在形疑問文の基本形。「Where + do + 主語 + 動詞原形」。<br>study = 勉強する　／　場所の習慣を尋ねるシンプルな表現',
+      },
+      {
+        ja: '一番近い駅はどこですか？',
+        ans: 'Where is the nearest station?',
+        exp: 'be動詞の疑問文。「Where + is + 主語」の形。<br>nearest = 一番近い（near の最上級）　／　station = 駅',
+      },
+      {
+        ja: 'トイレはどこですか？',
+        ans: 'Where is the restroom?',
+        exp: 'be動詞の疑問文。restroom / bathroom = トイレ。<br>旅行や外出先でよく使う日常会話の定番表現！',
+      },
+      {
+        ja: 'お昼はどこで食べましたか？',
+        ans: 'Where did you eat lunch?',
+        exp: '過去形疑問文。eat → ate（不規則変化）だが、<b>did</b> があるので eat のまま（原形）。<br>lunch = 昼食',
+      },
+      {
+        ja: '友達とどこで会いましたか？',
+        ans: 'Where did you meet your friend?',
+        exp: '過去形疑問文。meet → met（不規則変化）だが、<b>did</b> があるので meet のまま（原形）。<br>your friend = あなたの友達',
+      },
+      {
+        ja: 'あなたはどこで英語を学びましたか？',
+        ans: 'Where did you learn English?',
+        exp: '過去形疑問文。learn → learned（規則変化）だが、<b>did</b> があるので learn のまま（原形）。<br>learn English = 英語を学ぶ',
+      },
+      {
+        ja: 'あなたはふだんどこで買い物をしますか？',
+        ans: 'Where do you usually shop?',
+        exp: '現在形疑問文。usually = ふだん・いつも（頻度の副詞）。<br>shop = 買い物をする（動詞としても使える）',
+      },
+      {
+        ja: 'あなたはどこにいたのですか？',
+        ans: 'Where were you?',
+        exp: 'be動詞の過去疑問文。主語 you に対して <b>were</b> を使う（am/is → was、are → were）。<br>シンプルだが日常会話でとても使う重要表現！',
+      },
+    ],
+    which: [
+      {
+        ja: 'どちらが好きですか、映画それとも読書？',
+        ans: 'Which do you prefer, movies or reading?',
+        exp: '現在形疑問文。prefer = 〜を好む・〜の方が好き。<br>A or B の形で選択肢を示す。Which は選択肢が限られているときに使う（What より限定的）',
+      },
+      {
+        ja: 'どのチームが試合に勝ちましたか？',
+        ans: 'Which team won the game?',
+        exp: '「Which + 名詞（team）」が主語の形。助動詞 did は不要。<br>win → won（不規則変化）　／　主語が疑問詞の場合は語順が変わらない',
+      },
+      {
+        ja: 'どちらが好きですか、犬それとも猫？',
+        ans: 'Which do you like better, dogs or cats?',
+        exp: '現在形疑問文。like better = 〜の方が好き（prefer と同じ意味）。<br>A or B の形で2つの選択肢を示す。better = より（good/well の比較級）',
+      },
+      {
+        ja: 'どちらのかばんがあなたのですか？',
+        ans: 'Which bag is yours?',
+        exp: 'be動詞の疑問文。「Which + 名詞 + is + 主語」の形。<br>yours = あなたのもの（所有代名詞）　／　「Which bag belongs to you?」も同じ意味',
+      },
+      {
+        ja: 'どちらのルートを選びましたか？',
+        ans: 'Which route did you take?',
+        exp: '過去形疑問文。take（選ぶ・乗る）→ took（不規則変化）だが、<b>did</b> があるので take のまま。<br>route = ルート・道順',
+      },
+      {
+        ja: 'どの科目が一番好きですか？',
+        ans: 'Which subject do you like best?',
+        exp: '現在形疑問文。like best = 一番好き（最上級の表現）。<br>subject = 科目　／　best = 一番（well/good の最上級）',
+      },
+      {
+        ja: 'どの色が好きですか、赤それとも青？',
+        ans: 'Which color do you like, red or blue?',
+        exp: '現在形疑問文。色を選ぶ疑問文。<br>color = 色　／　red = 赤　／　blue = 青　／　A or B で2択を提示',
+      },
+      {
+        ja: 'どちらの席がいいですか？',
+        ans: 'Which seat do you want?',
+        exp: '現在形疑問文。want = 欲しい・望む。<br>seat = 席・座席　／　レストランや電車など日常でよく使う表現',
+      },
+      {
+        ja: 'どのチームを応援していますか？',
+        ans: 'Which team do you support?',
+        exp: '現在形疑問文。support = 応援する・支持する。<br>「Which + 名詞 + do + 主語 + 動詞原形」の形',
+      },
+      {
+        ja: 'どちらが大きいですか、AそれともB？',
+        ans: 'Which is bigger, A or B?',
+        exp: 'be動詞の疑問文。bigger = より大きい（big の比較級。g を重ねて er をつける）。<br>A or B の形で2択を比較する定番表現',
+      },
+    ],
+    whether: [
+      {
+        ja: '彼が来るかどうか知っていますか？',
+        ans: 'Do you know whether he will come?',
+        exp: '間接疑問文。whether = 〜かどうか。<br>主節は現在形（Do you know）、whether 節は未来（will come）。<br>⚠️ whether/if を文頭には使えない！',
+      },
+      {
+        ja: '彼が家にいるかどうか知っていますか？',
+        ans: 'Do you know if he is at home?',
+        exp: '間接疑問文。if 節内が現在形（is）。<br>at home = 家にいる　／　if はカジュアルな場面でよく使う',
+      },
+      {
+        ja: '彼女が寿司が好きかどうか知っていますか？',
+        ans: 'Do you know if she likes sushi?',
+        exp: 'if 節内が現在形。三人称単数（she）なので <b>likes</b>（s をつける）。<br>like = 好き　／　sushi = 寿司',
+      },
+      {
+        ja: 'お店が開いているかどうか知っていますか？',
+        ans: 'Do you know if the shop is open?',
+        exp: 'if 節内が be 動詞現在形。is open = 開いている（形容詞 open）。<br>「is opened」ではなく「is open」が正しい！',
+      },
+      {
+        ja: '彼が車を持っているかどうか知っていますか？',
+        ans: 'Do you know if he has a car?',
+        exp: 'if 節内が現在形。三人称単数（he）なので <b>has</b>（have の三単現形）。<br>have a car = 車を持っている',
+      },
+      {
+        ja: '明日暇かどうか教えてください。',
+        ans: 'Please tell me if you are free tomorrow.',
+        exp: '丁寧な命令文。if 節内が be 動詞現在形。<br>free = 暇な・時間がある（形容詞）　／　tomorrow = 明日',
+      },
+      {
+        ja: '彼女が学生かどうか知っていますか？',
+        ans: 'Do you know if she is a student?',
+        exp: 'if 節内が be 動詞現在形（is）。<br>a student = 学生（職業・身分には a をつける）',
+      },
+      {
+        ja: 'ドアが開いているかどうか確認してください。',
+        ans: 'Please check if the door is open.',
+        exp: '依頼の命令文。if 節内が be 動詞現在形。<br>door = ドア　／　open = 開いている（形容詞）　／　check = 確認する',
+      },
+      {
+        ja: '今日が祝日かどうか知っていますか？',
+        ans: 'Do you know if today is a holiday?',
+        exp: 'if 節内が be 動詞現在形（is）。<br>holiday = 祝日・休日　／　today = 今日（主語として使う）',
+      },
+      {
+        ja: '夕食の準備ができたかどうか確認してもらえますか？',
+        ans: 'Can you check if dinner is ready?',
+        exp: '丁寧な依頼文。if 節内が be 動詞現在形。<br>ready = 準備ができている（形容詞）　／　dinner = 夕食',
+      },
+    ],
+    how: [
+      {
+        ja: 'あなたはどのようにその問題を解決しましたか？',
+        ans: 'How did you solve the problem?',
+        exp: '過去形疑問文。solve → solved（規則変化）だが、<b>did</b> があるので solve のまま（原形）。<br>the problem = その問題　／　solve = 解く・解決する',
+      },
+      {
+        ja: 'どうやって学校へ来ますか？',
+        ans: 'How do you come to school?',
+        exp: '現在形疑問文。交通手段や方法を尋ねる基本表現。<br>come to school = 学校に来る　／　by bus / on foot なども一緒に覚えよう',
+      },
+      {
+        ja: '毎日どのくらい勉強しますか？',
+        ans: 'How long do you study every day?',
+        exp: 'How long = どのくらいの時間（期間・時間の長さ）。現在形疑問文。<br>study = 勉強する　／　every day = 毎日',
+      },
+      {
+        ja: '身長はどのくらいですか？',
+        ans: 'How tall are you?',
+        exp: 'be動詞の疑問文。How tall = 身長はいくつ・どのくらい背が高い。<br>tall = 背が高い　／　「I am 170 centimeters tall.」のように答える',
+      },
+      {
+        ja: '日本語で「ありがとう」は何と言いますか？',
+        ans: 'How do you say "thank you" in Japanese?',
+        exp: '「How do you say + 言葉 + in + 言語」= 〜語で〜は何と言う？<br>外国語を学ぶときに使う超定番フレーズ！',
+      },
+      {
+        ja: 'あなたはどのくらいの頻度で運動しますか？',
+        ans: 'How often do you exercise?',
+        exp: 'How often = どのくらいの頻度で（頻度を尋ねる）。現在形疑問文。<br>exercise = 運動する（動詞としても名詞としても使える）',
+      },
+      {
+        ja: 'あなたはどのようにリラックスしますか？',
+        ans: 'How do you relax?',
+        exp: '現在形疑問文。方法・習慣を尋ねる基本表現。<br>relax = リラックスする　／　「How do you unwind?」も同じ意味',
+      },
+      {
+        ja: '彼女は何歳ですか？',
+        ans: 'How old is she?',
+        exp: 'be動詞の疑問文。How old = 年齢はいくつ・何歳。<br>「She is 25 years old.」のように答える。years old は省略しても可',
+      },
+      {
+        ja: '駅まで歩いてどのくらいかかりますか？',
+        ans: 'How long does it take to walk to the station?',
+        exp: '「How long does it take to + 動詞原形」= 〜するのにどのくらいかかる？<br>日常会話でとてもよく使う重要表現！　station = 駅',
+      },
+      {
+        ja: '彼女はどのようにして友達を作りましたか？',
+        ans: 'How did she make friends?',
+        exp: '過去形疑問文。make friends = 友達を作る（慣用表現）。<br><b>did</b> があるので make のまま（原形）　／　friends = 友達（複数形）',
+      },
+    ],
+    howmany: [
+      {
+        ja: '1ヶ月に何冊本を読みますか？',
+        ans: 'How many books do you read a month?',
+        exp: '現在形疑問文の基本形。「How many + 複数名詞 + do + 主語 + 動詞原形」。<br>⚠️ How many の後は必ず複数形（books）！　a month = 1ヶ月に',
+      },
+      {
+        ja: 'パーティーに何人来ましたか？',
+        ans: 'How many people came to the party?',
+        exp: '過去形。How many people が主語なので助動詞 did は不要！<br>come → came（不規則変化）　／　came to = 〜に来た',
+      },
+      {
+        ja: '兄弟は何人いますか？',
+        ans: 'How many brothers and sisters do you have?',
+        exp: '現在形疑問文。brothers and sisters = 兄弟姉妹。<br>「How many siblings do you have?」でも同じ意味。sibling = きょうだい',
+      },
+      {
+        ja: 'クラスに女の子は何人いますか？',
+        ans: 'How many girls are in your class?',
+        exp: 'be動詞の疑問文。「How many + 複数名詞 + are + 場所」の形。<br>girls = 女の子（複数形）　／　in your class = クラスに',
+      },
+      {
+        ja: '1日に何枚写真を撮りますか？',
+        ans: 'How many photos do you take a day?',
+        exp: '現在形疑問文。take a photo = 写真を撮る。<br>photos = photo の複数形　／　a day = 1日に',
+      },
+      {
+        ja: 'あなたのクラスには何人の生徒がいますか？',
+        ans: 'How many students are there in your class?',
+        exp: '「There are + 複数名詞」の疑問文。there are → <b>are there</b>（語順が逆になる）。<br>students = student の複数形　／　in your class = クラスに',
+      },
+      {
+        ja: '彼女はそのプロジェクトに何人雇いましたか？',
+        ans: 'How many people did she hire for the project?',
+        exp: '過去形疑問文。hire = 雇う → hired（過去形）だが、<b>did</b> があるので hire のまま（原形）。<br>for the project = プロジェクトのために',
+      },
+      {
+        ja: '何足靴を持っていますか？',
+        ans: 'How many pairs of shoes do you have?',
+        exp: '現在形疑問文。a pair of shoes = 靴1足。<br>pairs of shoes = 靴〜足　／　「How many shoes do you have?」でも通じる',
+      },
+      {
+        ja: '週に何回映画を見ますか？',
+        ans: 'How many times a week do you watch movies?',
+        exp: '現在形疑問文。How many times = 何回。<br>a week = 週に　／　watch movies = 映画を見る',
+      },
+      {
+        ja: '昨日の試合に何人の観客が来ましたか？',
+        ans: "How many spectators came to yesterday's game?",
+        exp: '過去形。spectator = 観客・見物人。<br>yesterday\'s game = 昨日の試合（所有格を使った表現）　／　came to = 〜に来た',
+      },
+    ],
+    howmuch: [
+      {
+        ja: 'このコートはいくらですか？',
+        ans: 'How much does this coat cost?',
+        exp: '値段を尋ねる定番表現。「How much + does + 主語 + cost」。<br>⚠️ cost は三単現でも costs ではなく does が前に来るので cost のまま（原形）',
+      },
+      {
+        ja: 'それにいくら払いましたか？',
+        ans: 'How much did you pay for it?',
+        exp: '過去形疑問文。pay → paid（不規則変化）だが、<b>did</b> があるので pay のまま（原形）。<br>pay for = 〜に対して払う　／　it = それ',
+      },
+      {
+        ja: 'コーヒーに砂糖をどのくらい入れますか？',
+        ans: 'How much sugar do you put in your coffee?',
+        exp: '現在形疑問文。sugar = 砂糖（不可算名詞なので複数形にしない）。<br>put in = 〜に入れる　／　How much + 不可算名詞 の基本形',
+      },
+      {
+        ja: '毎月どのくらいのお金を使いますか？',
+        ans: 'How much money do you spend a month?',
+        exp: '現在形疑問文。money は不可算名詞なので複数形にしない！<br>spend = 使う　／　a month = 1ヶ月に',
+      },
+      {
+        ja: 'バスの料金はいくらですか？',
+        ans: 'How much is the bus fare?',
+        exp: 'be動詞の疑問文。「How much + is + 主語」の形で値段を尋ねる。<br>fare = 運賃・料金　／　bus fare = バス代',
+      },
+      {
+        ja: '毎日どのくらい水を飲みますか？',
+        ans: 'How much water do you drink every day?',
+        exp: '現在形疑問文。water（水）は不可算名詞なので複数形にしない！<br>⚠️ How much + 不可算名詞（単数形のまま）　／　every day = 毎日',
+      },
+      {
+        ja: '修理にいくらかかりましたか？',
+        ans: 'How much did the repair cost?',
+        exp: '過去形疑問文。cost の過去形も <b>cost</b>（不規則変化：原形・過去形・過去分詞すべて同じ）。<br>repair = 修理（名詞として使用）',
+      },
+      {
+        ja: 'このピザはいくらでしたか？',
+        ans: 'How much was this pizza?',
+        exp: 'be動詞の過去疑問文。「How much + was + 主語」の形で過去の値段を尋ねる。<br>was = is の過去形　／　pizza = ピザ',
+      },
+      {
+        ja: 'あなたはその旅行にいくら使いましたか？',
+        ans: 'How much did you spend on the trip?',
+        exp: '過去形疑問文。spend → spent（不規則変化）だが、<b>did</b> があるので spend のまま（原形）。<br>spend on = 〜に（お金を）使う　／　the trip = 旅行',
+      },
+      {
+        ja: 'ランチにいくら使いましたか？',
+        ans: 'How much did you spend on lunch?',
+        exp: '過去形疑問文。spend → spent（不規則変化）だが、<b>did</b> があるので spend のまま（原形）。<br>on lunch = 昼食に　／　日常会話でよく使う表現',
+      },
+    ],
+  };
+
+    perfect: [
+      // ── 現在完了（継続）──────────────────────────
+      {
+        ja: 'どのくらいの間、英語を勉強していますか？',
+        ans: 'How long have you studied English?',
+        exp: '<b>現在完了（継続）</b>。過去から今もずっと続いていることを尋ねる。<br>「How long + have + 主語 + 過去分詞」の形。<br>study → studied（規則変化）　／　for 2 years / since 2020 などで答える',
+      },
+      {
+        ja: '彼女はいつからここに住んでいますか？',
+        ans: 'Since when has she lived here?',
+        exp: '<b>現在完了（継続）</b>。since when = いつから（起点を尋ねる）。<br>三人称単数（she）なので <b>has</b>。<br>「Since when + has + 主語 + 過去分詞」の形',
+      },
+      {
+        ja: 'あなたはどのくらいの間、彼を知っていますか？',
+        ans: 'How long have you known him?',
+        exp: '<b>現在完了（継続）</b>。know は状態動詞なので <b>進行形にできない</b>！<br>× have been knowing　→　○ have known<br>know → known（不規則変化）',
+      },
+      {
+        ja: '彼らはどのくらいの間、結婚していますか？',
+        ans: 'How long have they been married?',
+        exp: '<b>現在完了（継続）</b>。be married = 結婚している（状態）。<br>「have been + 形容詞」の形。married は形容詞として使う。<br>they（複数）なので <b>have</b>',
+      },
+      {
+        ja: 'あなたはいつからその仕事をしていますか？',
+        ans: 'Since when have you worked there?',
+        exp: '<b>現在完了（継続）</b>。since when = いつから。<br>work → worked（規則変化）　／　there = そこで',
+      },
+      // ── 現在完了（経験）──────────────────────────
+      {
+        ja: '富士山に登ったことがありますか？',
+        ans: 'Have you ever climbed Mt. Fuji?',
+        exp: '<b>現在完了（経験）</b>。ever = 今までに（疑問文で使う）。<br>「Have + 主語 + ever + 過去分詞」の形。<br>climb → climbed（規則変化）　／　Mt. Fuji = 富士山',
+      },
+      {
+        ja: '彼女は今までにニュージーランドに行ったことがありますか？',
+        ans: 'Has she ever been to New Zealand?',
+        exp: '<b>現在完了（経験）</b>。been to = 〜に行ったことがある（go ではなく be の完了形を使う）。<br>⚠️ 「have gone to」= 行ってしまった（まだそこにいる）、<br>「have been to」= 行ったことがある（もう戻ってきた）',
+      },
+      {
+        ja: 'あなたはこの映画を見たことがありますか？',
+        ans: 'Have you ever seen this movie?',
+        exp: '<b>現在完了（経験）</b>。see → seen（不規則変化）。<br>ever を入れると「今までに」という経験のニュアンスが強まる。<br>ever を省略しても文法的にはOK',
+      },
+      {
+        ja: '彼は何回日本に来たことがありますか？',
+        ans: 'How many times has he visited Japan?',
+        exp: '<b>現在完了（経験）</b>。How many times = 何回。<br>三人称単数（he）なので <b>has</b>。<br>visit → visited（規則変化）',
+      },
+      {
+        ja: 'あなたは今までに外国に住んだことがありますか？',
+        ans: 'Have you ever lived abroad?',
+        exp: '<b>現在完了（経験）</b>。abroad = 外国に・海外に（副詞）。<br>「in a foreign country」でも同じ意味。<br>live → lived（規則変化）',
+      },
+      // ── 現在完了（完了）──────────────────────────
+      {
+        ja: 'あなたはもう宿題を終えましたか？',
+        ans: 'Have you finished your homework yet?',
+        exp: '<b>現在完了（完了）</b>。yet = もう（疑問文の文末に置く）。<br>「already」は肯定文で「すでに」、「yet」は疑問文・否定文で使う。<br>finish → finished（規則変化）',
+      },
+      {
+        ja: '彼女はもう昼食を食べましたか？',
+        ans: 'Has she eaten lunch yet?',
+        exp: '<b>現在完了（完了）</b>。三人称単数（she）なので <b>has</b>。<br>eat → eaten（不規則変化）　／　yet = もう（疑問文の文末）',
+      },
+      {
+        ja: '彼はもうその本を読みましたか？',
+        ans: 'Has he read that book yet?',
+        exp: '<b>現在完了（完了）</b>。read の過去分詞は read（スペルは同じ、発音は「レッド」）。<br>⚠️ read（現在：リード）→ read（過去分詞：レッド）。発音に注意！',
+      },
+      // ── 現在完了進行形 ────────────────────────────
+      {
+        ja: 'あなたはどのくらいの間ゲームをしていますか？',
+        ans: 'How long have you been playing games?',
+        exp: '<b>現在完了進行形</b>。「have/has been + 動詞ing」。<br>動作動詞（play）には進行形を使って「ずっと〜し続けている」と表現できる。<br>play → playing（規則変化）',
+      },
+      {
+        ja: '彼女はどのくらいの間泣いているのですか？',
+        ans: 'How long has she been crying?',
+        exp: '<b>現在完了進行形</b>。三人称単数（she）なので <b>has been</b>。<br>cry → crying（y はそのままにして ing をつける）　／　感情が続いている状態を表す',
+      },
+      {
+        ja: '彼らはどのくらいの間話し合っているのですか？',
+        ans: 'How long have they been talking?',
+        exp: '<b>現在完了進行形</b>。they（複数）なので <b>have been</b>。<br>talk → talking（規則変化）　／　会話や議論が続いていることを表す',
+      },
+      {
+        ja: 'あなたはいつからここで働いているのですか？',
+        ans: 'Since when have you been working here?',
+        exp: '<b>現在完了進行形</b>。since when = いつから（起点を尋ねる）。<br>work → working（規則変化）　／　「How long have you been working here?」でも同じ意味',
+      },
+      // ── 過去完了形 ────────────────────────────────
+      {
+        ja: 'あなたが来たとき、彼はもう出発していましたか？',
+        ans: 'Had he already left when you arrived?',
+        exp: '<b>過去完了形</b>。「had + 過去分詞」。過去のある時点より前に完了していたことを表す。<br>leave → left（不規則変化）　／　already = すでに（過去完了とよく使う）<br>when 節は過去形（arrived）',
+      },
+      {
+        ja: '映画が始まる前に、彼女は宿題を終えていましたか？',
+        ans: 'Had she finished her homework before the movie started?',
+        exp: '<b>過去完了形</b>。「Had + 主語 + 過去分詞」の疑問文形。<br>before = 〜する前に（before 節は過去形 started）。<br>finish → finished（規則変化）',
+      },
+      {
+        ja: '彼が電話したとき、あなたはもうすでに寝ていましたか？',
+        ans: 'Had you already gone to bed when he called?',
+        exp: '<b>過去完了形</b>。go to bed = 寝る。go → gone（不規則変化）。<br>already は had と過去分詞の間に置く。<br>when 節は過去形（called）',
+      },
+      {
+        ja: '電車が来るまでに、あなたはどのくらい待っていましたか？',
+        ans: 'How long had you been waiting before the train came?',
+        exp: '<b>過去完了進行形</b>。「had been + 動詞ing」。過去のある時点まで動作が継続していた。<br>wait → waiting（規則変化）　／　before the train came = 電車が来る前に',
+      },
+    ],
+
+  // --- 音声再生 ---
+  let currentUtterance = null;
+
+  function speak(text, rate, btn) {
+    window.speechSynthesis.cancel();
+    if (currentUtterance && btn.classList.contains('speaking')) {
+      btn.classList.remove('speaking');
+      btn.querySelector('.speak-icon').textContent = '🔊';
+      currentUtterance = null;
+      return;
+    }
+
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'en-US';
+    utter.rate = rate;
+    utter.pitch = 1;
+
+    // 英語音声を優先して選択
+    const voices = window.speechSynthesis.getVoices();
+    const enVoice = voices.find(v => v.lang.startsWith('en') && v.localService) ||
+                    voices.find(v => v.lang.startsWith('en'));
+    if (enVoice) utter.voice = enVoice;
+
+    utter.onstart = () => {
+      btn.classList.add('speaking');
+      btn.querySelector('.speak-icon').textContent = '⏹';
+    };
+    utter.onend = () => {
+      btn.classList.remove('speaking');
+      btn.querySelector('.speak-icon').textContent = rate < 1 ? '🐢' : '🔊';
+      currentUtterance = null;
+    };
+    utter.onerror = () => {
+      btn.classList.remove('speaking');
+      currentUtterance = null;
+    };
+
+    currentUtterance = utter;
+    window.speechSynthesis.speak(utter);
+  }
+
+  // voices が非同期で読み込まれるブラウザ対応
+  if (window.speechSynthesis && window.speechSynthesis.onvoiceschanged !== undefined) {
+    window.speechSynthesis.onvoiceschanged = () => {};
+  }
+
+  function buildQuiz(id, color) {
+    const container = document.getElementById('quiz-' + id);
+    if (!container) return;
+    const items = quizData[id];
+    items.forEach((item, i) => {
+      const div = document.createElement('div');
+      div.className = 'quiz-item';
+      div.innerHTML = `
+        <span class="quiz-num" style="background:${color}">${i + 1}</span>
+        <span class="quiz-ja">${item.ja}</span>
+        <div class="answer-box" style="border-color:${color}">
+          <span class="answer-label">解答例</span>
+          <div class="answer-inner">${item.ans}</div>
+          <div class="exp-box">
+            <span class="sub-label">📝 解説</span>
+            ${item.exp}
+          </div>
+          <div class="pron-box">
+            <button class="speak-btn" type="button">
+              <span class="speak-icon">🔊</span> 聞く（通常）
+            </button>
+            <button class="speak-slow-btn" type="button">
+              <span class="speak-icon">🐢</span> ゆっくり
+            </button>
+          </div>
+        </div>`;
+
+      // 解答の開閉（ボタン以外クリックで）
+      div.addEventListener('click', (e) => {
+        if (e.target.closest('button')) return;
+        div.querySelector('.answer-box').classList.toggle('show');
+      });
+
+      // 通常再生ボタン
+      const speakBtn = div.querySelector('.speak-btn');
+      speakBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        speak(item.ans, 0.95, speakBtn);
+      });
+
+      // ゆっくり再生ボタン
+      const slowBtn = div.querySelector('.speak-slow-btn');
+      slowBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        speak(item.ans, 0.55, slowBtn);
+      });
+
+      container.appendChild(div);
+    });
+  }
+
+  Object.entries(colors).forEach(([id, color]) => buildQuiz(id, color));
+</script>
+</body>
+</html>
