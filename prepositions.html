@@ -1,0 +1,1894 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英語前置詞マスター | イラストで学ぶ前置詞</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Patrick+Hand&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2d6ea8;
+            --primary-light: #e8f1fc;
+            --accent: #e8854a;
+            --accent-light: #fdf0e8;
+            --green: #2d8a6e;
+            --green-light: #e8f5f0;
+            --purple: #7c4dbd;
+            --purple-light: #f3eef9;
+            --red: #c0392b;
+            --red-light: #fdecea;
+            --paper-bg: #fefcf6;
+            --paper-lines: #e8e4d9;
+            --text-dark: #2c2c2c;
+            --text-medium: #555;
+            --text-light: #888;
+            --shadow-soft: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-card: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(135deg, #f5f3ed 0%, #ebe8df 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            line-height: 1.8;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a4a7a 0%, #2d6ea8 50%, #4a9bd4 100%);
+            padding: 2.5rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
+        }
+
+        header h1 {
+            font-size: clamp(1.6rem, 4vw, 2.8rem);
+            color: white;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        header p {
+            color: rgba(255,255,255,0.85);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            position: relative;
+        }
+
+        .header-emoji {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-nav {
+            background: white;
+            border-bottom: 3px solid var(--primary-light);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .toc-nav-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            justify-content: center;
+        }
+
+        .toc-btn {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1.5px solid #c0d8f0;
+            border-radius: 20px;
+            padding: 0.25rem 0.8rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            font-family: 'Patrick Hand', cursive;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .toc-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem 4rem;
+        }
+
+        /* ===== セクション共通 ===== */
+        .prep-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            border-left: 6px solid var(--primary);
+            position: relative;
+        }
+
+        .prep-section.green  { border-left-color: var(--green); }
+        .prep-section.accent { border-left-color: var(--accent); }
+        .prep-section.purple { border-left-color: var(--purple); }
+        .prep-section.red    { border-left-color: var(--red); }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px dashed #e8e4d9;
+        }
+
+        .section-badge {
+            background: var(--primary);
+            color: white;
+            border-radius: 10px;
+            padding: 0.4rem 1rem;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.4rem;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+            min-width: 70px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .green  .section-badge { background: var(--green); }
+        .accent .section-badge { background: var(--accent); }
+        .purple .section-badge { background: var(--purple); }
+        .red    .section-badge { background: var(--red); }
+
+        .section-title-block h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .section-title-block .reading {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* ===== イメージボックス ===== */
+        .image-box {
+            background: linear-gradient(135deg, #f8f6ff 0%, #eff8ff 100%);
+            border: 2px solid #d0e8ff;
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .image-box .emoji-big {
+            font-size: 2.8rem;
+            flex-shrink: 0;
+        }
+
+        .image-box .core-meaning {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .image-box .core-meaning span {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-medium);
+            margin-top: 0.2rem;
+        }
+
+        /* ===== 用法グループ ===== */
+        .usage-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .usage-label {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1.5px solid #c0d8f0;
+            border-radius: 6px;
+            padding: 0.2rem 0.7rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .green  .usage-label { background: var(--green-light);  color: var(--green);  border-color: #a8d8c8; }
+        .accent .usage-label { background: var(--accent-light); color: var(--accent); border-color: #f0c8a0; }
+        .purple .usage-label { background: var(--purple-light); color: var(--purple); border-color: #c8a8e8; }
+        .red    .usage-label { background: var(--red-light);    color: var(--red);    border-color: #f0b0a8; }
+
+        /* ===== 例文カード ===== */
+        .example-list {
+            display: grid;
+            gap: 0.7rem;
+        }
+
+        .ex {
+            background: var(--paper-bg);
+            border: 1.5px solid var(--paper-lines);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            position: relative;
+        }
+
+        .ex:hover {
+            border-color: #c0d8f0;
+            box-shadow: 0 2px 8px rgba(45,110,168,0.08);
+        }
+
+        .ex-en {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            margin-bottom: 0.15rem;
+        }
+
+        .ex-en strong {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .green  .ex-en strong { color: var(--green); }
+        .accent .ex-en strong { color: var(--accent); }
+        .purple .ex-en strong { color: var(--purple); }
+        .red    .ex-en strong { color: var(--red); }
+
+        .ex-ja {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+        }
+
+        .ex-note {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-top: 0.15rem;
+        }
+
+        /* ===== 比較ボックス ===== */
+        .compare-box {
+            background: #fffbf0;
+            border: 2px solid #f0e0a0;
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .compare-box h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #a07800;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+
+        @media (max-width: 600px) {
+            .compare-grid { grid-template-columns: 1fr; }
+        }
+
+        .compare-item {
+            background: white;
+            border-radius: 8px;
+            padding: 0.6rem 0.9rem;
+            border: 1.5px solid #f0e0a0;
+        }
+
+        .compare-item .ci-prep {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.2rem;
+        }
+
+        .compare-item .ci-en {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 0.95rem;
+        }
+
+        .compare-item .ci-ja {
+            font-size: 0.8rem;
+            color: var(--text-medium);
+        }
+
+        /* ===== 注意ボックス ===== */
+        .tip-box {
+            background: #fffbf0;
+            border-left: 4px solid #f59e0b;
+            border-radius: 0 8px 8px 0;
+            padding: 0.9rem 1.1rem;
+            margin-top: 1.2rem;
+            font-size: 0.9rem;
+        }
+
+        .tip-box strong {
+            color: #b45309;
+        }
+
+        /* ===== まとめ表 ===== */
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .summary-table th {
+            background: var(--primary);
+            color: white;
+            padding: 0.6rem 0.8rem;
+            text-align: left;
+            font-weight: 700;
+        }
+
+        .green  .summary-table th { background: var(--green); }
+        .accent .summary-table th { background: var(--accent); }
+        .purple .summary-table th { background: var(--purple); }
+        .red    .summary-table th { background: var(--red); }
+
+        .summary-table td {
+            padding: 0.55rem 0.8rem;
+            border-bottom: 1px solid #e8e4d9;
+            vertical-align: top;
+        }
+
+        .summary-table tr:nth-child(even) td {
+            background: #fafaf8;
+        }
+
+        .summary-table .prep-cell {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--primary);
+            white-space: nowrap;
+        }
+
+        /* ===== ページトップに戻る ===== */
+        .back-to-top {
+            display: block;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .back-to-top a {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 15px rgba(45,110,168,0.3);
+            transition: all 0.2s;
+        }
+
+        .back-to-top a:hover {
+            background: #1a4a7a;
+            box-shadow: 0 6px 20px rgba(45,110,168,0.4);
+            transform: translateY(-2px);
+        }
+
+        /* ===== 視覚的イラスト ===== */
+        .visual-diagram {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .vd-item {
+            background: white;
+            border: 2px solid #d0e8ff;
+            border-radius: 10px;
+            padding: 0.6rem 1rem;
+            text-align: center;
+            min-width: 100px;
+            flex: 1;
+        }
+
+        .vd-item .vd-art {
+            font-size: 1.8rem;
+            display: block;
+            line-height: 1.3;
+        }
+
+        .vd-item .vd-prep {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .vd-item .vd-ja {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+
+        /* ===== 冒頭導入 ===== */
+        .intro-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+        }
+
+        .intro-card h2 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .intro-card p {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            line-height: 2;
+        }
+
+        .prep-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .prep-tag {
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            padding: 0.3rem 0.9rem;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .prep-tag.g  { background: var(--green); }
+        .prep-tag.a  { background: var(--accent); }
+        .prep-tag.p  { background: var(--purple); }
+        .prep-tag.r  { background: var(--red); }
+    </style>
+</head>
+<body>
+
+<header id="top">
+    <span class="header-emoji">📚</span>
+    <h1>英語前置詞マスター</h1>
+    <p>イラスト＆豊富な例文でわかる！前置詞の使い方完全ガイド</p>
+</header>
+
+<!-- ナビゲーション -->
+<nav class="toc-nav">
+    <div class="toc-nav-inner">
+        <a href="#section-in"    class="toc-btn">in</a>
+        <a href="#section-at"    class="toc-btn">at</a>
+        <a href="#section-on"    class="toc-btn">on</a>
+        <a href="#section-to"    class="toc-btn">to</a>
+        <a href="#section-for"   class="toc-btn">for</a>
+        <a href="#section-of"    class="toc-btn">of</a>
+        <a href="#section-with"  class="toc-btn">with</a>
+        <a href="#section-by"    class="toc-btn">by</a>
+        <a href="#section-from"  class="toc-btn">from</a>
+        <a href="#section-about" class="toc-btn">about</a>
+        <a href="#section-over"  class="toc-btn">over</a>
+        <a href="#section-under" class="toc-btn">under</a>
+        <a href="#section-into"  class="toc-btn">into</a>
+        <a href="#section-out"   class="toc-btn">out of</a>
+        <a href="#summary"       class="toc-btn">📋 まとめ</a>
+    </div>
+</nav>
+
+<main>
+
+    <!-- 導入カード -->
+    <div class="intro-card">
+        <h2>前置詞とは？</h2>
+        <p>
+            前置詞は名詞の前に置いて、<strong>「場所」「時間」「方向」「関係」</strong>などを表す単語です。<br>
+            英語では非常によく使われる品詞で、使い方をマスターすると<br>
+            表現できることが一気に広がります！
+        </p>
+        <div class="prep-tags">
+            <span class="prep-tag">in</span>
+            <span class="prep-tag g">at</span>
+            <span class="prep-tag a">on</span>
+            <span class="prep-tag p">to</span>
+            <span class="prep-tag r">for</span>
+            <span class="prep-tag">of</span>
+            <span class="prep-tag g">with</span>
+            <span class="prep-tag a">by</span>
+            <span class="prep-tag p">from</span>
+            <span class="prep-tag r">about</span>
+        </div>
+    </div>
+
+    <!-- ==================== IN ==================== -->
+    <section class="prep-section" id="section-in">
+        <div class="section-header">
+            <div class="section-badge">in</div>
+            <div class="section-title-block">
+                <h2>in ─ 「〜の中に・中で」</h2>
+                <div class="reading">イン</div>
+            </div>
+        </div>
+
+        <div class="image-box">
+            <span class="emoji-big">📦</span>
+            <div class="core-meaning">
+                コアイメージ：「何かに包まれている・囲まれている」
+                <span>箱の中、部屋の中、国の中など、空間の内側にある感覚です。</span>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">① 場所「〜の中に」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">There is a cat <strong>in</strong> the box.</div>
+                    <div class="ex-ja">箱の中に猫がいます。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">She is <strong>in</strong> the kitchen.</div>
+                    <div class="ex-ja">彼女はキッチンにいます。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">I live <strong>in</strong> Tokyo.</div>
+                    <div class="ex-ja">私は東京に住んでいます。</div>
+                    <div class="ex-note">※ 都市・国などの広い場所には in を使う</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">He was born <strong>in</strong> Japan.</div>
+                    <div class="ex-ja">彼は日本で生まれました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">The keys are <strong>in</strong> my bag.</div>
+                    <div class="ex-ja">鍵はバッグの中にあります。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">② 時間「〜に・〜後に」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">I was born <strong>in</strong> 1995.</div>
+                    <div class="ex-ja">私は1995年に生まれました。</div>
+                    <div class="ex-note">※ 年・月・季節には in を使う</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">My birthday is <strong>in</strong> March.</div>
+                    <div class="ex-ja">私の誕生日は3月です。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">It's cold <strong>in</strong> winter.</div>
+                    <div class="ex-ja">冬は寒いです。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">I'll be back <strong>in</strong> ten minutes.</div>
+                    <div class="ex-ja">10分後に戻ります。</div>
+                    <div class="ex-note">※「〜後に」という未来のニュアンス</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">He finished the work <strong>in</strong> an hour.</div>
+                    <div class="ex-ja">彼は1時間で仕事を終えました。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">③ 状態・様子「〜の状態で」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">She is <strong>in</strong> trouble.</div>
+                    <div class="ex-ja">彼女は困っています。（困難な状況の中にいる）</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">He spoke <strong>in</strong> a loud voice.</div>
+                    <div class="ex-ja">彼は大きな声で話しました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">Please write <strong>in</strong> English.</div>
+                    <div class="ex-ja">英語で書いてください。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">She was dressed <strong>in</strong> red.</div>
+                    <div class="ex-ja">彼女は赤い服を着ていました。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <strong>💡 ポイント：in / at / on の時間での使い分け</strong><br>
+            <strong>in</strong> → 年・月・季節・午前/午後など広い時間<br>
+            <strong>at</strong> → 特定の時刻（at 3 o'clock）<br>
+            <strong>on</strong> → 特定の日・曜日（on Monday）
+        </div>
+    </section>
+
+    <!-- ==================== AT ==================== -->
+    <section class="prep-section green" id="section-at">
+        <div class="section-header">
+            <div class="section-badge">at</div>
+            <div class="section-title-block">
+                <h2>at ─ 「〜に・〜で（点）」</h2>
+                <div class="reading">アット</div>
+            </div>
+        </div>
+
+        <div class="image-box">
+            <span class="emoji-big">📍</span>
+            <div class="core-meaning">
+                コアイメージ：「一点を指さす」
+                <span>地図のピンのように、ある一点・一瞬に焦点を当てるイメージです。</span>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">① 場所「〜に（地点）」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">I'm <strong>at</strong> the station.</div>
+                    <div class="ex-ja">私は駅にいます。</div>
+                    <div class="ex-note">※ 駅・空港・停留所など、一地点として捉える</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">She is waiting <strong>at</strong> the bus stop.</div>
+                    <div class="ex-ja">彼女はバス停で待っています。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">We met <strong>at</strong> the corner of the street.</div>
+                    <div class="ex-ja">私たちは通りの角で会いました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">He is <strong>at</strong> work right now.</div>
+                    <div class="ex-ja">彼は今、職場にいます。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">The children are <strong>at</strong> school.</div>
+                    <div class="ex-ja">子どもたちは学校にいます。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">② 時間「〜時に」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">The meeting starts <strong>at</strong> 9 o'clock.</div>
+                    <div class="ex-ja">会議は9時に始まります。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">I wake up <strong>at</strong> 6:30 every day.</div>
+                    <div class="ex-ja">毎日6時30分に起きます。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">What are you doing <strong>at</strong> noon?</div>
+                    <div class="ex-ja">正午に何をしていますか？</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">We had dinner <strong>at</strong> midnight.</div>
+                    <div class="ex-ja">私たちは深夜に夕食を食べました。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">③ 動作の対象「〜を向けて・〜に」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">He smiled <strong>at</strong> me.</div>
+                    <div class="ex-ja">彼は私に微笑みました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">Don't shout <strong>at</strong> me!</div>
+                    <div class="ex-ja">私に向かって怒鳴らないで！</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">She looked <strong>at</strong> the picture.</div>
+                    <div class="ex-ja">彼女は絵を見ました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">I'm good <strong>at</strong> cooking.</div>
+                    <div class="ex-ja">私は料理が得意です。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ON ==================== -->
+    <section class="prep-section accent" id="section-on">
+        <div class="section-header">
+            <div class="section-badge">on</div>
+            <div class="section-title-block">
+                <h2>on ─ 「〜の上に・〜に接触して」</h2>
+                <div class="reading">オン</div>
+            </div>
+        </div>
+
+        <div class="image-box">
+            <span class="emoji-big">🏔️</span>
+            <div class="core-meaning">
+                コアイメージ：「表面に接触している」
+                <span>机の上、壁、床など、何かの表面にくっついているイメージです。</span>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">① 場所「〜の上に（接触）」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">The book is <strong>on</strong> the desk.</div>
+                    <div class="ex-ja">本は机の上にあります。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">There is a picture <strong>on</strong> the wall.</div>
+                    <div class="ex-ja">壁に絵がかかっています。</div>
+                    <div class="ex-note">※ 壁に接しているので on（真上でなくても使える）</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">The cat is sleeping <strong>on</strong> the sofa.</div>
+                    <div class="ex-ja">猫はソファの上で寝ています。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">My house is <strong>on</strong> Cherry Street.</div>
+                    <div class="ex-ja">私の家はチェリー通りにあります。</div>
+                    <div class="ex-note">※ 道路に面している → on</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">② 時間「〜曜日に・特定の日に」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">I have a meeting <strong>on</strong> Monday.</div>
+                    <div class="ex-ja">月曜日に会議があります。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">My birthday is <strong>on</strong> July 15th.</div>
+                    <div class="ex-ja">私の誕生日は7月15日です。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">We got married <strong>on</strong> Valentine's Day.</div>
+                    <div class="ex-ja">私たちはバレンタインデーに結婚しました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">What do you do <strong>on</strong> weekends?</div>
+                    <div class="ex-ja">週末は何をしますか？</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">③ メディア・手段「〜で」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">I watched the game <strong>on</strong> TV.</div>
+                    <div class="ex-ja">テレビで試合を見ました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">She talked to him <strong>on</strong> the phone.</div>
+                    <div class="ex-ja">彼女は電話で彼と話しました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">I found this information <strong>on</strong> the internet.</div>
+                    <div class="ex-ja">インターネットでこの情報を見つけました。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="compare-box">
+            <h4>🔍 in / on / above の違い（場所）</h4>
+            <div class="compare-grid">
+                <div class="compare-item">
+                    <div class="ci-prep">in the box</div>
+                    <div class="ci-ja">箱の中に（内部）</div>
+                </div>
+                <div class="compare-item">
+                    <div class="ci-prep">on the box</div>
+                    <div class="ci-ja">箱の上に（接触）</div>
+                </div>
+                <div class="compare-item">
+                    <div class="ci-prep">above the box</div>
+                    <div class="ci-ja">箱の上空に（離れて）</div>
+                </div>
+                <div class="compare-item">
+                    <div class="ci-prep">over the box</div>
+                    <div class="ci-ja">箱をまたいで・覆って</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TO ==================== -->
+    <section class="prep-section purple" id="section-to">
+        <div class="section-header">
+            <div class="section-badge">to</div>
+            <div class="section-title-block">
+                <h2>to ─ 「〜へ・〜に（向かって）」</h2>
+                <div class="reading">トゥ</div>
+            </div>
+        </div>
+
+        <div class="image-box">
+            <span class="emoji-big">➡️</span>
+            <div class="core-meaning">
+                コアイメージ：「矢印のように向かっていく」
+                <span>ある目的地・対象へ向かう方向性を表します。動きのあるイメージです。</span>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">① 方向・目的地「〜へ・〜に」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">I go <strong>to</strong> school every day.</div>
+                    <div class="ex-ja">私は毎日学校へ行きます。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">She is going <strong>to</strong> the hospital.</div>
+                    <div class="ex-ja">彼女は病院へ行くところです。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">We took a trip <strong>to</strong> Kyoto.</div>
+                    <div class="ex-ja">私たちは京都へ旅行に行きました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">Turn left <strong>to</strong> get to the park.</div>
+                    <div class="ex-ja">公園に行くには左に曲がってください。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">② 相手「〜に（渡す・伝える）」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">I gave a gift <strong>to</strong> my mother.</div>
+                    <div class="ex-ja">母にプレゼントをあげました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">Can you send this <strong>to</strong> me?</div>
+                    <div class="ex-ja">これを私に送ってくれますか？</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">She spoke <strong>to</strong> the teacher.</div>
+                    <div class="ex-ja">彼女は先生に話しかけました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">He wrote a letter <strong>to</strong> his friend.</div>
+                    <div class="ex-ja">彼は友達に手紙を書きました。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">③ 時間の範囲「〜まで」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">The store is open from 9 <strong>to</strong> 6.</div>
+                    <div class="ex-ja">そのお店は9時から6時まで開いています。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">It takes ten minutes <strong>to</strong> get there.</div>
+                    <div class="ex-ja">そこに着くのに10分かかります。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <strong>💡 to と for の違い（目的地）</strong><br>
+            <strong>to</strong> → 明確な目的地（到達点が決まっている）<br>
+            　I'm going <em>to</em> the airport. （空港へ向かっている）<br>
+            <strong>for</strong> → 方向・出発点（「〜に向けて出発する」のニュアンス）<br>
+            　I'm leaving <em>for</em> the airport. （空港へ向けて出発する）
+        </div>
+    </section>
+
+    <!-- ==================== FOR ==================== -->
+    <section class="prep-section red" id="section-for">
+        <div class="section-header">
+            <div class="section-badge">for</div>
+            <div class="section-title-block">
+                <h2>for ─ 「〜のために・〜の間」</h2>
+                <div class="reading">フォー</div>
+            </div>
+        </div>
+
+        <div class="image-box">
+            <span class="emoji-big">🎁</span>
+            <div class="core-meaning">
+                コアイメージ：「誰かのために向けられた・ある期間を通じて」
+                <span>目的・対象・継続する期間を表す前置詞です。</span>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">① 目的・用途「〜のために・〜向けの」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">This is a present <strong>for</strong> you.</div>
+                    <div class="ex-ja">これはあなたへのプレゼントです。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">I bought flowers <strong>for</strong> my mom.</div>
+                    <div class="ex-ja">お母さんのために花を買いました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">She studied hard <strong>for</strong> the exam.</div>
+                    <div class="ex-ja">彼女は試験のために一生懸命勉強しました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">What's <strong>for</strong> dinner tonight?</div>
+                    <div class="ex-ja">今夜の夕食は何ですか？</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">② 期間「〜の間（継続）」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">I've lived here <strong>for</strong> three years.</div>
+                    <div class="ex-ja">私はここに3年間住んでいます。</div>
+                    <div class="ex-note">※ 継続を表す for（現在完了形とよく使われる）</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">She waited <strong>for</strong> two hours.</div>
+                    <div class="ex-ja">彼女は2時間待ちました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">We talked <strong>for</strong> a long time.</div>
+                    <div class="ex-ja">私たちは長い時間話しました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">He studied English <strong>for</strong> five years.</div>
+                    <div class="ex-ja">彼は5年間英語を勉強しました。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">③ 理由・原因「〜のせいで・〜で有名な」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">Thank you <strong>for</strong> your help.</div>
+                    <div class="ex-ja">助けてくれてありがとうございます。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">Japan is famous <strong>for</strong> its sushi.</div>
+                    <div class="ex-ja">日本は寿司で有名です。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">He was punished <strong>for</strong> lying.</div>
+                    <div class="ex-ja">彼は嘘をついたために罰せられました。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="compare-box">
+            <h4>🔍 for と since の違い（期間）</h4>
+            <div class="compare-grid">
+                <div class="compare-item">
+                    <div class="ci-prep">for + 期間の長さ</div>
+                    <div class="ci-en">for three years</div>
+                    <div class="ci-ja">3年間（長さを表す）</div>
+                </div>
+                <div class="compare-item">
+                    <div class="ci-prep">since + 起点</div>
+                    <div class="ci-en">since 2020</div>
+                    <div class="ci-ja">2020年から（出発点を表す）</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== OF ==================== -->
+    <section class="prep-section" id="section-of">
+        <div class="section-header">
+            <div class="section-badge">of</div>
+            <div class="section-title-block">
+                <h2>of ─ 「〜の（所属・関係）」</h2>
+                <div class="reading">オブ</div>
+            </div>
+        </div>
+
+        <div class="image-box">
+            <span class="emoji-big">🔗</span>
+            <div class="core-meaning">
+                コアイメージ：「つながり・切り離せない関係」
+                <span>AのB → B of A という形で、所属・部分・内容などを表します。</span>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">① 所属・所有「〜の」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">The color <strong>of</strong> the sky is blue.</div>
+                    <div class="ex-ja">空の色は青いです。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">The capital <strong>of</strong> Japan is Tokyo.</div>
+                    <div class="ex-ja">日本の首都は東京です。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">This is a map <strong>of</strong> the world.</div>
+                    <div class="ex-ja">これは世界地図です。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">She is a member <strong>of</strong> our team.</div>
+                    <div class="ex-ja">彼女は私たちのチームのメンバーです。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">② 部分・数量「〜の中の」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">Two <strong>of</strong> my friends are coming.</div>
+                    <div class="ex-ja">私の友達のうち2人が来ます。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">Most <strong>of</strong> the students passed the test.</div>
+                    <div class="ex-ja">生徒のほとんどがテストに合格しました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">A cup <strong>of</strong> coffee, please.</div>
+                    <div class="ex-ja">コーヒーを一杯ください。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">Lots <strong>of</strong> people came to the event.</div>
+                    <div class="ex-ja">たくさんの人がイベントに来ました。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">③ 感情・評価の対象「〜について・〜に対して」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">I'm proud <strong>of</strong> you.</div>
+                    <div class="ex-ja">あなたのことを誇りに思います。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">She is afraid <strong>of</strong> dogs.</div>
+                    <div class="ex-ja">彼女は犬が怖いです。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">I'm tired <strong>of</strong> waiting.</div>
+                    <div class="ex-ja">待つのが嫌になってきました。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== WITH ==================== -->
+    <section class="prep-section green" id="section-with">
+        <div class="section-header">
+            <div class="section-badge">with</div>
+            <div class="section-title-block">
+                <h2>with ─ 「〜と一緒に・〜を使って」</h2>
+                <div class="reading">ウィズ</div>
+            </div>
+        </div>
+
+        <div class="image-box">
+            <span class="emoji-big">🤝</span>
+            <div class="core-meaning">
+                コアイメージ：「そこにいる・一緒にある」
+                <span>人との同伴、道具の携帯、特徴の付随など「ともにある」感覚です。</span>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">① 同伴「〜と一緒に」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">I went to the movies <strong>with</strong> my friends.</div>
+                    <div class="ex-ja">友達と映画に行きました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">She lives <strong>with</strong> her parents.</div>
+                    <div class="ex-ja">彼女は両親と一緒に住んでいます。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">He is always <strong>with</strong> his dog.</div>
+                    <div class="ex-ja">彼はいつも犬と一緒にいます。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">② 道具・手段「〜を使って・〜で」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">I write <strong>with</strong> a pencil.</div>
+                    <div class="ex-ja">鉛筆で書きます。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">She cut the bread <strong>with</strong> a knife.</div>
+                    <div class="ex-ja">彼女はナイフでパンを切りました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">He fixed the machine <strong>with</strong> a screwdriver.</div>
+                    <div class="ex-ja">彼はドライバーで機械を直しました。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">③ 特徴・付随「〜を持った・〜がある」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">The man <strong>with</strong> the red hat is my father.</div>
+                    <div class="ex-ja">赤い帽子をかぶっている男性は私の父です。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">A house <strong>with</strong> a garden is my dream.</div>
+                    <div class="ex-ja">庭付きの家が私の夢です。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">I have a problem <strong>with</strong> my computer.</div>
+                    <div class="ex-ja">コンピューターに問題があります。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">Are you pleased <strong>with</strong> the result?</div>
+                    <div class="ex-ja">結果に満足していますか？</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== BY ==================== -->
+    <section class="prep-section accent" id="section-by">
+        <div class="section-header">
+            <div class="section-badge">by</div>
+            <div class="section-title-block">
+                <h2>by ─ 「〜によって・〜までに・〜のそばに」</h2>
+                <div class="reading">バイ</div>
+            </div>
+        </div>
+
+        <div class="image-box">
+            <span class="emoji-big">⏰</span>
+            <div class="core-meaning">
+                コアイメージ：「すぐそばに・手段・期限」
+                <span>行為者（受動態）、手段・方法、締め切り、場所の近さを表します。</span>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">① 行為者「〜によって（受動態）」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">This book was written <strong>by</strong> Natsume Soseki.</div>
+                    <div class="ex-ja">この本は夏目漱石によって書かれました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">The window was broken <strong>by</strong> the boy.</div>
+                    <div class="ex-ja">窓はその男の子によって割られました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">The cake was made <strong>by</strong> my grandmother.</div>
+                    <div class="ex-ja">そのケーキは祖母が作りました。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">② 手段「〜で・〜を使って」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">I go to work <strong>by</strong> train.</div>
+                    <div class="ex-ja">電車で仕事に行きます。</div>
+                    <div class="ex-note">※ 交通手段には by + 無冠詞の名詞</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">She came here <strong>by</strong> bus.</div>
+                    <div class="ex-ja">彼女はバスでここに来ました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">I paid <strong>by</strong> credit card.</div>
+                    <div class="ex-ja">クレジットカードで払いました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">Can I contact you <strong>by</strong> email?</div>
+                    <div class="ex-ja">メールで連絡してもいいですか？</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">③ 期限「〜までに」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">Please finish this <strong>by</strong> tomorrow.</div>
+                    <div class="ex-ja">明日までにこれを終わらせてください。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">I need the report <strong>by</strong> Friday.</div>
+                    <div class="ex-ja">金曜日までにレポートが必要です。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">She arrived <strong>by</strong> noon.</div>
+                    <div class="ex-ja">彼女は正午までに到着しました。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">④ 場所「〜のそばに」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">Sit <strong>by</strong> me.</div>
+                    <div class="ex-ja">私のそばに座ってください。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">There is a bench <strong>by</strong> the lake.</div>
+                    <div class="ex-ja">湖のそばにベンチがあります。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <strong>💡 by と until の違い（時間）</strong><br>
+            <strong>by</strong> → 期限（〜までに完了する）　: Submit the form <em>by</em> 5 PM.<br>
+            <strong>until</strong> → 継続（〜までずっと続く）: I worked <em>until</em> midnight.
+        </div>
+    </section>
+
+    <!-- ==================== FROM ==================== -->
+    <section class="prep-section purple" id="section-from">
+        <div class="section-header">
+            <div class="section-badge">from</div>
+            <div class="section-title-block">
+                <h2>from ─ 「〜から（出発・起源）」</h2>
+                <div class="reading">フロム</div>
+            </div>
+        </div>
+
+        <div class="image-box">
+            <span class="emoji-big">🚀</span>
+            <div class="core-meaning">
+                コアイメージ：「出発点・起源」
+                <span>どこかから離れていく・始まる感覚。toとセットで「〜から〜まで」とも使えます。</span>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">① 出発点「〜から」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">I'm <strong>from</strong> Japan.</div>
+                    <div class="ex-ja">私は日本出身です。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">He walked <strong>from</strong> the station to his house.</div>
+                    <div class="ex-ja">彼は駅から家まで歩きました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">The store is open <strong>from</strong> 9 to 6.</div>
+                    <div class="ex-ja">そのお店は9時から6時まで開いています。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">I received a letter <strong>from</strong> my friend.</div>
+                    <div class="ex-ja">友達から手紙を受け取りました。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">② 起源・材料「〜から作られた・〜由来の」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">Wine is made <strong>from</strong> grapes.</div>
+                    <div class="ex-ja">ワインはブドウから作られます。</div>
+                    <div class="ex-note">※ 原料の形が変わる場合は from</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">This word comes <strong>from</strong> Latin.</div>
+                    <div class="ex-ja">この単語はラテン語から来ています。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">③ 分離・保護「〜から守る・〜から離れる」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">Keep children away <strong>from</strong> fire.</div>
+                    <div class="ex-ja">子どもたちを火から遠ざけてください。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">I'm tired <strong>from</strong> working all day.</div>
+                    <div class="ex-ja">一日中働いて疲れました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">She recovered <strong>from</strong> her illness.</div>
+                    <div class="ex-ja">彼女は病気から回復しました。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT ==================== -->
+    <section class="prep-section" id="section-about">
+        <div class="section-header">
+            <div class="section-badge">about</div>
+            <div class="section-title-block">
+                <h2>about ─ 「〜について・〜ほど」</h2>
+                <div class="reading">アバウト</div>
+            </div>
+        </div>
+
+        <div class="image-box">
+            <span class="emoji-big">💭</span>
+            <div class="core-meaning">
+                コアイメージ：「ある話題の周りを取り囲む」
+                <span>ある主題について話したり考えたりする際に使います。おおよその数量にも使えます。</span>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">① テーマ・話題「〜について」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">Tell me <strong>about</strong> yourself.</div>
+                    <div class="ex-ja">自己紹介してください。（自分自身について話して）</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">We talked <strong>about</strong> the future.</div>
+                    <div class="ex-ja">私たちは将来について話しました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">I'm reading a book <strong>about</strong> history.</div>
+                    <div class="ex-ja">歴史についての本を読んでいます。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">She knows a lot <strong>about</strong> cooking.</div>
+                    <div class="ex-ja">彼女は料理についてたくさん知っています。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">What do you think <strong>about</strong> this idea?</div>
+                    <div class="ex-ja">このアイデアについてどう思いますか？</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">② おおよその数量「〜ほど・約〜」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">I'll be there in <strong>about</strong> ten minutes.</div>
+                    <div class="ex-ja">約10分後にそちらに行きます。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">There were <strong>about</strong> 200 people at the concert.</div>
+                    <div class="ex-ja">コンサートには約200人いました。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">③ 心配・感情の対象「〜のことが」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">I'm worried <strong>about</strong> the exam.</div>
+                    <div class="ex-ja">試験のことが心配です。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">He's excited <strong>about</strong> his trip.</div>
+                    <div class="ex-ja">彼は旅行のことにわくわくしています。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">I'm sorry <strong>about</strong> the mistake.</div>
+                    <div class="ex-ja">間違いについて申し訳ありません。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== OVER ==================== -->
+    <section class="prep-section green" id="section-over">
+        <div class="section-header">
+            <div class="section-badge">over</div>
+            <div class="section-title-block">
+                <h2>over ─ 「〜の上を越えて・〜以上」</h2>
+                <div class="reading">オーバー</div>
+            </div>
+        </div>
+
+        <div class="image-box">
+            <span class="emoji-big">🌉</span>
+            <div class="core-meaning">
+                コアイメージ：「弧を描いて上を通り越す」
+                <span>橋を渡る・覆い被さる・超えるといった動きや状態を表します。</span>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">① 位置「〜の真上に（覆って）」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">There is a bridge <strong>over</strong> the river.</div>
+                    <div class="ex-ja">川の上に橋があります。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">She put a blanket <strong>over</strong> the sleeping child.</div>
+                    <div class="ex-ja">彼女は眠っている子どもの上に毛布をかけました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">Clouds formed <strong>over</strong> the mountains.</div>
+                    <div class="ex-ja">山の上に雲が出てきました。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">② 超過「〜以上・〜を超えて」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">She is <strong>over</strong> 30 years old.</div>
+                    <div class="ex-ja">彼女は30歳以上です。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">He jumped <strong>over</strong> the fence.</div>
+                    <div class="ex-ja">彼はフェンスを飛び越えました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">The project is <strong>over</strong> budget.</div>
+                    <div class="ex-ja">プロジェクトは予算超過です。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">③ 期間「〜の間ずっと・〜を通して」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">I stayed home <strong>over</strong> the weekend.</div>
+                    <div class="ex-ja">週末の間ずっと家にいました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">We discussed it <strong>over</strong> dinner.</div>
+                    <div class="ex-ja">夕食をとりながらそれについて話し合いました。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== UNDER ==================== -->
+    <section class="prep-section accent" id="section-under">
+        <div class="section-header">
+            <div class="section-badge">under</div>
+            <div class="section-title-block">
+                <h2>under ─ 「〜の下に・〜未満」</h2>
+                <div class="reading">アンダー</div>
+            </div>
+        </div>
+
+        <div class="image-box">
+            <span class="emoji-big">🌊</span>
+            <div class="core-meaning">
+                コアイメージ：「何かの下・覆われている・基準を下回る」
+                <span>over の反対。物理的な下の位置や、基準・規則の下に置かれることを表します。</span>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">① 位置「〜の下に」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">The cat is hiding <strong>under</strong> the bed.</div>
+                    <div class="ex-ja">猫はベッドの下に隠れています。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">We found the key <strong>under</strong> the mat.</div>
+                    <div class="ex-ja">マットの下で鍵を見つけました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">It was cool <strong>under</strong> the tree.</div>
+                    <div class="ex-ja">木の下は涼しかったです。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">② 未満・以下「〜より少ない・〜歳未満」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">Children <strong>under</strong> 12 enter for free.</div>
+                    <div class="ex-ja">12歳未満のお子さんは無料で入れます。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">The price is <strong>under</strong> $100.</div>
+                    <div class="ex-ja">値段は100ドル以下です。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">③ 状況・支配「〜の下で・〜中で」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">The building is <strong>under</strong> construction.</div>
+                    <div class="ex-ja">その建物は工事中です。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">He is <strong>under</strong> a lot of stress.</div>
+                    <div class="ex-ja">彼はとても大きなストレス下にあります。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">The country is <strong>under</strong> attack.</div>
+                    <div class="ex-ja">その国は攻撃下にあります。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== INTO ==================== -->
+    <section class="prep-section purple" id="section-into">
+        <div class="section-header">
+            <div class="section-badge">into</div>
+            <div class="section-title-block">
+                <h2>into ─ 「〜の中へ（移動）」</h2>
+                <div class="reading">イントゥ</div>
+            </div>
+        </div>
+
+        <div class="image-box">
+            <span class="emoji-big">🚪</span>
+            <div class="core-meaning">
+                コアイメージ：「外から中へ入っていく動き」
+                <span>in は「中にある状態」、into は「外から内部へ向かう動き」です。</span>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">① 移動「〜の中へ入っていく」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">She walked <strong>into</strong> the room.</div>
+                    <div class="ex-ja">彼女は部屋の中へ歩いて入ってきました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">He jumped <strong>into</strong> the pool.</div>
+                    <div class="ex-ja">彼はプールへ飛び込みました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">Put the money <strong>into</strong> the envelope.</div>
+                    <div class="ex-ja">封筒の中にお金を入れてください。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">We got <strong>into</strong> the car.</div>
+                    <div class="ex-ja">私たちは車に乗り込みました。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">② 変化・変換「〜に変わる・〜になる」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">Water turns <strong>into</strong> ice when it freezes.</div>
+                    <div class="ex-ja">水は凍ると氷になります。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">She grew <strong>into</strong> a beautiful woman.</div>
+                    <div class="ex-ja">彼女は美しい女性に成長しました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">Translate this <strong>into</strong> Japanese, please.</div>
+                    <div class="ex-ja">これを日本語に翻訳してください。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="compare-box">
+            <h4>🔍 in と into の使い分け</h4>
+            <div class="compare-grid">
+                <div class="compare-item">
+                    <div class="ci-prep">in（状態）</div>
+                    <div class="ci-en">The cat is in the box.</div>
+                    <div class="ci-ja">猫は箱の中にいる。（静止状態）</div>
+                </div>
+                <div class="compare-item">
+                    <div class="ci-prep">into（動き）</div>
+                    <div class="ci-en">The cat jumped into the box.</div>
+                    <div class="ci-ja">猫は箱に飛び込んだ。（動きあり）</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== OUT OF ==================== -->
+    <section class="prep-section red" id="section-out">
+        <div class="section-header">
+            <div class="section-badge">out of</div>
+            <div class="section-title-block">
+                <h2>out of ─ 「〜の外へ・〜から外へ」</h2>
+                <div class="reading">アウト オブ</div>
+            </div>
+        </div>
+
+        <div class="image-box">
+            <span class="emoji-big">🏃</span>
+            <div class="core-meaning">
+                コアイメージ：「内部から外へ出ていく」
+                <span>into の正反対。中から外に出る動き、または内部からの原因を表します。</span>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">① 移動「〜の外へ出る」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">She walked <strong>out of</strong> the room.</div>
+                    <div class="ex-ja">彼女は部屋から出ていきました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">He took the book <strong>out of</strong> his bag.</div>
+                    <div class="ex-ja">彼はバッグから本を取り出しました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">The fish jumped <strong>out of</strong> the water.</div>
+                    <div class="ex-ja">魚が水の外に飛び出しました。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">② 原因・動機「〜から（動機・感情から）」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">She helped him <strong>out of</strong> kindness.</div>
+                    <div class="ex-ja">彼女は親切心から彼を助けました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">He did it <strong>out of</strong> curiosity.</div>
+                    <div class="ex-ja">彼は好奇心からそれをしました。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-group">
+            <span class="usage-label">③ 品切れ・欠乏「〜がなくなった」</span>
+            <div class="example-list">
+                <div class="ex">
+                    <div class="ex-en">We are <strong>out of</strong> milk.</div>
+                    <div class="ex-ja">牛乳がなくなりました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">My phone is <strong>out of</strong> battery.</div>
+                    <div class="ex-ja">スマホのバッテリーがなくなりました。</div>
+                </div>
+                <div class="ex">
+                    <div class="ex-en">I'm <strong>out of</strong> ideas right now.</div>
+                    <div class="ex-ja">今はアイデアが思い浮かびません。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== まとめ表 ==================== -->
+    <section class="prep-section" id="summary" style="border-left-color: #34495e;">
+        <div class="section-header">
+            <div class="section-badge" style="background:#34495e;">📋</div>
+            <div class="section-title-block">
+                <h2>前置詞クイックリファレンス</h2>
+                <div class="reading">まとめ・一覧表</div>
+            </div>
+        </div>
+
+        <table class="summary-table" style="--primary: #34495e;">
+            <thead>
+                <tr>
+                    <th>前置詞</th>
+                    <th>主な意味</th>
+                    <th>代表的な使い方</th>
+                    <th>例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="prep-cell" style="color:var(--primary);">in</td>
+                    <td>〜の中に</td>
+                    <td>場所・年/月/季節・状態</td>
+                    <td>in the box / in March / in trouble</td>
+                </tr>
+                <tr>
+                    <td class="prep-cell" style="color:var(--green);">at</td>
+                    <td>〜に（一点）</td>
+                    <td>地点・時刻・動作の対象</td>
+                    <td>at the station / at 3 PM / smile at</td>
+                </tr>
+                <tr>
+                    <td class="prep-cell" style="color:var(--accent);">on</td>
+                    <td>〜の上に（接触）</td>
+                    <td>表面・曜日/日付・メディア</td>
+                    <td>on the desk / on Monday / on TV</td>
+                </tr>
+                <tr>
+                    <td class="prep-cell" style="color:var(--purple);">to</td>
+                    <td>〜へ・〜に</td>
+                    <td>方向・相手・時間の終点</td>
+                    <td>go to school / talk to / from 9 to 5</td>
+                </tr>
+                <tr>
+                    <td class="prep-cell" style="color:var(--red);">for</td>
+                    <td>〜のために・〜の間</td>
+                    <td>目的・継続期間・理由</td>
+                    <td>for you / for 3 years / famous for</td>
+                </tr>
+                <tr>
+                    <td class="prep-cell" style="color:var(--primary);">of</td>
+                    <td>〜の（関係）</td>
+                    <td>所属・部分・感情の対象</td>
+                    <td>color of / most of / proud of</td>
+                </tr>
+                <tr>
+                    <td class="prep-cell" style="color:var(--green);">with</td>
+                    <td>〜と一緒に</td>
+                    <td>同伴・道具・特徴</td>
+                    <td>with friends / with a knife / with a hat</td>
+                </tr>
+                <tr>
+                    <td class="prep-cell" style="color:var(--accent);">by</td>
+                    <td>〜によって</td>
+                    <td>行為者・手段・期限・場所</td>
+                    <td>written by / by train / by Friday</td>
+                </tr>
+                <tr>
+                    <td class="prep-cell" style="color:var(--purple);">from</td>
+                    <td>〜から</td>
+                    <td>出発点・起源・分離</td>
+                    <td>from Japan / made from / recover from</td>
+                </tr>
+                <tr>
+                    <td class="prep-cell" style="color:var(--primary);">about</td>
+                    <td>〜について</td>
+                    <td>話題・おおよその量・感情</td>
+                    <td>talk about / about 10 / worried about</td>
+                </tr>
+                <tr>
+                    <td class="prep-cell" style="color:var(--green);">over</td>
+                    <td>〜の上を越えて</td>
+                    <td>真上（覆う）・超過・期間</td>
+                    <td>bridge over / over 30 / over the weekend</td>
+                </tr>
+                <tr>
+                    <td class="prep-cell" style="color:var(--accent);">under</td>
+                    <td>〜の下に</td>
+                    <td>下の位置・未満・状況下</td>
+                    <td>under the bed / under 12 / under construction</td>
+                </tr>
+                <tr>
+                    <td class="prep-cell" style="color:var(--purple);">into</td>
+                    <td>〜の中へ（動き）</td>
+                    <td>移動（外→内）・変化</td>
+                    <td>walk into / turn into ice</td>
+                </tr>
+                <tr>
+                    <td class="prep-cell" style="color:var(--red);">out of</td>
+                    <td>〜から外へ</td>
+                    <td>移動（内→外）・欠乏</td>
+                    <td>walk out of / out of milk</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 時間の前置詞まとめ -->
+        <div style="margin-top:2rem;">
+            <span class="usage-label" style="background:#e8f1fc;color:var(--primary);border-color:#c0d8f0;">⏰ 時間の前置詞まとめ</span>
+            <div class="visual-diagram" style="margin-top:0.8rem;">
+                <div class="vd-item">
+                    <span class="vd-art">📅</span>
+                    <div class="vd-prep">in + 年/月/季節</div>
+                    <div class="vd-ja">in 2024 / in April</div>
+                </div>
+                <div class="vd-item">
+                    <span class="vd-art">📆</span>
+                    <div class="vd-prep">on + 日/曜日</div>
+                    <div class="vd-ja">on Monday / on July 4th</div>
+                </div>
+                <div class="vd-item">
+                    <span class="vd-art">🕐</span>
+                    <div class="vd-prep">at + 時刻</div>
+                    <div class="vd-ja">at 3 PM / at noon</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 場所の前置詞まとめ -->
+        <div style="margin-top:1.5rem;">
+            <span class="usage-label" style="background:#e8f5f0;color:var(--green);border-color:#a8d8c8;">📍 場所の前置詞まとめ</span>
+            <div class="visual-diagram" style="margin-top:0.8rem;">
+                <div class="vd-item">
+                    <span class="vd-art">📦</span>
+                    <div class="vd-prep">in（内部）</div>
+                    <div class="vd-ja">in the box</div>
+                </div>
+                <div class="vd-item">
+                    <span class="vd-art">📌</span>
+                    <div class="vd-prep">at（一点）</div>
+                    <div class="vd-ja">at the station</div>
+                </div>
+                <div class="vd-item">
+                    <span class="vd-art">📗</span>
+                    <div class="vd-prep">on（接触）</div>
+                    <div class="vd-ja">on the desk</div>
+                </div>
+                <div class="vd-item">
+                    <span class="vd-art">⬆️</span>
+                    <div class="vd-prep">over（上空）</div>
+                    <div class="vd-ja">over the river</div>
+                </div>
+                <div class="vd-item">
+                    <span class="vd-art">⬇️</span>
+                    <div class="vd-prep">under（下）</div>
+                    <div class="vd-ja">under the bed</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="back-to-top">
+        <a href="#top">▲ ページの先頭に戻る</a>
+    </div>
+
+</main>
+
+<footer style="text-align:center; padding: 2rem 1rem; color: #999; font-size: 0.85rem; background: white; border-top: 2px solid #f0ede4; margin-top: 2rem;">
+    英語前置詞マスター ─ イラスト＆豊富な例文で学ぶ英語教材
+</footer>
+
+</body>
+</html>
