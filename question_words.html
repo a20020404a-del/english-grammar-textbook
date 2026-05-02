@@ -2068,14 +2068,12 @@
     container.innerHTML = '';
     const picked = shuffle(allPool).slice(0, 50);
     picked.forEach((item, i) => {
-      const { label, color } = categoryInfo[item._cat];
+      const { color } = categoryInfo[item._cat];
       const div = document.createElement('div');
       div.className = 'quiz-item';
       div.innerHTML = `
         <span class="quiz-num" style="background:${color}">${i + 1}</span>
-        <span class="quiz-ja">
-          <span style="display:inline-block; background:${color}22; color:${color}; border:1px solid ${color}55; border-radius:8px; padding:0.05rem 0.5rem; font-size:0.72rem; font-weight:700; margin-right:0.4rem; vertical-align:middle;">${label}</span>${item.ja}
-        </span>
+        <span class="quiz-ja">${item.ja}</span>
         <div class="answer-box" style="border-color:${color}">
           <span class="answer-label">解答例</span>
           <div class="answer-inner">${item.ans}</div>
