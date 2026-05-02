@@ -489,6 +489,7 @@
     <a href="#howmuch" class="toc-btn" style="background:#607d8b;">HOW MUCH</a>
     <a href="#perfect"   class="toc-btn" style="background: linear-gradient(135deg,#00897b,#004d40); grid-column: span 2;">現在完了・現在完了進行形・過去完了形</a>
     <a href="#tense-diff" class="toc-btn" style="background: linear-gradient(135deg,#e85d5d,#7c4dbd); grid-column: span 2;">🕐 過去形 vs 過去完了形</a>
+    <a href="#summary"    class="toc-btn" style="background: linear-gradient(135deg,#f59e0b,#b45309); grid-column: span 2; font-size:1.05rem; letter-spacing:0.03em;">🎯 まとめ問題 50問ランダム</a>
   </div>
 </div>
 
@@ -1238,6 +1239,30 @@
         <h3 style="color:#00897b;">✏️ 練習問題（各クリックで解答・解説・音声）</h3>
         <div class="quiz-list" id="quiz-perfect"></div>
       </div>
+    </div>
+  </div>
+
+  <!-- まとめ問題 50問ランダム -->
+  <div class="section" id="summary" style="margin-bottom:3rem;">
+    <div class="section-header" style="background: linear-gradient(135deg, #f59e0b, #b45309);">
+      <div class="badge" style="font-size:1.3rem;">🎯</div>
+      <div class="title-wrap">
+        <h2>まとめ問題 ランダム50問</h2>
+        <p>全疑問詞・全時制からランダム出題 ／ クリックで解答・解説表示</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.25rem; flex-wrap:wrap;">
+        <div style="background:#fff8e1; border:2px solid #f59e0b; border-radius:12px; padding:0.75rem 1.25rem; font-size:0.9rem; line-height:1.7; flex:1; min-width:220px;">
+          💡 <strong>使い方：</strong>日本語を見て英文を頭の中で作り、クリックして答え合わせ。ページを再読み込みすると問題が入れ替わります。
+        </div>
+        <button id="shuffle-btn" type="button"
+          style="background:linear-gradient(135deg,#f59e0b,#b45309); color:white; border:none; border-radius:12px; padding:0.75rem 1.5rem; font-size:0.95rem; font-weight:700; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.15); font-family:'Zen Maru Gothic',sans-serif; transition:transform 0.15s, opacity 0.15s;"
+          onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+          🔀 シャッフル
+        </button>
+      </div>
+      <div class="quiz-list" id="quiz-summary"></div>
     </div>
   </div>
 
@@ -2008,6 +2033,85 @@
   }
 
   Object.entries(colors).forEach(([id, color]) => buildQuiz(id, color));
+
+  // ── まとめ問題（ランダム50問）──────────────────────────────
+  const categoryInfo = {
+    what:     { label: 'WHAT',        color: '#e85d5d' },
+    why:      { label: 'WHY',         color: '#9b59b6' },
+    when:     { label: 'WHEN',        color: '#2d8a6e' },
+    where:    { label: 'WHERE',       color: '#3b7dd8' },
+    which:    { label: 'WHICH',       color: '#e67e22' },
+    whether:  { label: 'WHETHER/IF',  color: '#1abc9c' },
+    how:      { label: 'HOW',         color: '#e91e8c' },
+    howmany:  { label: 'HOW MANY',    color: '#795548' },
+    howmuch:  { label: 'HOW MUCH',    color: '#607d8b' },
+    perfect:  { label: '完了形',       color: '#00897b' },
+  };
+
+  // 全問題にカテゴリタグを付けてプールを作る
+  const allPool = [];
+  Object.entries(quizData).forEach(([id, items]) => {
+    items.forEach(item => allPool.push({ ...item, _cat: id }));
+  });
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function buildSummaryQuiz() {
+    const container = document.getElementById('quiz-summary');
+    container.innerHTML = '';
+    const picked = shuffle(allPool).slice(0, 50);
+    picked.forEach((item, i) => {
+      const { label, color } = categoryInfo[item._cat];
+      const div = document.createElement('div');
+      div.className = 'quiz-item';
+      div.innerHTML = `
+        <span class="quiz-num" style="background:${color}">${i + 1}</span>
+        <span class="quiz-ja">
+          <span style="display:inline-block; background:${color}22; color:${color}; border:1px solid ${color}55; border-radius:8px; padding:0.05rem 0.5rem; font-size:0.72rem; font-weight:700; margin-right:0.4rem; vertical-align:middle;">${label}</span>${item.ja}
+        </span>
+        <div class="answer-box" style="border-color:${color}">
+          <span class="answer-label">解答例</span>
+          <div class="answer-inner">${item.ans}</div>
+          <div class="exp-box">
+            <span class="sub-label">📝 解説</span>
+            ${item.exp}
+          </div>
+          <div class="pron-box">
+            <button class="speak-btn" type="button">
+              <span class="speak-icon">🔊</span> 聞く（通常）
+            </button>
+            <button class="speak-slow-btn" type="button">
+              <span class="speak-icon">🐢</span> ゆっくり
+            </button>
+          </div>
+        </div>`;
+
+      div.addEventListener('click', (e) => {
+        if (e.target.closest('button')) return;
+        div.querySelector('.answer-box').classList.toggle('show');
+      });
+      const speakBtn = div.querySelector('.speak-btn');
+      speakBtn.addEventListener('click', (e) => { e.stopPropagation(); speak(item.ans, 0.95, speakBtn); });
+      const slowBtn = div.querySelector('.speak-slow-btn');
+      slowBtn.addEventListener('click', (e) => { e.stopPropagation(); speak(item.ans, 0.55, slowBtn); });
+
+      container.appendChild(div);
+    });
+  }
+
+  buildSummaryQuiz();
+
+  document.getElementById('shuffle-btn').addEventListener('click', () => {
+    buildSummaryQuiz();
+    document.getElementById('summary').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 </script>
 </body>
 </html>
