@@ -1886,7 +1886,320 @@
 
 </main>
 
-<footer style="text-align:center; padding: 2rem 1rem; color: #999; font-size: 0.85rem; background: white; border-top: 2px solid #f0ede4; margin-top: 2rem;">
+<!-- ==================== QUIZ ==================== -->
+<section id="quiz-section" style="background: linear-gradient(135deg, #1a4a7a 0%, #2d6ea8 100%); padding: 3rem 1rem 4rem;">
+    <div style="max-width: 860px; margin: 0 auto;">
+
+        <div style="text-align:center; margin-bottom: 2rem;">
+            <div style="font-size:2.5rem;">✏️</div>
+            <h2 style="color:white; font-size:1.8rem; font-weight:700; margin-bottom:0.4rem;">前置詞 総まとめ問題</h2>
+            <p style="color:rgba(255,255,255,0.8); font-size:0.95rem;">30問ランダム出題・何度でも挑戦できます！</p>
+        </div>
+
+        <!-- スコア表示 -->
+        <div id="quiz-score-bar" style="display:none; background:white; border-radius:12px; padding:1rem 1.5rem; margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:space-between;">
+            <div>
+                <span style="font-size:0.85rem; color:#666;">正解数</span>
+                <span id="score-correct" style="font-size:1.5rem; font-weight:700; color:#2d8a6e; margin-left:0.4rem;">0</span>
+                <span style="color:#999;"> / </span>
+                <span id="score-total"  style="font-size:1.2rem; font-weight:700; color:#555;">0</span>
+            </div>
+            <div id="score-pct-wrap" style="display:none;">
+                <span style="font-size:0.85rem; color:#666;">正答率：</span>
+                <span id="score-pct" style="font-size:1.3rem; font-weight:700; color:#2d6ea8;"></span>
+            </div>
+        </div>
+
+        <!-- 問題コンテナ -->
+        <div id="quiz-container"></div>
+
+        <!-- ボタン類 -->
+        <div style="text-align:center; margin-top:2rem; display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
+            <button id="btn-check" onclick="checkAnswers()" style="background:#f59e0b; color:white; border:none; border-radius:25px; padding:0.9rem 2.5rem; font-size:1rem; font-weight:700; cursor:pointer; font-family:'Zen Maru Gothic',sans-serif; box-shadow:0 4px 15px rgba(245,158,11,0.4); transition:all 0.2s;">
+                採点する ✔
+            </button>
+            <button id="btn-retry" onclick="buildQuiz()" style="background:rgba(255,255,255,0.2); color:white; border:2px solid rgba(255,255,255,0.5); border-radius:25px; padding:0.9rem 2.5rem; font-size:1rem; font-weight:700; cursor:pointer; font-family:'Zen Maru Gothic',sans-serif; transition:all 0.2s;">
+                もう一度（シャッフル） 🔀
+            </button>
+        </div>
+
+        <!-- 最終結果メッセージ -->
+        <div id="result-msg" style="display:none; text-align:center; margin-top:2rem; background:white; border-radius:14px; padding:1.5rem 2rem;"></div>
+
+    </div>
+</section>
+
+<style>
+.q-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: box-shadow 0.2s;
+}
+.q-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.15); }
+.q-num {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #2d6ea8;
+    background: #e8f1fc;
+    border-radius: 20px;
+    padding: 0.15rem 0.6rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+.q-text {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.08rem;
+    color: #2c2c2c;
+    margin-bottom: 0.3rem;
+    line-height: 1.6;
+}
+.q-text .blank {
+    display: inline-block;
+    border-bottom: 2px solid #2d6ea8;
+    min-width: 60px;
+    text-align: center;
+    color: #2d6ea8;
+    font-weight: bold;
+}
+.q-ja {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 0.8rem;
+}
+.q-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.q-opt {
+    border: 2px solid #d0e0f0;
+    background: #f4f8ff;
+    border-radius: 8px;
+    padding: 0.4rem 1rem;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: #2c2c2c;
+}
+.q-opt:hover { background: #dbeafe; border-color: #2d6ea8; }
+.q-opt.selected { background: #2d6ea8; color: white; border-color: #2d6ea8; }
+.q-opt.correct  { background: #2d8a6e !important; color: white !important; border-color: #2d8a6e !important; }
+.q-opt.wrong    { background: #c0392b !important; color: white !important; border-color: #c0392b !important; }
+.q-opt.disabled { pointer-events: none; }
+.q-opt.reveal   { background: #2d8a6e; color: white; border-color: #2d8a6e; opacity: 0.7; }
+.q-feedback {
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: none;
+}
+.q-feedback.ok  { color: #2d8a6e; }
+.q-feedback.ng  { color: #c0392b; }
+</style>
+
+<script>
+const ALL_QUESTIONS = [
+    // ── in ──
+    { en: "I live ___ Tokyo.", ja: "私は東京に住んでいます。", answer: "in",   options: ["in","at","on","to"] },
+    { en: "She was born ___ 1998.", ja: "彼女は1998年に生まれました。", answer: "in", options: ["in","at","on","by"] },
+    { en: "It gets cold ___ winter.", ja: "冬は寒くなります。", answer: "in", options: ["in","on","at","for"] },
+    { en: "He will be back ___ ten minutes.", ja: "彼は10分後に戻ります。", answer: "in", options: ["in","for","by","at"] },
+    { en: "There is a cat ___ the box.", ja: "箱の中に猫がいます。", answer: "in", options: ["in","on","under","at"] },
+    { en: "Please write ___ English.", ja: "英語で書いてください。", answer: "in", options: ["in","with","by","on"] },
+    // ── at ──
+    { en: "The meeting starts ___ 9 o'clock.", ja: "会議は9時に始まります。", answer: "at", options: ["at","in","on","by"] },
+    { en: "She is waiting ___ the bus stop.", ja: "彼女はバス停で待っています。", answer: "at", options: ["at","in","on","to"] },
+    { en: "I'm good ___ cooking.", ja: "私は料理が得意です。", answer: "at", options: ["at","in","for","with"] },
+    { en: "He smiled ___ me.", ja: "彼は私に微笑みました。", answer: "at", options: ["at","to","for","on"] },
+    { en: "The children are ___ school.", ja: "子どもたちは学校にいます。", answer: "at", options: ["at","in","on","to"] },
+    // ── on ──
+    { en: "The book is ___ the desk.", ja: "本は机の上にあります。", answer: "on", options: ["on","in","over","at"] },
+    { en: "I have a meeting ___ Monday.", ja: "月曜日に会議があります。", answer: "on", options: ["on","in","at","for"] },
+    { en: "My birthday is ___ July 15th.", ja: "私の誕生日は7月15日です。", answer: "on", options: ["on","in","at","by"] },
+    { en: "She talked to him ___ the phone.", ja: "彼女は電話で彼と話しました。", answer: "on", options: ["on","by","with","in"] },
+    { en: "There is a picture ___ the wall.", ja: "壁に絵がかかっています。", answer: "on", options: ["on","in","at","over"] },
+    // ── to ──
+    { en: "I go ___ school every day.", ja: "私は毎日学校へ行きます。", answer: "to", options: ["to","at","for","into"] },
+    { en: "I gave a gift ___ my mother.", ja: "母にプレゼントをあげました。", answer: "to", options: ["to","for","at","with"] },
+    { en: "She spoke ___ the teacher.", ja: "彼女は先生に話しかけました。", answer: "to", options: ["to","at","with","for"] },
+    // ── for ──
+    { en: "This is a present ___ you.", ja: "これはあなたへのプレゼントです。", answer: "for", options: ["for","to","of","with"] },
+    { en: "I've lived here ___ three years.", ja: "私はここに3年間住んでいます。", answer: "for", options: ["for","since","during","in"] },
+    { en: "Japan is famous ___ its sushi.", ja: "日本は寿司で有名です。", answer: "for", options: ["for","of","by","as"] },
+    { en: "Thank you ___ your help.", ja: "助けてくれてありがとうございます。", answer: "for", options: ["for","of","to","with"] },
+    // ── of ──
+    { en: "The capital ___ Japan is Tokyo.", ja: "日本の首都は東京です。", answer: "of", options: ["of","in","at","for"] },
+    { en: "She is afraid ___ dogs.", ja: "彼女は犬が怖いです。", answer: "of", options: ["of","from","with","at"] },
+    { en: "I'm proud ___ you.", ja: "あなたのことを誇りに思います。", answer: "of", options: ["of","for","to","about"] },
+    { en: "A cup ___ coffee, please.", ja: "コーヒーを一杯ください。", answer: "of", options: ["of","for","with","in"] },
+    // ── with ──
+    { en: "I went to the movies ___ my friends.", ja: "友達と映画に行きました。", answer: "with", options: ["with","by","to","for"] },
+    { en: "She cut the bread ___ a knife.", ja: "彼女はナイフでパンを切りました。", answer: "with", options: ["with","by","in","using"] },
+    { en: "Are you pleased ___ the result?", ja: "結果に満足していますか？", answer: "with", options: ["with","about","of","for"] },
+    // ── by ──
+    { en: "I go to work ___ train.", ja: "電車で仕事に行きます。", answer: "by", options: ["by","on","in","with"] },
+    { en: "Please finish this ___ tomorrow.", ja: "明日までにこれを終わらせてください。", answer: "by", options: ["by","until","to","at"] },
+    { en: "This book was written ___ Natsume Soseki.", ja: "この本は夏目漱石によって書かれました。", answer: "by", options: ["by","from","with","of"] },
+    { en: "I paid ___ credit card.", ja: "クレジットカードで払いました。", answer: "by", options: ["by","with","in","on"] },
+    // ── from ──
+    { en: "I'm ___ Japan.", ja: "私は日本出身です。", answer: "from", options: ["from","in","at","of"] },
+    { en: "I received a letter ___ my friend.", ja: "友達から手紙を受け取りました。", answer: "from", options: ["from","by","of","to"] },
+    { en: "Wine is made ___ grapes.", ja: "ワインはブドウから作られます。", answer: "from", options: ["from","of","with","by"] },
+    { en: "She recovered ___ her illness.", ja: "彼女は病気から回復しました。", answer: "from", options: ["from","of","at","in"] },
+    // ── about ──
+    { en: "We talked ___ the future.", ja: "私たちは将来について話しました。", answer: "about", options: ["about","of","for","on"] },
+    { en: "I'm worried ___ the exam.", ja: "試験のことが心配です。", answer: "about", options: ["about","for","of","at"] },
+    { en: "She knows a lot ___ cooking.", ja: "彼女は料理についてたくさん知っています。", answer: "about", options: ["about","of","on","in"] },
+    { en: "There were ___ 200 people at the concert.", ja: "コンサートには約200人いました。", answer: "about", options: ["about","over","almost","around"] },
+    // ── over ──
+    { en: "There is a bridge ___ the river.", ja: "川の上に橋があります。", answer: "over", options: ["over","on","above","across"] },
+    { en: "She is ___ 30 years old.", ja: "彼女は30歳以上です。", answer: "over", options: ["over","above","more","under"] },
+    { en: "I stayed home ___ the weekend.", ja: "週末の間ずっと家にいました。", answer: "over", options: ["over","during","for","at"] },
+    // ── under ──
+    { en: "The cat is hiding ___ the bed.", ja: "猫はベッドの下に隠れています。", answer: "under", options: ["under","below","beneath","on"] },
+    { en: "Children ___ 12 enter for free.", ja: "12歳未満のお子さんは無料です。", answer: "under", options: ["under","below","over","less"] },
+    { en: "The building is ___ construction.", ja: "その建物は工事中です。", answer: "under", options: ["under","in","at","on"] },
+    // ── into ──
+    { en: "She walked ___ the room.", ja: "彼女は部屋の中へ入ってきました。", answer: "into", options: ["into","in","to","through"] },
+    { en: "He jumped ___ the pool.", ja: "彼はプールへ飛び込みました。", answer: "into", options: ["into","in","to","at"] },
+    { en: "Water turns ___ ice when it freezes.", ja: "水は凍ると氷になります。", answer: "into", options: ["into","to","in","as"] },
+    { en: "Translate this ___ Japanese, please.", ja: "これを日本語に翻訳してください。", answer: "into", options: ["into","to","in","for"] },
+    // ── out of ──
+    { en: "She walked ___ the room.", ja: "彼女は部屋から出ていきました。", answer: "out of", options: ["out of","from","off","away from"] },
+    { en: "We are ___ milk.", ja: "牛乳がなくなりました。", answer: "out of", options: ["out of","without","from","no"] },
+    { en: "He did it ___ curiosity.", ja: "彼は好奇心からそれをしました。", answer: "out of", options: ["out of","from","by","with"] },
+    { en: "My phone is ___ battery.", ja: "スマホのバッテリーがなくなりました。", answer: "out of", options: ["out of","without","low on","from"] },
+];
+
+const QUIZ_COUNT = 30;
+let questions = [];
+let userAnswers = {};
+let checked = false;
+
+function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+function buildQuiz() {
+    checked = false;
+    userAnswers = {};
+    questions = shuffle(ALL_QUESTIONS).slice(0, QUIZ_COUNT);
+
+    const container = document.getElementById('quiz-container');
+    container.innerHTML = '';
+
+    questions.forEach((q, idx) => {
+        const opts = shuffle(q.options);
+        const enWithBlank = q.en.replace('___', '<span class="blank">　　　</span>');
+
+        const card = document.createElement('div');
+        card.className = 'q-card';
+        card.innerHTML = `
+            <span class="q-num">Q${idx + 1}</span>
+            <div class="q-text">${enWithBlank}</div>
+            <div class="q-ja">${q.ja}</div>
+            <div class="q-options" id="opts-${idx}">
+                ${opts.map(o => `<button class="q-opt" onclick="selectOpt(${idx}, this, '${o.replace(/'/g,"\\'")}', event)">${o}</button>`).join('')}
+            </div>
+            <div class="q-feedback" id="fb-${idx}"></div>
+        `;
+        container.appendChild(card);
+    });
+
+    document.getElementById('quiz-score-bar').style.display = 'flex';
+    document.getElementById('score-correct').textContent = '0';
+    document.getElementById('score-total').textContent = '0';
+    document.getElementById('score-pct-wrap').style.display = 'none';
+    document.getElementById('result-msg').style.display = 'none';
+    document.getElementById('btn-check').style.display = 'inline-block';
+
+    updateProgress();
+    window.scrollTo({ top: document.getElementById('quiz-section').offsetTop - 80, behavior: 'smooth' });
+}
+
+function selectOpt(idx, el, val, e) {
+    e.preventDefault();
+    if (checked) return;
+    const opts = document.querySelectorAll(`#opts-${idx} .q-opt`);
+    opts.forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    userAnswers[idx] = val;
+    updateProgress();
+}
+
+function updateProgress() {
+    const answered = Object.keys(userAnswers).length;
+    document.getElementById('score-total').textContent = answered;
+}
+
+function checkAnswers() {
+    if (checked) return;
+    checked = true;
+
+    let correct = 0;
+    questions.forEach((q, idx) => {
+        const chosen = userAnswers[idx];
+        const opts = document.querySelectorAll(`#opts-${idx} .q-opt`);
+        const fb = document.getElementById(`fb-${idx}`);
+
+        opts.forEach(o => {
+            o.classList.add('disabled');
+            if (o.textContent.trim() === q.answer) o.classList.add('reveal');
+        });
+
+        if (chosen === q.answer) {
+            correct++;
+            if (chosen !== undefined) {
+                opts.forEach(o => { if (o.textContent.trim() === chosen) { o.classList.remove('reveal'); o.classList.add('correct'); } });
+            }
+            fb.className = 'q-feedback ok';
+            fb.textContent = '✓ 正解！';
+            fb.style.display = 'block';
+        } else {
+            if (chosen !== undefined) {
+                opts.forEach(o => { if (o.textContent.trim() === chosen) o.classList.add('wrong'); });
+            }
+            fb.className = 'q-feedback ng';
+            fb.textContent = chosen ? `✗ 不正解。正解は「${q.answer}」です。` : `✗ 未回答。正解は「${q.answer}」です。`;
+            fb.style.display = 'block';
+        }
+    });
+
+    const pct = Math.round(correct / QUIZ_COUNT * 100);
+    document.getElementById('score-correct').textContent = correct;
+    document.getElementById('score-total').textContent = QUIZ_COUNT;
+    document.getElementById('score-pct').textContent = pct + '%';
+    document.getElementById('score-pct-wrap').style.display = 'block';
+    document.getElementById('btn-check').style.display = 'none';
+
+    let msg, color;
+    if (pct >= 90)      { msg = '🏆 すばらしい！前置詞マスターです！'; color = '#2d8a6e'; }
+    else if (pct >= 70) { msg = '👍 よくできました！もう少しで完璧！'; color = '#2d6ea8'; }
+    else if (pct >= 50) { msg = '📚 もう一度復習してから再挑戦しよう！'; color = '#e8854a'; }
+    else                { msg = '💪 解説を読んでもう一度チャレンジ！'; color = '#c0392b'; }
+
+    const resultEl = document.getElementById('result-msg');
+    resultEl.innerHTML = `
+        <div style="font-size:1.5rem; font-weight:700; color:${color}; margin-bottom:0.3rem;">${pct}点（${correct}/${QUIZ_COUNT}問正解）</div>
+        <div style="font-size:1rem; color:#555;">${msg}</div>
+    `;
+    resultEl.style.display = 'block';
+}
+
+// ページ読み込み時に自動スタート
+document.addEventListener('DOMContentLoaded', buildQuiz);
+</script>
+
+<footer style="text-align:center; padding: 2rem 1rem; color: #999; font-size: 0.85rem; background: white; border-top: 2px solid #f0ede4; margin-top: 0;">
     英語前置詞マスター ─ イラスト＆豊富な例文で学ぶ英語教材
 </footer>
 
