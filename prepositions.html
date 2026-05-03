@@ -1898,11 +1898,14 @@
 
         <!-- スコア表示 -->
         <div id="quiz-score-bar" style="display:none; background:white; border-radius:12px; padding:1rem 1.5rem; margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:space-between;">
-            <div>
-                <span style="font-size:0.85rem; color:#666;">正解数</span>
-                <span id="score-correct" style="font-size:1.5rem; font-weight:700; color:#2d8a6e; margin-left:0.4rem;">0</span>
-                <span style="color:#999;"> / </span>
-                <span id="score-total"  style="font-size:1.2rem; font-weight:700; color:#555;">0</span>
+            <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                <span style="font-size:0.85rem; color:#666;">正解</span>
+                <span id="score-correct" style="font-size:1.5rem; font-weight:700; color:#2d8a6e;">0</span>
+                <span style="color:#bbb;">/</span>
+                <span style="font-size:0.85rem; color:#666;">回答済み</span>
+                <span id="score-answered" style="font-size:1.3rem; font-weight:700; color:#555;">0</span>
+                <span style="color:#bbb;">/</span>
+                <span style="font-size:0.85rem; color:#888;">全30問</span>
             </div>
             <div id="score-pct-wrap" style="display:none;">
                 <span style="font-size:0.85rem; color:#666;">正答率：</span>
@@ -1915,8 +1918,8 @@
 
         <!-- ボタン類 -->
         <div style="text-align:center; margin-top:2rem; display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
-            <button id="btn-check" onclick="checkAnswers()" style="background:#f59e0b; color:white; border:none; border-radius:25px; padding:0.9rem 2.5rem; font-size:1rem; font-weight:700; cursor:pointer; font-family:'Zen Maru Gothic',sans-serif; box-shadow:0 4px 15px rgba(245,158,11,0.4); transition:all 0.2s;">
-                採点する ✔
+            <button id="btn-finish" onclick="showFinalResult()" style="display:none; background:#f59e0b; color:white; border:none; border-radius:25px; padding:0.9rem 2.5rem; font-size:1rem; font-weight:700; cursor:pointer; font-family:'Zen Maru Gothic',sans-serif; box-shadow:0 4px 15px rgba(245,158,11,0.4); transition:all 0.2s;">
+                最終結果を見る 🏆
             </button>
             <button id="btn-retry" onclick="buildQuiz()" style="background:rgba(255,255,255,0.2); color:white; border:2px solid rgba(255,255,255,0.5); border-radius:25px; padding:0.9rem 2.5rem; font-size:1rem; font-weight:700; cursor:pointer; font-family:'Zen Maru Gothic',sans-serif; transition:all 0.2s;">
                 もう一度（シャッフル） 🔀
@@ -1936,9 +1939,19 @@
     padding: 1.2rem 1.5rem;
     margin-bottom: 1rem;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: box-shadow 0.2s;
+    transition: box-shadow 0.2s, border-color 0.3s;
+    border: 2px solid transparent;
 }
 .q-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.15); }
+.q-card.answered-ok { border-color: #2d8a6e; }
+.q-card.answered-ng { border-color: #c0392b; }
+
+.q-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
 .q-num {
     font-size: 0.78rem;
     font-weight: 700;
@@ -1947,8 +1960,22 @@
     border-radius: 20px;
     padding: 0.15rem 0.6rem;
     display: inline-block;
-    margin-bottom: 0.5rem;
 }
+.q-speak-btn {
+    background: #e8f1fc;
+    border: 1.5px solid #c0d8f0;
+    border-radius: 20px;
+    padding: 0.2rem 0.7rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: #2d6ea8;
+    transition: all 0.15s;
+    white-space: nowrap;
+}
+.q-speak-btn:hover { background: #2d6ea8; color: white; border-color: #2d6ea8; }
+.q-speak-btn.speaking { background: #2d6ea8; color: white; animation: pulse 0.8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
 .q-text {
     font-family: 'Patrick Hand', cursive;
     font-size: 1.08rem;
@@ -1962,6 +1989,14 @@
     min-width: 60px;
     text-align: center;
     color: #2d6ea8;
+    font-weight: bold;
+}
+.q-text .filled {
+    display: inline-block;
+    background: #2d8a6e;
+    color: white;
+    border-radius: 4px;
+    padding: 0 6px;
     font-weight: bold;
 }
 .q-ja {
@@ -1985,100 +2020,360 @@
     transition: all 0.15s;
     color: #2c2c2c;
 }
-.q-opt:hover { background: #dbeafe; border-color: #2d6ea8; }
-.q-opt.selected { background: #2d6ea8; color: white; border-color: #2d6ea8; }
+.q-opt:hover:not(.disabled) { background: #dbeafe; border-color: #2d6ea8; }
 .q-opt.correct  { background: #2d8a6e !important; color: white !important; border-color: #2d8a6e !important; }
 .q-opt.wrong    { background: #c0392b !important; color: white !important; border-color: #c0392b !important; }
-.q-opt.disabled { pointer-events: none; }
-.q-opt.reveal   { background: #2d8a6e; color: white; border-color: #2d8a6e; opacity: 0.7; }
-.q-feedback {
-    margin-top: 0.6rem;
-    font-size: 0.85rem;
-    font-weight: 700;
+.q-opt.reveal   { background: #2d8a6e; color: white; border-color: #2d8a6e; opacity: 0.6; }
+.q-opt.disabled { pointer-events: none; opacity: 0.55; }
+.q-opt.disabled.correct, .q-opt.disabled.reveal { opacity: 1; }
+
+/* フィードバック＋解説エリア */
+.q-result {
+    margin-top: 0.8rem;
     display: none;
+    animation: fadeIn 0.3s ease;
 }
-.q-feedback.ok  { color: #2d8a6e; }
-.q-feedback.ng  { color: #c0392b; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(-4px)} to{opacity:1;transform:translateY(0)} }
+.q-result-badge {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+.q-result-badge.ok { color: #2d8a6e; }
+.q-result-badge.ng { color: #c0392b; }
+
+.q-explanation {
+    background: #f8fdf9;
+    border-left: 4px solid #2d8a6e;
+    border-radius: 0 8px 8px 0;
+    padding: 0.7rem 1rem;
+    font-size: 0.87rem;
+    color: #444;
+    line-height: 1.7;
+}
+.q-explanation.ng-exp {
+    background: #fff8f8;
+    border-left-color: #e07070;
+}
+.q-explanation strong {
+    color: #2d6ea8;
+}
+.q-full-sentence {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1rem;
+    color: #2c2c2c;
+    margin-bottom: 0.3rem;
+}
+.q-full-sentence .ans {
+    color: #2d8a6e;
+    font-weight: bold;
+    text-decoration: underline;
+}
 </style>
 
 <script>
 const ALL_QUESTIONS = [
     // ── in ──
-    { en: "I live ___ Tokyo.", ja: "私は東京に住んでいます。", answer: "in",   options: ["in","at","on","to"] },
-    { en: "She was born ___ 1998.", ja: "彼女は1998年に生まれました。", answer: "in", options: ["in","at","on","by"] },
-    { en: "It gets cold ___ winter.", ja: "冬は寒くなります。", answer: "in", options: ["in","on","at","for"] },
-    { en: "He will be back ___ ten minutes.", ja: "彼は10分後に戻ります。", answer: "in", options: ["in","for","by","at"] },
-    { en: "There is a cat ___ the box.", ja: "箱の中に猫がいます。", answer: "in", options: ["in","on","under","at"] },
-    { en: "Please write ___ English.", ja: "英語で書いてください。", answer: "in", options: ["in","with","by","on"] },
+    {
+        en: "I live ___ Tokyo.", ja: "私は東京に住んでいます。",
+        answer: "in", options: ["in","at","on","to"],
+        exp: "都市・国などの広い空間の内部を表すときは <strong>in</strong> を使います。「I live in Tokyo（東京の中に住む）」のように、広い場所を「包まれた空間」として捉えます。"
+    },
+    {
+        en: "She was born ___ 1998.", ja: "彼女は1998年に生まれました。",
+        answer: "in", options: ["in","at","on","by"],
+        exp: "年号・月・季節など<strong>幅のある時間</strong>には <strong>in</strong> を使います。in 1998 / in March / in summer のように使います。"
+    },
+    {
+        en: "It gets cold ___ winter.", ja: "冬は寒くなります。",
+        answer: "in", options: ["in","on","at","for"],
+        exp: "季節には <strong>in</strong> を使います。in winter / in summer / in spring / in autumn の4つを覚えましょう。"
+    },
+    {
+        en: "He will be back ___ ten minutes.", ja: "彼は10分後に戻ります。",
+        answer: "in", options: ["in","for","by","at"],
+        exp: "<strong>in + 時間の長さ</strong> は「〜後に（未来）」を表します。「10分という時間が経過した後」というイメージです。for は継続期間、by は期限なので混同しないよう注意。"
+    },
+    {
+        en: "There is a cat ___ the box.", ja: "箱の中に猫がいます。",
+        answer: "in", options: ["in","on","under","at"],
+        exp: "空間の<strong>内部・中</strong>を表すのが <strong>in</strong> です。「箱の中に包まれている」イメージです。on は表面に接触、under は下側を表します。"
+    },
+    {
+        en: "Please write ___ English.", ja: "英語で書いてください。",
+        answer: "in", options: ["in","with","by","on"],
+        exp: "言語を手段として使うときは <strong>in + 言語名</strong> の形を使います。「英語という枠の中で書く」イメージです。write in English / speak in Japanese のように使います。"
+    },
     // ── at ──
-    { en: "The meeting starts ___ 9 o'clock.", ja: "会議は9時に始まります。", answer: "at", options: ["at","in","on","by"] },
-    { en: "She is waiting ___ the bus stop.", ja: "彼女はバス停で待っています。", answer: "at", options: ["at","in","on","to"] },
-    { en: "I'm good ___ cooking.", ja: "私は料理が得意です。", answer: "at", options: ["at","in","for","with"] },
-    { en: "He smiled ___ me.", ja: "彼は私に微笑みました。", answer: "at", options: ["at","to","for","on"] },
-    { en: "The children are ___ school.", ja: "子どもたちは学校にいます。", answer: "at", options: ["at","in","on","to"] },
+    {
+        en: "The meeting starts ___ 9 o'clock.", ja: "会議は9時に始まります。",
+        answer: "at", options: ["at","in","on","by"],
+        exp: "具体的な<strong>時刻</strong>には <strong>at</strong> を使います。at 3 PM / at noon / at midnight のように「時間軸上の一点」を指します。in は年・月・季節、on は曜日・日付に使います。"
+    },
+    {
+        en: "She is waiting ___ the bus stop.", ja: "彼女はバス停で待っています。",
+        answer: "at", options: ["at","in","on","to"],
+        exp: "停留所・駅・空港など「一地点」として捉える場所には <strong>at</strong> を使います。地図のピンで「ここ！」と指さすようなイメージです。in は広い空間の内部に使います。"
+    },
+    {
+        en: "I'm good ___ cooking.", ja: "私は料理が得意です。",
+        answer: "at", options: ["at","in","for","with"],
+        exp: "<strong>be good at ～</strong> で「〜が得意・うまい」という定番フレーズです。「料理という一点をターゲットにしてうまい」イメージで at を使います。"
+    },
+    {
+        en: "He smiled ___ me.", ja: "彼は私に微笑みました。",
+        answer: "at", options: ["at","to","for","on"],
+        exp: "smile at / look at / shout at など、<strong>動作の向かう対象</strong>を指すときに <strong>at</strong> を使います。視線や感情を「ある点に向ける」イメージです。"
+    },
+    {
+        en: "The children are ___ school.", ja: "子どもたちは学校にいます。",
+        answer: "at", options: ["at","in","on","to"],
+        exp: "「at school（学校にいる）」は学校を<strong>一地点</strong>として捉えた表現です。「in school」だと「在学中・授業中」というニュアンスになります。"
+    },
     // ── on ──
-    { en: "The book is ___ the desk.", ja: "本は机の上にあります。", answer: "on", options: ["on","in","over","at"] },
-    { en: "I have a meeting ___ Monday.", ja: "月曜日に会議があります。", answer: "on", options: ["on","in","at","for"] },
-    { en: "My birthday is ___ July 15th.", ja: "私の誕生日は7月15日です。", answer: "on", options: ["on","in","at","by"] },
-    { en: "She talked to him ___ the phone.", ja: "彼女は電話で彼と話しました。", answer: "on", options: ["on","by","with","in"] },
-    { en: "There is a picture ___ the wall.", ja: "壁に絵がかかっています。", answer: "on", options: ["on","in","at","over"] },
+    {
+        en: "The book is ___ the desk.", ja: "本は机の上にあります。",
+        answer: "on", options: ["on","in","over","at"],
+        exp: "何かの<strong>表面に接触している</strong>ことを表すのが <strong>on</strong> です。机の上面に本が触れているイメージです。over は表面から離れて「上空・覆って」を表します。"
+    },
+    {
+        en: "I have a meeting ___ Monday.", ja: "月曜日に会議があります。",
+        answer: "on", options: ["on","in","at","for"],
+        exp: "曜日・特定の日付には <strong>on</strong> を使います。on Monday / on July 4th / on my birthday のように、カレンダーの特定の一日を指します。"
+    },
+    {
+        en: "My birthday is ___ July 15th.", ja: "私の誕生日は7月15日です。",
+        answer: "on", options: ["on","in","at","by"],
+        exp: "特定の<strong>日付</strong>には <strong>on</strong> を使います。月だけなら in July、具体的な日付なら on July 15th と使い分けます。"
+    },
+    {
+        en: "She talked to him ___ the phone.", ja: "彼女は電話で彼と話しました。",
+        answer: "on", options: ["on","by","with","in"],
+        exp: "<strong>on the phone</strong> で「電話で」。電話回線という「表面・媒体の上で」コミュニケーションするイメージです。on TV / on the radio / on the internet も同じパターンです。"
+    },
+    {
+        en: "There is a picture ___ the wall.", ja: "壁に絵がかかっています。",
+        answer: "on", options: ["on","in","at","over"],
+        exp: "壁の<strong>表面に接触して</strong>いるので <strong>on</strong> を使います。「上」でなくても、壁・床・天井など何かの面に触れていれば on です。"
+    },
     // ── to ──
-    { en: "I go ___ school every day.", ja: "私は毎日学校へ行きます。", answer: "to", options: ["to","at","for","into"] },
-    { en: "I gave a gift ___ my mother.", ja: "母にプレゼントをあげました。", answer: "to", options: ["to","for","at","with"] },
-    { en: "She spoke ___ the teacher.", ja: "彼女は先生に話しかけました。", answer: "to", options: ["to","at","with","for"] },
+    {
+        en: "I go ___ school every day.", ja: "私は毎日学校へ行きます。",
+        answer: "to", options: ["to","at","for","into"],
+        exp: "<strong>go to ～</strong> で「〜へ行く」。to は目的地へ<strong>向かう方向</strong>を表します。go to school / go to work / go to the hospital のように使います。"
+    },
+    {
+        en: "I gave a gift ___ my mother.", ja: "母にプレゼントをあげました。",
+        answer: "to", options: ["to","for","at","with"],
+        exp: "<strong>give A to B</strong>（AをBに渡す）の形です。何かが「相手に向かって届く」ときに <strong>to</strong> を使います。for は「〜のために」と目的を表す点で違います。"
+    },
+    {
+        en: "She spoke ___ the teacher.", ja: "彼女は先生に話しかけました。",
+        answer: "to", options: ["to","at","with","for"],
+        exp: "<strong>speak to ～</strong> で「〜に話しかける」。言葉を相手に向けて届けるイメージで <strong>to</strong> を使います。speak with は「〜と対話する（双方向）」のニュアンスになります。"
+    },
     // ── for ──
-    { en: "This is a present ___ you.", ja: "これはあなたへのプレゼントです。", answer: "for", options: ["for","to","of","with"] },
-    { en: "I've lived here ___ three years.", ja: "私はここに3年間住んでいます。", answer: "for", options: ["for","since","during","in"] },
-    { en: "Japan is famous ___ its sushi.", ja: "日本は寿司で有名です。", answer: "for", options: ["for","of","by","as"] },
-    { en: "Thank you ___ your help.", ja: "助けてくれてありがとうございます。", answer: "for", options: ["for","of","to","with"] },
+    {
+        en: "This is a present ___ you.", ja: "これはあなたへのプレゼントです。",
+        answer: "for", options: ["for","to","of","with"],
+        exp: "<strong>for + 人</strong> で「〜のための・〜へ」と<strong>対象・目的</strong>を表します。プレゼントが「あなたに向けられたもの」というイメージです。to は動きを伴う「渡す」場面に使います。"
+    },
+    {
+        en: "I've lived here ___ three years.", ja: "私はここに3年間住んでいます。",
+        answer: "for", options: ["for","since","during","in"],
+        exp: "<strong>for + 期間の長さ</strong> で継続する期間を表します。since は「〜から（起点）」、during は「〜の間に（特定の期間内）」と使い分けます。現在完了形とよく一緒に使われます。"
+    },
+    {
+        en: "Japan is famous ___ its sushi.", ja: "日本は寿司で有名です。",
+        answer: "for", options: ["for","of","by","as"],
+        exp: "<strong>be famous for ～</strong> で「〜で有名」という定番の熟語です。「寿司のために（理由として）有名」というイメージで <strong>for</strong> を使います。"
+    },
+    {
+        en: "Thank you ___ your help.", ja: "助けてくれてありがとうございます。",
+        answer: "for", options: ["for","of","to","with"],
+        exp: "<strong>thank A for B</strong> で「BのことでAに感謝する」という構文です。感謝の<strong>理由・原因</strong>を表すのが <strong>for</strong> です。"
+    },
     // ── of ──
-    { en: "The capital ___ Japan is Tokyo.", ja: "日本の首都は東京です。", answer: "of", options: ["of","in","at","for"] },
-    { en: "She is afraid ___ dogs.", ja: "彼女は犬が怖いです。", answer: "of", options: ["of","from","with","at"] },
-    { en: "I'm proud ___ you.", ja: "あなたのことを誇りに思います。", answer: "of", options: ["of","for","to","about"] },
-    { en: "A cup ___ coffee, please.", ja: "コーヒーを一杯ください。", answer: "of", options: ["of","for","with","in"] },
+    {
+        en: "The capital ___ Japan is Tokyo.", ja: "日本の首都は東京です。",
+        answer: "of", options: ["of","in","at","for"],
+        exp: "<strong>A of B</strong> でAがBに属することを表します。「the capital of Japan（日本という全体の中の首都）」のように、<strong>所属・関係</strong>を表すのが <strong>of</strong> です。"
+    },
+    {
+        en: "She is afraid ___ dogs.", ja: "彼女は犬が怖いです。",
+        answer: "of", options: ["of","from","with","at"],
+        exp: "<strong>be afraid of ～</strong> で「〜が怖い・〜を恐れる」という定番の熟語です。感情の向かう対象を表すのに <strong>of</strong> を使います。"
+    },
+    {
+        en: "I'm proud ___ you.", ja: "あなたのことを誇りに思います。",
+        answer: "of", options: ["of","for","to","about"],
+        exp: "<strong>be proud of ～</strong> で「〜を誇りに思う」。感情の切り離せない対象を表す <strong>of</strong> の典型例です。be fond of / be tired of も同じパターンです。"
+    },
+    {
+        en: "A cup ___ coffee, please.", ja: "コーヒーを一杯ください。",
+        answer: "of", options: ["of","for","with","in"],
+        exp: "<strong>容器/単位 + of + 内容物</strong> の形です。a cup of coffee / a glass of water / a piece of cake のように、中身が「容器に属する」関係を表します。"
+    },
     // ── with ──
-    { en: "I went to the movies ___ my friends.", ja: "友達と映画に行きました。", answer: "with", options: ["with","by","to","for"] },
-    { en: "She cut the bread ___ a knife.", ja: "彼女はナイフでパンを切りました。", answer: "with", options: ["with","by","in","using"] },
-    { en: "Are you pleased ___ the result?", ja: "結果に満足していますか？", answer: "with", options: ["with","about","of","for"] },
+    {
+        en: "I went to the movies ___ my friends.", ja: "友達と映画に行きました。",
+        answer: "with", options: ["with","by","to","for"],
+        exp: "<strong>with + 人</strong> で「〜と一緒に」という同伴を表します。「友達がそこにいる・ともにある」というイメージです。"
+    },
+    {
+        en: "She cut the bread ___ a knife.", ja: "彼女はナイフでパンを切りました。",
+        answer: "with", options: ["with","by","in","using"],
+        exp: "<strong>with + 道具</strong> で「〜を使って」。道具を手に持っているイメージです。by train のような「交通手段・システム的な手段」には by を使います。"
+    },
+    {
+        en: "Are you pleased ___ the result?", ja: "結果に満足していますか？",
+        answer: "with", options: ["with","about","of","for"],
+        exp: "<strong>be pleased with ～</strong> で「〜に満足している」という熟語です。be satisfied with / be happy with も同じパターンで覚えましょう。"
+    },
     // ── by ──
-    { en: "I go to work ___ train.", ja: "電車で仕事に行きます。", answer: "by", options: ["by","on","in","with"] },
-    { en: "Please finish this ___ tomorrow.", ja: "明日までにこれを終わらせてください。", answer: "by", options: ["by","until","to","at"] },
-    { en: "This book was written ___ Natsume Soseki.", ja: "この本は夏目漱石によって書かれました。", answer: "by", options: ["by","from","with","of"] },
-    { en: "I paid ___ credit card.", ja: "クレジットカードで払いました。", answer: "by", options: ["by","with","in","on"] },
+    {
+        en: "I go to work ___ train.", ja: "電車で仕事に行きます。",
+        answer: "by", options: ["by","on","in","with"],
+        exp: "<strong>by + 交通手段（無冠詞）</strong> でその乗り物を使うことを表します。by train / by bus / by car / by plane のように冠詞なしで使います。"
+    },
+    {
+        en: "Please finish this ___ tomorrow.", ja: "明日までにこれを終わらせてください。",
+        answer: "by", options: ["by","until","to","at"],
+        exp: "<strong>by</strong> は期限（〜までに完了する）を表します。until との違い：until は「〜までずっと継続する」です。I worked <em>until</em> midnight.（深夜まで働き続けた）と比べてみましょう。"
+    },
+    {
+        en: "This book was written ___ Natsume Soseki.", ja: "この本は夏目漱石によって書かれました。",
+        answer: "by", options: ["by","from","with","of"],
+        exp: "受動態（be動詞 + 過去分詞）で行為者を表すときは <strong>by</strong> を使います。「〜によって」という日本語に対応します。"
+    },
+    {
+        en: "I paid ___ credit card.", ja: "クレジットカードで払いました。",
+        answer: "by", options: ["by","with","in","on"],
+        exp: "<strong>by + 支払い手段</strong> で「〜で払う」。by credit card / by cash / by check のように使います。with a credit card とも言えますが、by の方がより一般的です。"
+    },
     // ── from ──
-    { en: "I'm ___ Japan.", ja: "私は日本出身です。", answer: "from", options: ["from","in","at","of"] },
-    { en: "I received a letter ___ my friend.", ja: "友達から手紙を受け取りました。", answer: "from", options: ["from","by","of","to"] },
-    { en: "Wine is made ___ grapes.", ja: "ワインはブドウから作られます。", answer: "from", options: ["from","of","with","by"] },
-    { en: "She recovered ___ her illness.", ja: "彼女は病気から回復しました。", answer: "from", options: ["from","of","at","in"] },
+    {
+        en: "I'm ___ Japan.", ja: "私は日本出身です。",
+        answer: "from", options: ["from","in","at","of"],
+        exp: "<strong>be from + 場所</strong> で出身地を表します。「日本というところから来た」という出発点のイメージです。I'm from Tokyo. / She's from Australia. のように使います。"
+    },
+    {
+        en: "I received a letter ___ my friend.", ja: "友達から手紙を受け取りました。",
+        answer: "from", options: ["from","by","of","to"],
+        exp: "手紙・メール・電話などを「〜から受け取る」ときは <strong>from</strong> を使います。送り主＝出発点を表すイメージです。"
+    },
+    {
+        en: "Wine is made ___ grapes.", ja: "ワインはブドウから作られます。",
+        answer: "from", options: ["from","of","with","by"],
+        exp: "<strong>be made from ～</strong> は原料が<strong>形を変えて別物になる</strong>場合に使います（ブドウ→ワイン）。形が変わらない場合は be made of を使います（例：This ring is made of gold. 金の指輪）。"
+    },
+    {
+        en: "She recovered ___ her illness.", ja: "彼女は病気から回復しました。",
+        answer: "from", options: ["from","of","at","in"],
+        exp: "<strong>recover from ～</strong> で「〜から回復する」。「病気という状態から離れる・脱出する」という分離のイメージで <strong>from</strong> を使います。"
+    },
     // ── about ──
-    { en: "We talked ___ the future.", ja: "私たちは将来について話しました。", answer: "about", options: ["about","of","for","on"] },
-    { en: "I'm worried ___ the exam.", ja: "試験のことが心配です。", answer: "about", options: ["about","for","of","at"] },
-    { en: "She knows a lot ___ cooking.", ja: "彼女は料理についてたくさん知っています。", answer: "about", options: ["about","of","on","in"] },
-    { en: "There were ___ 200 people at the concert.", ja: "コンサートには約200人いました。", answer: "about", options: ["about","over","almost","around"] },
+    {
+        en: "We talked ___ the future.", ja: "私たちは将来について話しました。",
+        answer: "about", options: ["about","of","for","on"],
+        exp: "<strong>talk about ～</strong> で「〜について話す」。「将来」というテーマの周りを取り囲むように話すイメージです。talk of もあますが、about の方が口語的でよく使われます。"
+    },
+    {
+        en: "I'm worried ___ the exam.", ja: "試験のことが心配です。",
+        answer: "about", options: ["about","for","of","at"],
+        exp: "<strong>be worried about ～</strong> で「〜のことを心配する」という定番の熟語です。be anxious about / be concerned about も同じパターンです。"
+    },
+    {
+        en: "She knows a lot ___ cooking.", ja: "彼女は料理についてたくさん知っています。",
+        answer: "about", options: ["about","of","on","in"],
+        exp: "<strong>know about ～</strong> で「〜についての知識を持っている」。「料理」というテーマをぐるりと囲むように知っているイメージです。"
+    },
+    {
+        en: "There were ___ 200 people at the concert.", ja: "コンサートには約200人いました。",
+        answer: "about", options: ["about","over","almost","around"],
+        exp: "<strong>about + 数字</strong> で「約〜・およそ〜」という大まかな数量を表します。around も同様に使えます。over は「〜以上（超えている）」という意味なので別物です。"
+    },
     // ── over ──
-    { en: "There is a bridge ___ the river.", ja: "川の上に橋があります。", answer: "over", options: ["over","on","above","across"] },
-    { en: "She is ___ 30 years old.", ja: "彼女は30歳以上です。", answer: "over", options: ["over","above","more","under"] },
-    { en: "I stayed home ___ the weekend.", ja: "週末の間ずっと家にいました。", answer: "over", options: ["over","during","for","at"] },
+    {
+        en: "There is a bridge ___ the river.", ja: "川の上に橋があります。",
+        answer: "over", options: ["over","on","above","across"],
+        exp: "<strong>over</strong> は弧を描いて上を<strong>跨ぐ・覆う</strong>イメージです。橋が川をまたいでいる様子に使います。above は「真上に離れてある」、across は「横断して向こう側へ」の意味です。"
+    },
+    {
+        en: "She is ___ 30 years old.", ja: "彼女は30歳以上です。",
+        answer: "over", options: ["over","above","more","under"],
+        exp: "<strong>over + 数字</strong> で「〜以上・〜を超えた」を表します。under が「〜未満」なのでセットで覚えましょう。children over 12 / temperatures over 30°C のように使います。"
+    },
+    {
+        en: "I stayed home ___ the weekend.", ja: "週末の間ずっと家にいました。",
+        answer: "over", options: ["over","during","for","at"],
+        exp: "<strong>over the weekend</strong> で「週末の間（ずっと）」。期間全体を<strong>覆い包む</strong>イメージで <strong>over</strong> を使います。during も同様に使えますが、over the weekend が最もよく使われる表現です。"
+    },
     // ── under ──
-    { en: "The cat is hiding ___ the bed.", ja: "猫はベッドの下に隠れています。", answer: "under", options: ["under","below","beneath","on"] },
-    { en: "Children ___ 12 enter for free.", ja: "12歳未満のお子さんは無料です。", answer: "under", options: ["under","below","over","less"] },
-    { en: "The building is ___ construction.", ja: "その建物は工事中です。", answer: "under", options: ["under","in","at","on"] },
+    {
+        en: "The cat is hiding ___ the bed.", ja: "猫はベッドの下に隠れています。",
+        answer: "under", options: ["under","below","beneath","on"],
+        exp: "<strong>under</strong> は何かに<strong>覆われた真下</strong>を表します。ベッドの下で隠れている = 覆われている下のスペース、というイメージです。below は単に「より低い位置」を指し、覆われている感はありません。"
+    },
+    {
+        en: "Children ___ 12 enter for free.", ja: "12歳未満のお子さんは無料です。",
+        answer: "under", options: ["under","below","over","less"],
+        exp: "<strong>under + 数字</strong> で「〜未満・〜歳以下」を表します。over（〜以上）の反対です。under 12 / under $100 / under 18 years old のように使います。"
+    },
+    {
+        en: "The building is ___ construction.", ja: "その建物は工事中です。",
+        answer: "under", options: ["under","in","at","on"],
+        exp: "<strong>under construction</strong> で「工事中」という定番表現です。under は「〜の支配下・〜の状況下に」という意味でも使われます。under control / under pressure なども同じパターンです。"
+    },
     // ── into ──
-    { en: "She walked ___ the room.", ja: "彼女は部屋の中へ入ってきました。", answer: "into", options: ["into","in","to","through"] },
-    { en: "He jumped ___ the pool.", ja: "彼はプールへ飛び込みました。", answer: "into", options: ["into","in","to","at"] },
-    { en: "Water turns ___ ice when it freezes.", ja: "水は凍ると氷になります。", answer: "into", options: ["into","to","in","as"] },
-    { en: "Translate this ___ Japanese, please.", ja: "これを日本語に翻訳してください。", answer: "into", options: ["into","to","in","for"] },
+    {
+        en: "She walked ___ the room.", ja: "彼女は部屋の中へ入ってきました。",
+        answer: "into", options: ["into","in","to","through"],
+        exp: "<strong>into</strong> は<strong>外から内部へ入る動き</strong>を表します。in との違い：in は「中にある状態」、into は「外から中へ移動する動作」です。She is in the room（状態）vs She walked into the room（動き）。"
+    },
+    {
+        en: "He jumped ___ the pool.", ja: "彼はプールへ飛び込みました。",
+        answer: "into", options: ["into","in","to","at"],
+        exp: "<strong>jump into ～</strong> で「〜へ飛び込む」。プールの外から水中へ入る<strong>動き</strong>を表すので <strong>into</strong> です。"
+    },
+    {
+        en: "Water turns ___ ice when it freezes.", ja: "水は凍ると氷になります。",
+        answer: "into", options: ["into","to","in","as"],
+        exp: "<strong>turn into ～</strong> で「〜に変化する・〜になる」。「水という状態から氷という別の状態へ入っていく」変換のイメージで <strong>into</strong> を使います。"
+    },
+    {
+        en: "Translate this ___ Japanese, please.", ja: "これを日本語に翻訳してください。",
+        answer: "into", options: ["into","to","in","for"],
+        exp: "<strong>translate into ～</strong> で「〜語に翻訳する」。英語という状態から日本語という別の言語に「変換する」イメージで <strong>into</strong> を使います。"
+    },
     // ── out of ──
-    { en: "She walked ___ the room.", ja: "彼女は部屋から出ていきました。", answer: "out of", options: ["out of","from","off","away from"] },
-    { en: "We are ___ milk.", ja: "牛乳がなくなりました。", answer: "out of", options: ["out of","without","from","no"] },
-    { en: "He did it ___ curiosity.", ja: "彼は好奇心からそれをしました。", answer: "out of", options: ["out of","from","by","with"] },
-    { en: "My phone is ___ battery.", ja: "スマホのバッテリーがなくなりました。", answer: "out of", options: ["out of","without","low on","from"] },
+    {
+        en: "She walked ___ the room.", ja: "彼女は部屋から出ていきました。",
+        answer: "out of", options: ["out of","from","off","away from"],
+        exp: "<strong>out of</strong> は<strong>内部から外へ出る動き</strong>を表します。into（外→内）の正反対です。walk out of / run out of / take out of のように使います。"
+    },
+    {
+        en: "We are ___ milk.", ja: "牛乳がなくなりました。",
+        answer: "out of", options: ["out of","without","from","no"],
+        exp: "<strong>be out of ～</strong> で「〜が尽きた・なくなった」。容器の中身が全部外に出てしまったイメージです。We're out of time. / I'm out of ideas. のように使えます。"
+    },
+    {
+        en: "He did it ___ curiosity.", ja: "彼は好奇心からそれをしました。",
+        answer: "out of", options: ["out of","from","by","with"],
+        exp: "<strong>out of + 感情/動機</strong> で「〜から（動機として）」を表します。「好奇心の内側から動機が出てきた」イメージです。out of kindness（親切心から）/ out of fear（恐れから）も同じパターンです。"
+    },
+    {
+        en: "My phone is ___ battery.", ja: "スマホのバッテリーがなくなりました。",
+        answer: "out of", options: ["out of","without","low on","from"],
+        exp: "<strong>be out of battery</strong> で「バッテリーが切れた」。電力が全部「外に出て」なくなったイメージです。out of gas（ガス欠）/ out of stock（在庫切れ）も同じ表現パターンです。"
+    },
 ];
 
 const QUIZ_COUNT = 30;
 let questions = [];
-let userAnswers = {};
-let checked = false;
+let answeredCount = 0;
+let correctCount = 0;
+let finalized = false;
 
 function shuffle(arr) {
     const a = [...arr];
@@ -2089,9 +2384,37 @@ function shuffle(arr) {
     return a;
 }
 
+// ── 発音機能 ──
+function speak(text, btnEl) {
+    if (!window.speechSynthesis) { alert('お使いのブラウザは音声に対応していません。'); return; }
+    window.speechSynthesis.cancel();
+    if (btnEl && btnEl.classList.contains('speaking')) {
+        btnEl.classList.remove('speaking');
+        btnEl.textContent = '🔊 発音';
+        return;
+    }
+    const utt = new SpeechSynthesisUtterance(text);
+    utt.lang = 'en-US';
+    utt.rate = 0.88;
+    utt.pitch = 1.05;
+    const voices = window.speechSynthesis.getVoices();
+    const enVoice = voices.find(v => v.lang.startsWith('en') && v.name.includes('Samantha'))
+                 || voices.find(v => v.lang === 'en-US')
+                 || voices.find(v => v.lang.startsWith('en'));
+    if (enVoice) utt.voice = enVoice;
+    if (btnEl) {
+        btnEl.classList.add('speaking');
+        btnEl.textContent = '🔊 再生中…';
+        utt.onend = () => { btnEl.classList.remove('speaking'); btnEl.textContent = '🔊 発音'; };
+        utt.onerror = () => { btnEl.classList.remove('speaking'); btnEl.textContent = '🔊 発音'; };
+    }
+    window.speechSynthesis.speak(utt);
+}
+
 function buildQuiz() {
-    checked = false;
-    userAnswers = {};
+    answeredCount = 0;
+    correctCount = 0;
+    finalized = false;
     questions = shuffle(ALL_QUESTIONS).slice(0, QUIZ_COUNT);
 
     const container = document.getElementById('quiz-container');
@@ -2103,100 +2426,131 @@ function buildQuiz() {
 
         const card = document.createElement('div');
         card.className = 'q-card';
+        card.id = `card-${idx}`;
         card.innerHTML = `
-            <span class="q-num">Q${idx + 1}</span>
-            <div class="q-text">${enWithBlank}</div>
+            <div class="q-card-header">
+                <span class="q-num">Q${idx + 1}</span>
+                <button class="q-speak-btn" onclick="speakQuestion(${idx}, this)" title="例文を読み上げる">🔊 発音</button>
+            </div>
+            <div class="q-text" id="qtext-${idx}">${enWithBlank}</div>
             <div class="q-ja">${q.ja}</div>
             <div class="q-options" id="opts-${idx}">
                 ${opts.map(o => `<button class="q-opt" onclick="selectOpt(${idx}, this, '${o.replace(/'/g,"\\'")}', event)">${o}</button>`).join('')}
             </div>
-            <div class="q-feedback" id="fb-${idx}"></div>
+            <div class="q-result" id="result-${idx}"></div>
         `;
         container.appendChild(card);
     });
 
     document.getElementById('quiz-score-bar').style.display = 'flex';
     document.getElementById('score-correct').textContent = '0';
-    document.getElementById('score-total').textContent = '0';
+    document.getElementById('score-answered').textContent = '0';
     document.getElementById('score-pct-wrap').style.display = 'none';
     document.getElementById('result-msg').style.display = 'none';
-    document.getElementById('btn-check').style.display = 'inline-block';
+    document.getElementById('btn-finish').style.display = 'none';
 
-    updateProgress();
     window.scrollTo({ top: document.getElementById('quiz-section').offsetTop - 80, behavior: 'smooth' });
+}
+
+function speakQuestion(idx, btnEl) {
+    const q = questions[idx];
+    const resultEl = document.getElementById(`result-${idx}`);
+    // 回答済みなら正解文を読む
+    if (resultEl.dataset.answered === '1') {
+        const fullSentence = q.en.replace('___', q.answer);
+        speak(fullSentence, btnEl);
+    } else {
+        // 未回答ならブランクを "blank" として読む
+        const partial = q.en.replace('___', '...');
+        speak(partial, btnEl);
+    }
 }
 
 function selectOpt(idx, el, val, e) {
     e.preventDefault();
-    if (checked) return;
+    const resultEl = document.getElementById(`result-${idx}`);
+    if (resultEl.dataset.answered === '1') return; // 回答済みは無効
+
+    const q = questions[idx];
+    const isCorrect = (val === q.answer);
     const opts = document.querySelectorAll(`#opts-${idx} .q-opt`);
-    opts.forEach(o => o.classList.remove('selected'));
-    el.classList.add('selected');
-    userAnswers[idx] = val;
-    updateProgress();
-}
 
-function updateProgress() {
-    const answered = Object.keys(userAnswers).length;
-    document.getElementById('score-total').textContent = answered;
-}
-
-function checkAnswers() {
-    if (checked) return;
-    checked = true;
-
-    let correct = 0;
-    questions.forEach((q, idx) => {
-        const chosen = userAnswers[idx];
-        const opts = document.querySelectorAll(`#opts-${idx} .q-opt`);
-        const fb = document.getElementById(`fb-${idx}`);
-
-        opts.forEach(o => {
-            o.classList.add('disabled');
-            if (o.textContent.trim() === q.answer) o.classList.add('reveal');
-        });
-
-        if (chosen === q.answer) {
-            correct++;
-            if (chosen !== undefined) {
-                opts.forEach(o => { if (o.textContent.trim() === chosen) { o.classList.remove('reveal'); o.classList.add('correct'); } });
-            }
-            fb.className = 'q-feedback ok';
-            fb.textContent = '✓ 正解！';
-            fb.style.display = 'block';
-        } else {
-            if (chosen !== undefined) {
-                opts.forEach(o => { if (o.textContent.trim() === chosen) o.classList.add('wrong'); });
-            }
-            fb.className = 'q-feedback ng';
-            fb.textContent = chosen ? `✗ 不正解。正解は「${q.answer}」です。` : `✗ 未回答。正解は「${q.answer}」です。`;
-            fb.style.display = 'block';
-        }
+    // 選択肢をロック
+    opts.forEach(o => {
+        o.classList.add('disabled');
+        const t = o.textContent.trim();
+        if (t === q.answer) o.classList.add(isCorrect && t === val ? 'correct' : 'reveal');
+        if (t === val && !isCorrect) o.classList.add('wrong');
     });
 
-    const pct = Math.round(correct / QUIZ_COUNT * 100);
-    document.getElementById('score-correct').textContent = correct;
-    document.getElementById('score-total').textContent = QUIZ_COUNT;
+    // 問題文のブランクを埋める
+    const qtextEl = document.getElementById(`qtext-${idx}`);
+    const fullSentence = q.en.replace('___', q.answer);
+    qtextEl.innerHTML = fullSentence.replace(q.answer, `<span class="filled">${q.answer}</span>`);
+
+    // 正解・不正解バッジ
+    const badge = isCorrect
+        ? `<div class="q-result-badge ok">✓ 正解！</div>`
+        : `<div class="q-result-badge ng">✗ 不正解 &nbsp;│&nbsp; 正解：<span style="color:#2d8a6e;font-weight:700;">${q.answer}</span></div>`;
+
+    // 解説
+    const expClass = isCorrect ? '' : 'ng-exp';
+    const fullText = `<div class="q-full-sentence">📝 ${q.en.replace('___', `<span class="ans">${q.answer}</span>`)}</div>`;
+    resultEl.innerHTML = badge + `<div class="q-explanation ${expClass}">${fullText}${q.exp}</div>`;
+    resultEl.style.display = 'block';
+    resultEl.dataset.answered = '1';
+
+    // カードに色付け
+    const card = document.getElementById(`card-${idx}`);
+    card.classList.add(isCorrect ? 'answered-ok' : 'answered-ng');
+
+    // カウント更新
+    answeredCount++;
+    if (isCorrect) correctCount++;
+    document.getElementById('score-correct').textContent = correctCount;
+    document.getElementById('score-answered').textContent = answeredCount;
+
+    // 全問回答したら「結果を見る」ボタン表示
+    if (answeredCount === QUIZ_COUNT) showFinishBtn();
+
+    // 発音：正解文を自動で一度読む
+    setTimeout(() => {
+        const speakBtn = document.querySelector(`#card-${idx} .q-speak-btn`);
+        speak(fullSentence, speakBtn);
+    }, 300);
+}
+
+function showFinishBtn() {
+    document.getElementById('btn-finish').style.display = 'inline-block';
+}
+
+function showFinalResult() {
+    if (finalized) return;
+    finalized = true;
+    const pct = Math.round(correctCount / QUIZ_COUNT * 100);
     document.getElementById('score-pct').textContent = pct + '%';
     document.getElementById('score-pct-wrap').style.display = 'block';
-    document.getElementById('btn-check').style.display = 'none';
+    document.getElementById('btn-finish').style.display = 'none';
 
     let msg, color;
     if (pct >= 90)      { msg = '🏆 すばらしい！前置詞マスターです！'; color = '#2d8a6e'; }
     else if (pct >= 70) { msg = '👍 よくできました！もう少しで完璧！'; color = '#2d6ea8'; }
-    else if (pct >= 50) { msg = '📚 もう一度復習してから再挑戦しよう！'; color = '#e8854a'; }
-    else                { msg = '💪 解説を読んでもう一度チャレンジ！'; color = '#c0392b'; }
+    else if (pct >= 50) { msg = '📚 解説を読んでもう一度チャレンジしよう！'; color = '#e8854a'; }
+    else                { msg = '💪 各前置詞の解説ページを復習してから再挑戦！'; color = '#c0392b'; }
 
     const resultEl = document.getElementById('result-msg');
     resultEl.innerHTML = `
-        <div style="font-size:1.5rem; font-weight:700; color:${color}; margin-bottom:0.3rem;">${pct}点（${correct}/${QUIZ_COUNT}問正解）</div>
-        <div style="font-size:1rem; color:#555;">${msg}</div>
+        <div style="font-size:1.5rem; font-weight:700; color:${color}; margin-bottom:0.3rem;">${pct}点（${correctCount}/${QUIZ_COUNT}問正解）</div>
+        <div style="font-size:1rem; color:#555; margin-bottom:0.8rem;">${msg}</div>
+        <div style="font-size:0.85rem; color:#888;">各問題の解説を読んで、間違えた前置詞を復習しましょう！</div>
     `;
     resultEl.style.display = 'block';
+    resultEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-// ページ読み込み時に自動スタート
 document.addEventListener('DOMContentLoaded', buildQuiz);
+window.speechSynthesis && window.speechSynthesis.onvoiceschanged !== undefined &&
+    (window.speechSynthesis.onvoiceschanged = () => {});
 </script>
 
 <footer style="text-align:center; padding: 2rem 1rem; color: #999; font-size: 0.85rem; background: white; border-top: 2px solid #f0ede4; margin-top: 0;">
